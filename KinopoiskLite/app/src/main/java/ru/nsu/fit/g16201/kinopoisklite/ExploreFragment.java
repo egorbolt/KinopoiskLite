@@ -22,7 +22,7 @@ public class ExploreFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_explore, container, false);
         tv = (TextView) view.findViewById(R.id.explore_tv);
 
-        tv.setText("Explore");
+        tv.setText(R.string.scrolling_test_text);
         return view;
     }
 
