@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
 
     <androidx.cardview.widget.CardView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
@@ -28,9 +28,8 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/list_name_text_view"
-                    android:text = "dfsdfd"
-                    android:textSize="20dp"/>
+                    android:id="@+id/colection_name_text_view"
+                    android:textSize="16sp"/>
             </LinearLayout>
 
             <View
@@ -59,7 +58,4 @@
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
-
-
-
-
+</layout>

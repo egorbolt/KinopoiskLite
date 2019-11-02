@@ -13,13 +13,12 @@
 
 
             <include
-                android:id="@+id/popular_list_view"
-                layout="@layout/movie_list_view"/>
-
+                android:id="@+id/popular_movie_collection"
+                layout="@layout/movie_collection"/>
 
             <include
-                android:id="@+id/another_list_view"
-                layout="@layout/movie_list_view"/>
+                android:id="@+id/another_movie_collection"
+                layout="@layout/movie_collection"/>
 
             <TextView
                 android:layout_width="match_parent"

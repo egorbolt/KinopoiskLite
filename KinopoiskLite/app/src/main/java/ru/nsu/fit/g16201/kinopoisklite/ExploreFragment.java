@@ -1,9 +1,11 @@
 package ru.nsu.fit.g16201.kinopoisklite;
 
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,25 +24,30 @@ public class ExploreFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_explore, container, false);
 
-        RecyclerView popularRecyclerView = view.findViewById(R.id.popular_list_view).findViewById(R.id.recycler_view);
+
+        View popularMovieCollection = view.findViewById(R.id.popular_movie_collection);
         String[] popularDataSet = {
                 "5.6", "7.8", "4.5", "8.6", "5.5"
         };
-        configureRecyclerView(popularRecyclerView, popularDataSet);
+        configureMovieCollection(popularMovieCollection, popularDataSet, "Popular");
 
-        RecyclerView anotherRecyclerView = view.findViewById(R.id.another_list_view).findViewById(R.id.recycler_view);
+        View anotherMovieCollection = view.findViewById(R.id.another_movie_collection);
         String[] anotherDataSet = {
                 "6.6", "1.8", "4.5", "8.4", "5.7"
         };
-        configureRecyclerView(anotherRecyclerView, anotherDataSet);
+        configureMovieCollection(anotherMovieCollection, anotherDataSet, "Another");
 
         return view;
     }
 
     //todo: newInstance?
 
-    private void configureRecyclerView(RecyclerView recyclerView, String[] dataSet)
+    private void configureMovieCollection(View movieCollection, String[] dataSet, String name)
     {
+        TextView textView = movieCollection.findViewById(R.id.colection_name_text_view);
+        textView.setText(name);
+
+        RecyclerView recyclerView = movieCollection.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.HORIZONTAL)); //todo :удалить
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL)); //todo :удалить
