@@ -22,7 +22,7 @@ public class ExploreFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_explore, container, false);
 
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.popular_recycler_view);
+        RecyclerView recyclerView = view.findViewById(R.id.popular_recycler_view);
         recyclerView.setHasFixedSize(true);
 
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.HORIZONTAL)); //todo :удалить
@@ -31,12 +31,12 @@ public class ExploreFragment extends Fragment {
         LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(horizontalLayoutManagaer);
         String[] dataSet = {
-                "test1", "test2", "test3", "test4", "test5"
+                "5.6", "7.8", "4.5", "8.6", "5.5"
         };
 
 
         // 3. create an adapter
-        MyAdapter mAdapter = new MyAdapter(dataSet);
+        MovieAdapter mAdapter = new MovieAdapter(dataSet);
         // 4. set adapter
         recyclerView.setAdapter(mAdapter);
         // 5. set item animator to DefaultAnimator
