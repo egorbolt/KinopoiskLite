@@ -19,31 +19,33 @@ public class ExploreFragment extends Fragment {
     public ExploreFragment() {
     }
 
+    private View view;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_explore, container, false);
+        view = inflater.inflate(R.layout.fragment_explore, container, false);
 
-
-        View popularMovieCollection = view.findViewById(R.id.popular_movie_collection);
         String[] popularDataSet = {
                 "5.6", "7.8", "4.5", "8.6", "5.5"
         };
-        configureMovieCollection(popularMovieCollection, popularDataSet, "Popular");
+        configureMovieCollection(R.id.popular_movie_collection, popularDataSet, "Popular");
 
-        View anotherMovieCollection = view.findViewById(R.id.another_movie_collection);
+
         String[] anotherDataSet = {
                 "6.6", "1.8", "4.5", "8.4", "5.7"
         };
-        configureMovieCollection(anotherMovieCollection, anotherDataSet, "Another");
+        configureMovieCollection(R.id.another_movie_collection, anotherDataSet, "Another");
 
         return view;
     }
 
     //todo: newInstance?
 
-    private void configureMovieCollection(View movieCollection, String[] dataSet, String name)
+    private void configureMovieCollection(int id, String[] dataSet, String name)
     {
+        View movieCollection = view.findViewById(id);
+
         TextView textView = movieCollection.findViewById(R.id.colection_name_text_view);
         textView.setText(name);
 
