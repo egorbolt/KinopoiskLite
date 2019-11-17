@@ -24,11 +24,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
 
-public class ExploreFragment extends Fragment implements SearchView.OnQueryTextListener {
+public class ExploreFragment extends Fragment {
     public ExploreFragment() {
     }
 
-    final Fragment showAllFragment = new ShowAllFragment();
+    private final Fragment showAllFragment = new ShowAllFragment();
 
 
     private View view;
@@ -37,7 +37,6 @@ public class ExploreFragment extends Fragment implements SearchView.OnQueryTextL
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_explore, container, false);
-        setHasOptionsMenu(true);
 
 
         String[] popularDataSet = {
@@ -68,8 +67,7 @@ public class ExploreFragment extends Fragment implements SearchView.OnQueryTextL
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction fragmentTransaction = getActivity()
-                        .getSupportFragmentManager().beginTransaction();
+                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                 fragmentTransaction.hide(ExploreFragment.this).show(showAllFragment).commit();
             }
         });
@@ -90,29 +88,7 @@ public class ExploreFragment extends Fragment implements SearchView.OnQueryTextL
     }
 
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        menu.clear();
-        inflater.inflate(R.menu.search_menu, menu);
-        MenuItem item = menu.findItem(R.id.search);
-        SearchView searchView = (SearchView) item.getActionView();
-        searchView.setOnQueryTextListener(this);
-    }
 
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        //todo
-
-        return false;
-    }
-
-    @Override
-    public boolean onQueryTextChange(String newText) {
-        //todo
-
-        return false;
-    }
 
     //todo: newInstance?
 }
