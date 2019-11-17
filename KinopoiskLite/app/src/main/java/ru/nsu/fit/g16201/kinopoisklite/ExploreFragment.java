@@ -30,7 +30,6 @@ public class ExploreFragment extends Fragment implements SearchView.OnQueryTextL
 
     final Fragment showAllFragment = new ShowAllFragment();
 
-    final FragmentManager fm = getActivity().getSupportFragmentManager();
 
     private View view;
 
