@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,6 +24,12 @@ import androidx.recyclerview.widget.RecyclerView;
 public class ExploreFragment extends Fragment implements SearchView.OnQueryTextListener {
     public ExploreFragment() {
     }
+
+    final Fragment showAllFragment = new ShowAllFragment();
+
+    final FragmentManager fm = getActivity().getSupportFragmentManager();
+
+    Fragment active = this;
 
     private View view;
 
