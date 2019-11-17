@@ -16,10 +16,13 @@ import androidx.appcompat.widget.SearchView;
 import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.button.MaterialButton;
 
 public class ExploreFragment extends Fragment implements SearchView.OnQueryTextListener {
     public ExploreFragment() {
@@ -29,8 +32,6 @@ public class ExploreFragment extends Fragment implements SearchView.OnQueryTextL
 
     final FragmentManager fm = getActivity().getSupportFragmentManager();
 
-    Fragment active = this;
-
     private View view;
 
     @Nullable
@@ -38,21 +39,23 @@ public class ExploreFragment extends Fragment implements SearchView.OnQueryTextL
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_explore, container, false);
         setHasOptionsMenu(true);
+
+
         String[] popularDataSet = {
                 "5.6", "7.8", "4.5", "8.6", "5.5"
         };
         configureMovieCollection(R.id.popular_movie_collection, popularDataSet, "Popular");
-
 
         String[] anotherDataSet = {
                 "6.6", "1.8", "4.5", "8.4", "5.7"
         };
         configureMovieCollection(R.id.another_movie_collection, anotherDataSet, "Another");
 
+
         return view;
     }
 
-    //todo: newInstance?
+
 
     private void configureMovieCollection(int id, String[] dataSet, String name)
     {
@@ -60,6 +63,17 @@ public class ExploreFragment extends Fragment implements SearchView.OnQueryTextL
 
         TextView textView = movieCollection.findViewById(R.id.colection_name_text_view);
         textView.setText(name);
+
+        MaterialButton button = movieCollection.findViewById(R.id.show_button);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction fragmentTransaction = getActivity()
+                        .getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.hide(ExploreFragment.this).show(showAllFragment).commit();
+            }
+        });
 
         RecyclerView recyclerView = movieCollection.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
@@ -69,13 +83,13 @@ public class ExploreFragment extends Fragment implements SearchView.OnQueryTextL
         LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(horizontalLayoutManagaer);
 
-        // 3. create an adapter
         MovieAdapter mAdapter = new MovieAdapter(dataSet);
-        // 4. set adapter
+
         recyclerView.setAdapter(mAdapter);
-        // 5. set item animator to DefaultAnimator
+
         recyclerView.setItemAnimator(new DefaultItemAnimator());
     }
+
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -100,4 +114,6 @@ public class ExploreFragment extends Fragment implements SearchView.OnQueryTextL
 
         return false;
     }
+
+    //todo: newInstance?
 }
