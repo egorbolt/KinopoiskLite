@@ -1,21 +1,14 @@
 package ru.nsu.fit.g16201.kinopoisklite;
 
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SearchView;
-import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -37,7 +30,6 @@ public class ExploreFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_explore, container, false);
-
 
         String[] popularDataSet = {
                 "5.6", "7.8", "4.5", "8.6", "5.5"
@@ -68,7 +60,9 @@ public class ExploreFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                //fragmentTransaction.replace(R.id.main_container, showAllFragment).addToBackStack("explore").commit();
                 fragmentTransaction.hide(ExploreFragment.this).show(showAllFragment).commit();
+
             }
         });
 
@@ -80,7 +74,7 @@ public class ExploreFragment extends Fragment {
         LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(horizontalLayoutManagaer);
 
-        MovieAdapter mAdapter = new MovieAdapter(dataSet);
+        MovieRatingsAdapter mAdapter = new MovieRatingsAdapter(dataSet);
 
         recyclerView.setAdapter(mAdapter);
 

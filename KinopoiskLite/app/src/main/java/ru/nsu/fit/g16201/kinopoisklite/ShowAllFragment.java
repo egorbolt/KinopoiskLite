@@ -9,14 +9,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-class ShowAllFragment extends Fragment {
+public class ShowAllFragment extends Fragment {
+
+    public ShowAllFragment()
+    {
+    }
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_explore, container, false);
-        //setHasOptionsMenu(true);
-
+        View view = inflater.inflate(R.layout.fragment_show_all, container, false);
 
         return view;
     }
+
 }
