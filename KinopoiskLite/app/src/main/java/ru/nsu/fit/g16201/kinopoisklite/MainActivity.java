@@ -16,10 +16,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity  implements SearchView.OnQueryTextListener {
 
-    final Fragment showAllFragment = new ShowAllFragment();
-    final Fragment exploreFragment = new ExploreFragment();
-    final Fragment randomFragment = new RandomFragment();
-    final Fragment listsFragment = new ListsFragment();
+    final ShowAllFragment showAllFragment = new ShowAllFragment();
+    final ExploreFragment exploreFragment = new ExploreFragment();
+    final RandomFragment randomFragment = new RandomFragment();
+    final ListsFragment listsFragment = new ListsFragment();
     final FragmentManager fm = getSupportFragmentManager();
 
     Fragment active = exploreFragment;
@@ -38,8 +38,9 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
                         switch (menuItem.getItemId()) {
                             case R.id.action_explore:
                                 //fm.beginTransaction().hide(active).show(exploreFragment).addToBackStack(null).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();  //будет сохранять всю историю переходов и разматывать её обратно при нажатии на back
-                                fm.beginTransaction().hide(active).show(exploreFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
-                                active = exploreFragment;
+                                Fragment exploreActiveFragment = exploreFragment.getActiveFragment();
+                                fm.beginTransaction().hide(active).show(exploreActiveFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+                                active = exploreActiveFragment;
                                 return true;
                             case R.id.action_random:
                                 fm.beginTransaction().hide(active).show(randomFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
@@ -87,6 +88,9 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
 
         return false;
     }
+
+
+
 
 
 }

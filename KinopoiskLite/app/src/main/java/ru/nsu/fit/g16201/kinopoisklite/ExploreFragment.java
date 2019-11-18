@@ -21,8 +21,8 @@ public class ExploreFragment extends Fragment {
     public ExploreFragment() {
     }
 
-    private final Fragment showAllFragment = new ShowAllFragment();
-
+    private final Fragment showAllFragment = new ShowAllFragment(); //todo: добавить сеттер, что показывать?
+    private Fragment activeFragment = this;
 
     private View view;
 
@@ -60,8 +60,9 @@ public class ExploreFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                activeFragment = showAllFragment;
                 //fragmentTransaction.replace(R.id.main_container, showAllFragment).addToBackStack("explore").commit();
-                fragmentTransaction.hide(ExploreFragment.this).show(showAllFragment).addToBackStack(null).commit();
+                fragmentTransaction.hide(ExploreFragment.this).show(showAllFragment).commit();
 
             }
         });
@@ -83,6 +84,10 @@ public class ExploreFragment extends Fragment {
 
 
 
+    public Fragment getActiveFragment()
+    {
+        return activeFragment;
+    }
 
     //todo: newInstance?
 }
