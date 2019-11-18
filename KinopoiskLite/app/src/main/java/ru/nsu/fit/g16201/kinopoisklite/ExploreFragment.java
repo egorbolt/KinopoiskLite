@@ -1,6 +1,7 @@
 package ru.nsu.fit.g16201.kinopoisklite;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -30,6 +32,8 @@ public class ExploreFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_explore, container, false);
+
+
 
         String[] popularDataSet = {
                 "5.6", "7.8", "4.5", "8.6", "5.5"
@@ -62,7 +66,7 @@ public class ExploreFragment extends Fragment {
                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                 activeFragment = showAllFragment;
                 //fragmentTransaction.replace(R.id.main_container, showAllFragment).addToBackStack("explore").commit();
-                fragmentTransaction.hide(ExploreFragment.this).show(showAllFragment).commit();
+                fragmentTransaction.hide(ExploreFragment.this).show(showAllFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
 
             }
         });
@@ -87,6 +91,11 @@ public class ExploreFragment extends Fragment {
     public Fragment getActiveFragment()
     {
         return activeFragment;
+    }
+
+    public void setExploreActive() {
+        activeFragment = this;
+        getFragmentManager().beginTransaction().hide(showAllFragment).show(this).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
     }
 
     //todo: newInstance?

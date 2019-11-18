@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -16,12 +17,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity  implements SearchView.OnQueryTextListener {
 
-    final ShowAllFragment showAllFragment = new ShowAllFragment();
     final ExploreFragment exploreFragment = new ExploreFragment();
     final RandomFragment randomFragment = new RandomFragment();
     final ListsFragment listsFragment = new ListsFragment();
     final FragmentManager fm = getSupportFragmentManager();
-
+    private BottomNavigationView bottomNavigationView;
     Fragment active = exploreFragment;
 
     @Override
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
 
         setContentView(R.layout.activity_main);
         setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
@@ -55,7 +55,6 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
                     }
                 });
 
-        fm.beginTransaction().add(R.id.main_container, showAllFragment, "4").hide(showAllFragment).commit();
         fm.beginTransaction().add(R.id.main_container, listsFragment, "3").hide(listsFragment).commit();
         fm.beginTransaction().add(R.id.main_container, randomFragment, "2").hide(randomFragment).commit();
         fm.beginTransaction().add(R.id.main_container, exploreFragment, "1").commit();
@@ -90,7 +89,15 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
     }
 
 
-
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && bottomNavigationView.getSelectedItemId() == R.id.action_explore && exploreFragment.getActiveFragment() != exploreFragment) {
+            exploreFragment.setExploreActive();
+            active = exploreFragment;
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 
 
 }
