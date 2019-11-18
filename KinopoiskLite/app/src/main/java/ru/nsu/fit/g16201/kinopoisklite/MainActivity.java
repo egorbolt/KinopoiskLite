@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -36,15 +37,15 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
                     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                         switch (menuItem.getItemId()) {
                             case R.id.action_explore:
-                                fm.beginTransaction().hide(active).show(exploreFragment).commit();
+                                fm.beginTransaction().hide(active).show(exploreFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
                                 active = exploreFragment;
                                 return true;
                             case R.id.action_random:
-                                fm.beginTransaction().hide(active).show(randomFragment).commit();
+                                fm.beginTransaction().hide(active).show(randomFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
                                 active = randomFragment;
                                 return true;
                             case R.id.action_lists:
-                                fm.beginTransaction().hide(active).show(listsFragment).commit();
+                                fm.beginTransaction().hide(active).show(listsFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
                                 active = listsFragment;
                                 return true;
                         }
