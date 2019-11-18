@@ -61,7 +61,7 @@ public class ExploreFragment extends Fragment {
             public void onClick(View v) {
                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                 //fragmentTransaction.replace(R.id.main_container, showAllFragment).addToBackStack("explore").commit();
-                fragmentTransaction.hide(ExploreFragment.this).show(showAllFragment).commit();
+                fragmentTransaction.hide(ExploreFragment.this).show(showAllFragment).addToBackStack(null).commit();
 
             }
         });

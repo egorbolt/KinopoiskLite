@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
                     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                         switch (menuItem.getItemId()) {
                             case R.id.action_explore:
+                                //fm.beginTransaction().hide(active).show(exploreFragment).addToBackStack(null).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();  //будет сохранять всю историю переходов и разматывать её обратно при нажатии на back
                                 fm.beginTransaction().hide(active).show(exploreFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
                                 active = exploreFragment;
                                 return true;
