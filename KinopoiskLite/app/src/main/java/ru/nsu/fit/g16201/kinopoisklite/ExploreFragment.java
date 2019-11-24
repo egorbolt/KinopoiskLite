@@ -71,7 +71,7 @@ public class ExploreFragment extends Fragment {
                 bundle.putString("key", "abc"); //todo: передавать в фрагмент что-то, по чему можно понять, какой список выводить
                 showAllFragment.setArguments(bundle);*/
                 activeFragment = showAllFragment;
-                //fragmentTransaction.replace(R.id.main_container, showAllFragment).addToBackStack("explore").commit();
+                ((MainActivity)getActivity()).setShowAllActive();
                 fragmentTransaction.hide(ExploreFragment.this).show(showAllFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
             }
         });
@@ -100,7 +100,6 @@ public class ExploreFragment extends Fragment {
 
     public void setExploreActive() {
         activeFragment = this;
-        getFragmentManager().beginTransaction().hide(showAllFragment).show(this).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
     }
 
     //todo: newInstance?

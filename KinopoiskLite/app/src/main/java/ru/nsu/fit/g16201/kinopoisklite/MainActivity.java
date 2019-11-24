@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
     private static final String ACTIVE_FRAGMENT = "active_fragment";
     private static final String SHOW_ALL_FRAGMENT = "show_all_fragment";
 
-
     public static final String SHOW_ALL_FRAGMENT_TAG = "show_all_fragment_tag";
 
 
@@ -121,7 +120,6 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
     @Override
     public boolean onQueryTextSubmit(String query) {
         //todo
-
         return false;
     }
 
@@ -138,6 +136,7 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
         BottomNavigationView bnv = findViewById(R.id.bottom_navigation);
         if (keyCode == KeyEvent.KEYCODE_BACK && bnv.getSelectedItemId() == R.id.action_explore && exploreFragment.getActiveFragment() != exploreFragment) {
             exploreFragment.setExploreActive();
+            getSupportFragmentManager().beginTransaction().hide(showAllFragment).show(exploreFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
             active = exploreFragment;
             return true;
         }
@@ -164,5 +163,9 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
         if (active != null) {
             outState.putString(ACTIVE_FRAGMENT, active.getTag());
         }
+    }
+
+    public void setShowAllActive() {
+        active = showAllFragment;
     }
 }
