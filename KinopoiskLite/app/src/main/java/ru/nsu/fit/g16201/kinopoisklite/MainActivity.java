@@ -93,7 +93,6 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
             bottomNavigationView.setSelectedItemId(R.id.action_explore);
         }
 
-
     }
 
     @Override
@@ -147,7 +146,6 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
         if (listsFragment != null) {
             outState.putString(LISTS_FRAGMENT, listsFragment.getTag());
         }
-
         if (active != null) {
             outState.putString(ACTIVE_FRAGMENT, active.getTag());
         }

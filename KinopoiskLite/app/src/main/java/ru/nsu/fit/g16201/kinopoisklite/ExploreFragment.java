@@ -33,8 +33,6 @@ public class ExploreFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_explore, container, false);
 
-
-
         String[] popularDataSet = {
                 "5.6", "7.8", "4.5", "8.6", "5.5"
         };
@@ -64,6 +62,13 @@ public class ExploreFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+
+
+                Bundle bundle = new Bundle();
+                bundle.putString("key", "abc"); //todo: передавать в фрагмент что-то, по чему можно понять, какой список выводить
+                //bundle.putInt("id", "abc");
+                showAllFragment.setArguments(bundle);
+
                 activeFragment = showAllFragment;
                 //fragmentTransaction.replace(R.id.main_container, showAllFragment).addToBackStack("explore").commit();
                 fragmentTransaction.hide(ExploreFragment.this).show(showAllFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
