@@ -11,8 +11,16 @@ import androidx.fragment.app.Fragment;
 
 public class ShowAllFragment extends Fragment {
 
+    private OnChangeMovieListListener callback;
+
     public ShowAllFragment()
     {
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
     }
 
 
@@ -22,12 +30,19 @@ public class ShowAllFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_show_all, container, false);
 
         //View movieCollection = view.findViewById(id);
-        Bundle bundle = this.getArguments();
 
-        if(bundle != null){
-            System.out.println("fdfdsdfsd");
-        }
         return view;
+    }
+
+
+    public void setOnChangeMovieListListener(OnChangeMovieListListener callback) {
+        this.callback = callback;
+    }
+
+    // This interface can be implemented by the Activity, parent Fragment,
+    // or a separate test implementation.
+    public interface OnChangeMovieListListener {
+        public void onArticleSelected(int position);
     }
 
 }
