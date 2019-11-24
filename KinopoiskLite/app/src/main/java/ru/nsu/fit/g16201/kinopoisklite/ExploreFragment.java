@@ -35,8 +35,7 @@ public class ExploreFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_explore, container, false);
 
-        showAllFragment = new ShowAllFragment(); //todo: добавить сеттер, что показывать?
-        getFragmentManager().beginTransaction().add(R.id.main_container, showAllFragment).commit();
+        showAllFragment = getFragmentManager().findFragmentByTag(MainActivity.SHOW_ALL_FRAGMENT_TAG);
 
         String[] popularDataSet = {
                 "5.6", "7.8", "4.5", "8.6", "5.5"

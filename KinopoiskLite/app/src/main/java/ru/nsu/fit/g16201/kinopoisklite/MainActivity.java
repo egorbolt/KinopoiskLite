@@ -21,10 +21,17 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
     private static final String RANDOM_FRAGMENT = "random_fragment";
     private static final String LISTS_FRAGMENT = "lists_fragment";
     private static final String ACTIVE_FRAGMENT = "active_fragment";
+    private static final String SHOW_ALL_FRAGMENT = "show_all_fragment";
+
+
+    public static final String SHOW_ALL_FRAGMENT_TAG = "show_all_fragment_tag";
+
 
     private ExploreFragment exploreFragment;
     private RandomFragment randomFragment;
     private ListsFragment listsFragment;
+    private ShowAllFragment showAllFragment;
+
     private Fragment active;
 
     @Override
@@ -76,6 +83,9 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
             String tagListsFragment = savedInstanceState.getString(LISTS_FRAGMENT);
             listsFragment = (ListsFragment) fm.findFragmentByTag(tagListsFragment);
 
+            String tagShowAllFragment = savedInstanceState.getString(SHOW_ALL_FRAGMENT);
+            showAllFragment = (ShowAllFragment) fm.findFragmentByTag(tagShowAllFragment);
+
             String tagActiveFragment = savedInstanceState.getString(ACTIVE_FRAGMENT);
             active = fm.findFragmentByTag(tagActiveFragment);
         }
@@ -84,7 +94,9 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
             exploreFragment = new ExploreFragment();
             randomFragment = new RandomFragment();
             listsFragment = new ListsFragment();
+            showAllFragment = new ShowAllFragment();
 
+            getSupportFragmentManager().beginTransaction().add(R.id.main_container, showAllFragment, SHOW_ALL_FRAGMENT_TAG).hide(showAllFragment).commit();
             getSupportFragmentManager().beginTransaction().add(R.id.main_container, listsFragment, "1").hide(listsFragment).commit();
             getSupportFragmentManager().beginTransaction().add(R.id.main_container, randomFragment, "2").hide(randomFragment).commit();
             getSupportFragmentManager().beginTransaction().add(R.id.main_container, exploreFragment, "3").commit();
@@ -145,6 +157,9 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
         }
         if (listsFragment != null) {
             outState.putString(LISTS_FRAGMENT, listsFragment.getTag());
+        }
+        if (showAllFragment != null) {
+            outState.putString(SHOW_ALL_FRAGMENT, showAllFragment.getTag());
         }
         if (active != null) {
             outState.putString(ACTIVE_FRAGMENT, active.getTag());
