@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ShowAllFragment extends Fragment {
@@ -29,6 +31,19 @@ public class ShowAllFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_show_all, container, false);
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
+
+        LinearLayoutManager verticalLayoutManagaer = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(verticalLayoutManagaer);
+
+        String[] dataSet = {
+                "6.6", "1.8", "4.5", "8.4", "5.7"
+        };
+
+        MovieListAdapter mAdapter = new MovieListAdapter(dataSet);
+
+        recyclerView.setAdapter(mAdapter);
+
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         return view;
     }
