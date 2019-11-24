@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
 
         setContentView(R.layout.activity_main);
         setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -54,6 +55,13 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
                         return false;
                     }
                 });
+
+        // However, if we're being restored from a previous state,
+        // then we don't need to do anything and should return or else
+        // we could end up with overlapping fragments.
+        if (savedInstanceState != null) {
+            return;
+        }
 
         fm.beginTransaction().add(R.id.main_container, listsFragment, "3").hide(listsFragment).commit();
         fm.beginTransaction().add(R.id.main_container, randomFragment, "2").hide(randomFragment).commit();
