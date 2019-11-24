@@ -17,12 +17,15 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity  implements SearchView.OnQueryTextListener {
 
-    final ExploreFragment exploreFragment = new ExploreFragment();
-    final RandomFragment randomFragment = new RandomFragment();
-    final ListsFragment listsFragment = new ListsFragment();
-    final FragmentManager fm = getSupportFragmentManager();
-    private BottomNavigationView bottomNavigationView;
-    Fragment active = exploreFragment;
+    private static final String EXPLORE_FRAGMENT = "explore_fragment";
+    private static final String RANDOM_FRAGMENT = "random_fragment";
+    private static final String LISTS_FRAGMENT = "lists_fragment";
+    private static final String ACTIVE_FRAGMENT = "active_fragment";
+
+    private ExploreFragment exploreFragment;
+    private RandomFragment randomFragment;
+    private ListsFragment listsFragment;
+    private Fragment active;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,24 +34,30 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
         setContentView(R.layout.activity_main);
         setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        bottomNavigationView = findViewById(R.id.bottom_navigation);
+        // However, if we're being restored from a previous state,
+        // then we don't need to do anything and should return or else
+        // we could end up with overlapping fragments.
+
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                        System.out.println("here");
                         switch (menuItem.getItemId()) {
                             case R.id.action_explore:
                                 //fm.beginTransaction().hide(active).show(exploreFragment).addToBackStack(null).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();  //будет сохранять всю историю переходов и разматывать её обратно при нажатии на back
                                 Fragment exploreActiveFragment = exploreFragment.getActiveFragment();
-                                fm.beginTransaction().hide(active).show(exploreActiveFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+                                getSupportFragmentManager().beginTransaction().hide(active).show(exploreActiveFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
                                 active = exploreActiveFragment;
                                 return true;
                             case R.id.action_random:
-                                fm.beginTransaction().hide(active).show(randomFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+                                getSupportFragmentManager().beginTransaction().hide(active).show(randomFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
                                 active = randomFragment;
                                 return true;
                             case R.id.action_lists:
-                                fm.beginTransaction().hide(active).show(listsFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+                                getSupportFragmentManager().beginTransaction().hide(active).show(listsFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
                                 active = listsFragment;
                                 return true;
                         }
@@ -56,17 +65,33 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
                     }
                 });
 
-        // However, if we're being restored from a previous state,
-        // then we don't need to do anything and should return or else
-        // we could end up with overlapping fragments.
         if (savedInstanceState != null) {
+            FragmentManager fm = getSupportFragmentManager();
+
+            String tagExploreFragment = savedInstanceState.getString(EXPLORE_FRAGMENT);
+            exploreFragment = (ExploreFragment) fm.findFragmentByTag(tagExploreFragment);
+
+            String tagRandomFragment = savedInstanceState.getString(RANDOM_FRAGMENT);
+            randomFragment = (RandomFragment) fm.findFragmentByTag(tagRandomFragment);
+
+            String tagListsFragment = savedInstanceState.getString(LISTS_FRAGMENT);
+            listsFragment = (ListsFragment) fm.findFragmentByTag(tagListsFragment);
+
+            String tagActiveFragment = savedInstanceState.getString(ACTIVE_FRAGMENT);
+            active = fm.findFragmentByTag(tagListsFragment);
+
             return;
         }
 
-        fm.beginTransaction().add(R.id.main_container, listsFragment, "3").hide(listsFragment).commit();
-        fm.beginTransaction().add(R.id.main_container, randomFragment, "2").hide(randomFragment).commit();
-        fm.beginTransaction().add(R.id.main_container, exploreFragment, "1").commit();
+        exploreFragment = new ExploreFragment();
+        randomFragment = new RandomFragment();
+        listsFragment = new ListsFragment();
 
+        getSupportFragmentManager().beginTransaction().add(R.id.main_container, listsFragment, "1").hide(listsFragment).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.main_container, randomFragment, "2").hide(randomFragment).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.main_container, exploreFragment, "3").commit();
+
+        active =  exploreFragment;
         bottomNavigationView.setSelectedItemId(R.id.action_explore);
 
     }
@@ -99,7 +124,8 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK && bottomNavigationView.getSelectedItemId() == R.id.action_explore && exploreFragment.getActiveFragment() != exploreFragment) {
+        BottomNavigationView bnv = findViewById(R.id.bottom_navigation);
+        if (keyCode == KeyEvent.KEYCODE_BACK && bnv.getSelectedItemId() == R.id.action_explore && exploreFragment.getActiveFragment() != exploreFragment) {
             exploreFragment.setExploreActive();
             active = exploreFragment;
             return true;
@@ -108,4 +134,22 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
     }
 
 
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        if (exploreFragment != null) {
+            outState.putString(EXPLORE_FRAGMENT, exploreFragment.getTag());
+        }
+        if (randomFragment != null) {
+            outState.putString(RANDOM_FRAGMENT, randomFragment.getTag());
+        }
+        if (listsFragment != null) {
+            outState.putString(LISTS_FRAGMENT, listsFragment.getTag());
+        }
+
+        if (active != null) {
+            outState.putString(ACTIVE_FRAGMENT, active.getTag());
+        }
+    }
 }
