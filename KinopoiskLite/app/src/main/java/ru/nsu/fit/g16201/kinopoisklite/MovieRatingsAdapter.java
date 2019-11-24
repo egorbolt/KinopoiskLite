@@ -38,7 +38,7 @@ public class MovieRatingsAdapter extends RecyclerView.Adapter<MovieRatingsAdapte
     public MoviePosterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // create a new view
         RelativeLayout v = (RelativeLayout) LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.movie_view, parent, false);
+                .inflate(R.layout.movie_small_view, parent, false);
 
         return new MoviePosterViewHolder(v);
 

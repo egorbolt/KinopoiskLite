@@ -8,10 +8,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class ShowAllFragment extends Fragment {
-
-    private OnChangeMovieListListener callback;
 
     public ShowAllFragment()
     {
@@ -29,20 +28,10 @@ public class ShowAllFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_show_all, container, false);
 
-        //View movieCollection = view.findViewById(id);
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
 
         return view;
     }
 
-
-    public void setOnChangeMovieListListener(OnChangeMovieListListener callback) {
-        this.callback = callback;
-    }
-
-    // This interface can be implemented by the Activity, parent Fragment,
-    // or a separate test implementation.
-    public interface OnChangeMovieListListener {
-        public void onArticleSelected(int position);
-    }
 
 }
