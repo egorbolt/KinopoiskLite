@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                        System.out.println("here");
                         switch (menuItem.getItemId()) {
                             case R.id.action_explore:
                                 //fm.beginTransaction().hide(active).show(exploreFragment).addToBackStack(null).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();  //будет сохранять всю историю переходов и разматывать её обратно при нажатии на back
@@ -78,21 +77,22 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
             listsFragment = (ListsFragment) fm.findFragmentByTag(tagListsFragment);
 
             String tagActiveFragment = savedInstanceState.getString(ACTIVE_FRAGMENT);
-            active = fm.findFragmentByTag(tagListsFragment);
+            active = fm.findFragmentByTag(tagActiveFragment);
+        }
+        else
+        {
+            exploreFragment = new ExploreFragment();
+            randomFragment = new RandomFragment();
+            listsFragment = new ListsFragment();
 
-            return;
+            getSupportFragmentManager().beginTransaction().add(R.id.main_container, listsFragment, "1").hide(listsFragment).commit();
+            getSupportFragmentManager().beginTransaction().add(R.id.main_container, randomFragment, "2").hide(randomFragment).commit();
+            getSupportFragmentManager().beginTransaction().add(R.id.main_container, exploreFragment, "3").commit();
+
+            active =  exploreFragment;
+            bottomNavigationView.setSelectedItemId(R.id.action_explore);
         }
 
-        exploreFragment = new ExploreFragment();
-        randomFragment = new RandomFragment();
-        listsFragment = new ListsFragment();
-
-        getSupportFragmentManager().beginTransaction().add(R.id.main_container, listsFragment, "1").hide(listsFragment).commit();
-        getSupportFragmentManager().beginTransaction().add(R.id.main_container, randomFragment, "2").hide(randomFragment).commit();
-        getSupportFragmentManager().beginTransaction().add(R.id.main_container, exploreFragment, "3").commit();
-
-        active =  exploreFragment;
-        bottomNavigationView.setSelectedItemId(R.id.action_explore);
 
     }
 
