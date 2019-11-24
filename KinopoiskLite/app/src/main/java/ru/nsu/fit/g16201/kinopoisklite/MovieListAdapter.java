@@ -13,8 +13,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.MovieInfoViewHolder>  {
 
-
     private String[] dataSet;
+
+
+    static class MovieInfoViewHolder extends RecyclerView.ViewHolder {
+        ImageView imageView;
+        TextView ratingBadge;
+        MovieInfoViewHolder(View view) {
+            super(view);
+            imageView = view.findViewById(R.id.movie_poster_image_view);
+            ratingBadge = view.findViewById(R.id.badge_rating);
+        }
+    }
+
 
     public MovieListAdapter(String[] dataSet) {
         this.dataSet = dataSet;
@@ -39,13 +50,5 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
         return dataSet.length;
     }
 
-    static class MovieInfoViewHolder extends RecyclerView.ViewHolder {
-        ImageView imageView;
-        TextView ratingBadge;
-        MovieInfoViewHolder(View view) {
-            super(view);
-            imageView = view.findViewById(R.id.movie_poster_image_view);
-            ratingBadge = view.findViewById(R.id.badge_rating);
-        }
-    }
+
 }

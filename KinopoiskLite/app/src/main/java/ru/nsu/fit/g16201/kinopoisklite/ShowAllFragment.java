@@ -21,7 +21,6 @@ public class ShowAllFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
 
@@ -30,10 +29,11 @@ public class ShowAllFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_show_all, container, false);
 
+        System.out.println("gdgdgfdgd");
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
 
-        LinearLayoutManager verticalLayoutManagaer = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        recyclerView.setLayoutManager(verticalLayoutManagaer);
+        LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(verticalLayoutManager);
 
         String[] dataSet = {
                 "6.6", "1.8", "4.5", "8.4", "5.7"

@@ -23,8 +23,10 @@ public class ExploreFragment extends Fragment {
     public ExploreFragment() {
     }
 
-    private final Fragment showAllFragment = new ShowAllFragment(); //todo: добавить сеттер, что показывать?
+    private Fragment showAllFragment;
+    ;
     private Fragment activeFragment = this;
+
 
     private View view;
 
@@ -32,6 +34,9 @@ public class ExploreFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_explore, container, false);
+
+        showAllFragment = new ShowAllFragment(); //todo: добавить сеттер, что показывать?
+        getFragmentManager().beginTransaction().add(R.id.main_container, showAllFragment).commit();
 
         String[] popularDataSet = {
                 "5.6", "7.8", "4.5", "8.6", "5.5"
@@ -66,11 +71,9 @@ public class ExploreFragment extends Fragment {
                 /*Bundle bundle = new Bundle();
                 bundle.putString("key", "abc"); //todo: передавать в фрагмент что-то, по чему можно понять, какой список выводить
                 showAllFragment.setArguments(bundle);*/
-
                 activeFragment = showAllFragment;
                 //fragmentTransaction.replace(R.id.main_container, showAllFragment).addToBackStack("explore").commit();
                 fragmentTransaction.hide(ExploreFragment.this).show(showAllFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
-
             }
         });
 
