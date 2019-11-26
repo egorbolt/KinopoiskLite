@@ -16,7 +16,6 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
 
     private String[] dataSet;
 
-
     static class MovieInfoViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
         TextView ratingBadge;

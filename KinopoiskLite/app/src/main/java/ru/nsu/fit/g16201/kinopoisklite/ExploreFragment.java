@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -23,7 +24,7 @@ public class ExploreFragment extends Fragment {
     public ExploreFragment() {
     }
 
-    private Fragment showAllFragment;
+    private ShowAllFragment showAllFragment;
     ;
     private Fragment activeFragment = this;
 
@@ -35,7 +36,7 @@ public class ExploreFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_explore, container, false);
 
-        showAllFragment = getFragmentManager().findFragmentByTag(MainActivity.SHOW_ALL_FRAGMENT_TAG);
+        //showAllFragment = getFragmentManager().findFragmentByTag(MainActivity.SHOW_ALL_FRAGMENT_TAG);
 
         String[] popularDataSet = {
                 "5.6", "7.8", "4.5", "8.6", "5.5"
@@ -70,8 +71,12 @@ public class ExploreFragment extends Fragment {
                 /*Bundle bundle = new Bundle();
                 bundle.putString("key", "abc"); //todo: передавать в фрагмент что-то, по чему можно понять, какой список выводить
                 showAllFragment.setArguments(bundle);*/
+
+                showAllFragment = new ShowAllFragment();
                 activeFragment = showAllFragment;
-                ((MainActivity)getActivity()).setShowAllActive();
+
+                notifyMainActivityShowAllFragmentIsActive(showAllFragment);
+
                 fragmentTransaction.hide(ExploreFragment.this).show(showAllFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
             }
         });
@@ -91,6 +96,11 @@ public class ExploreFragment extends Fragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
     }
 
+    private void notifyMainActivityShowAllFragmentIsActive(ShowAllFragment showAllFragment) {
+        FragmentActivity activity = getActivity();
+        if(activity != null)
+            ((MainActivity)activity).setShowAllActive(showAllFragment);
+    }
 
 
     public Fragment getActiveFragment()
