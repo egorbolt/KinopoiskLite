@@ -19,28 +19,22 @@
         android:layout_height="wrap_content"
         >
 
-        <Space
-            android:id="@+id/space_top"
-            android:layout_height="8dp"
-            android:layout_width="match_parent"
-            app:layout_constraintBottom_toTopOf="@id/poster_view"
-            app:layout_constraintTop_toTopOf="parent"/>
 
         <include
             android:id="@+id/poster_view"
             layout="@layout/movie_poster_view"
+
             android:layout_width="100dp"
             android:layout_height="150dp"
 
-            app:layout_constraintTop_toBottomOf="@id/space_top"
-            app:layout_constraintBottom_toTopOf="@id/space_bottom" />
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="6dp"
 
-        <Space
-            android:id="@+id/space_bottom"
-            android:layout_width="match_parent"
-            android:layout_height="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/poster_view" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
 
         <TextView
             android:id="@+id/textView"
@@ -71,7 +65,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/poster_view"
             app:layout_constraintTop_toBottomOf="@+id/textView"
-            android:text="Zero movie review"
+            android:text="Zero movie review fdsfdsfsdfsdfdsfsdfsdfsdfsdfsdfdfdsfdsfs"
             />
 
         <TextView
@@ -87,7 +81,7 @@
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/poster_view"
             app:layout_constraintTop_toBottomOf="@+id/textViewTitle"
             android:text="Zero movie review: Shah Rukh Khan, Katrina Kaif and Anushka Sharma"
             />
