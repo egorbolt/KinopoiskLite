@@ -35,20 +35,9 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginTop="8dp"
-            android:text="2 min Ago "
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
-
         <TextView
             android:id="@+id/textViewTitle"
+
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -56,34 +45,41 @@
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:letterSpacing="-0.02"
 
-            android:lineSpacingExtra="5sp"
+            android:letterSpacing="-0.02"
+            android:lineSpacingExtra="5sp
+"
+            android:variablePadding="true"
+
             android:textColor="@color/red"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/poster_view"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
-            android:text="Zero movie review fdsfdsfsdfsdfdsfsdfsdfsdfsdfsdfdfdsfdsfs"
+            app:layout_constraintTop_toTopOf="parent"
+
+            android:gravity="start"
+
+            android:text="Zero movie review dsfdfds fdsfsdsf sdfdfs"
             />
 
         <TextView
             android:id="@+id/textViewDescription"
+
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:textSize="15sp"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/poster_view"
-            app:layout_constraintTop_toBottomOf="@+id/textViewTitle"
-            android:text="Zero movie review: Shah Rukh Khan, Katrina Kaif and Anushka Sharma"
+
+            android:text="Zero movie review: Shah Rukh Khan, Katrina Kaif and Anushka Sharma gffdgfdgfdgfdgfdg"
+
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
