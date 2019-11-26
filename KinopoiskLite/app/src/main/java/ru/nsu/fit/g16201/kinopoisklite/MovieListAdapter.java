@@ -4,12 +4,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.Random;
 
 public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.MovieInfoViewHolder>  {
 
@@ -19,10 +20,15 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
     static class MovieInfoViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
         TextView ratingBadge;
+        TextView movieTitle;
+        TextView movieDescription;
         MovieInfoViewHolder(View view) {
             super(view);
             imageView = view.findViewById(R.id.movie_poster_image_view);
             ratingBadge = view.findViewById(R.id.badge_rating);
+            movieTitle = view.findViewById(R.id.textViewMovieTitle);
+            movieDescription = view.findViewById(R.id.textViewMovieDescription);
+
         }
     }
 
@@ -43,6 +49,7 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
     @Override
     public void onBindViewHolder(@NonNull MovieInfoViewHolder holder, int position) {
         holder.ratingBadge.setText(dataSet[position]);
+        holder.movieTitle.setText(String.format("%d", new Random().nextInt()));
     }
 
     @Override

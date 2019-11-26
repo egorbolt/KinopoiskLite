@@ -36,7 +36,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
-            android:id="@+id/textViewTitle"
+            android:id="@+id/textViewMovieTitle"
 
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -47,8 +47,8 @@
             android:layout_marginTop="8dp"
 
             android:letterSpacing="-0.02"
-            android:lineSpacingExtra="5sp
-"
+            android:lineSpacingExtra="5sp"
+
             android:variablePadding="true"
 
             android:textColor="@color/red"
@@ -60,11 +60,11 @@
 
             android:gravity="start"
 
-            android:text="Zero movie review dsfdfds fdsfsdsf sdfdfs"
+            android:text="Zero movie review dsfdfdsfdsfsdsf sdfdfs"
             />
 
         <TextView
-            android:id="@+id/textViewDescription"
+            android:id="@+id/textViewMovieDescription"
 
             android:layout_width="0dp"
             android:layout_height="wrap_content"
