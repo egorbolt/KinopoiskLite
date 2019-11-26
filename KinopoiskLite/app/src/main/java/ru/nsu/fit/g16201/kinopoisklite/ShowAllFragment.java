@@ -21,6 +21,11 @@ public class ShowAllFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            System.out.println("gfgdfgdfgfdg");
+        }
     }
 
 

@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
 
     public static final String SHOW_ALL_FRAGMENT_TAG = "show_all_fragment_tag";
 
-
     private ExploreFragment exploreFragment;
     private RandomFragment randomFragment;
     private ListsFragment listsFragment;
@@ -46,8 +45,8 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                         switch (menuItem.getItemId()) {
+                            //можно вместо hide и show использовать бэкстек, тогда он будет сохранять всю историю переходов и разматывать её обратно при нажатии на back
                             case R.id.action_explore:
-                                //fm.beginTransaction().hide(active).show(exploreFragment).addToBackStack(null).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();  //будет сохранять всю историю переходов и разматывать её обратно при нажатии на back
                                 Fragment exploreActiveFragment = exploreFragment.getActiveFragment();
                                 if(active != showAllFragment)
                                 {
@@ -98,7 +97,6 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
             randomFragment = new RandomFragment();
             listsFragment = new ListsFragment();
 
-            //getSupportFragmentManager().beginTransaction().add(R.id.main_container, showAllFragment, SHOW_ALL_FRAGMENT_TAG).hide(showAllFragment).commit();
             getSupportFragmentManager().beginTransaction().add(R.id.main_container, listsFragment, "1").hide(listsFragment).commit();
             getSupportFragmentManager().beginTransaction().add(R.id.main_container, randomFragment, "2").hide(randomFragment).commit();
             getSupportFragmentManager().beginTransaction().add(R.id.main_container, exploreFragment, "3").commit();
