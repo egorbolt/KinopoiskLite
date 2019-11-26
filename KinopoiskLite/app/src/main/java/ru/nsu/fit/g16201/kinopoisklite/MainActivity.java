@@ -49,8 +49,17 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
                             case R.id.action_explore:
                                 //fm.beginTransaction().hide(active).show(exploreFragment).addToBackStack(null).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();  //будет сохранять всю историю переходов и разматывать её обратно при нажатии на back
                                 Fragment exploreActiveFragment = exploreFragment.getActiveFragment();
-                                getSupportFragmentManager().beginTransaction().hide(active).show(exploreActiveFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
-                                active = exploreActiveFragment;
+                                if(active != showAllFragment)
+                                {
+                                    getSupportFragmentManager().beginTransaction().hide(active).show(exploreActiveFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+                                    active = exploreActiveFragment;
+                                }
+                                else
+                                {
+                                    getSupportFragmentManager().beginTransaction().hide(active).show(exploreFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+                                    exploreFragment.setExploreActive();
+                                    active = exploreFragment;
+                                }
                                 return true;
                             case R.id.action_random:
                                 getSupportFragmentManager().beginTransaction().hide(active).show(randomFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
@@ -77,8 +86,8 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
             String tagListsFragment = savedInstanceState.getString(LISTS_FRAGMENT);
             listsFragment = (ListsFragment) fm.findFragmentByTag(tagListsFragment);
 
-            //String tagShowAllFragment = savedInstanceState.getString(SHOW_ALL_FRAGMENT);
-            //showAllFragment = (ShowAllFragment) fm.findFragmentByTag(tagShowAllFragment);
+            String tagShowAllFragment = savedInstanceState.getString(SHOW_ALL_FRAGMENT);
+            showAllFragment = (ShowAllFragment) fm.findFragmentByTag(tagShowAllFragment);
 
             String tagActiveFragment = savedInstanceState.getString(ACTIVE_FRAGMENT);
             active = fm.findFragmentByTag(tagActiveFragment);
@@ -88,7 +97,6 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
             exploreFragment = new ExploreFragment();
             randomFragment = new RandomFragment();
             listsFragment = new ListsFragment();
-            //showAllFragment = new ShowAllFragment();
 
             //getSupportFragmentManager().beginTransaction().add(R.id.main_container, showAllFragment, SHOW_ALL_FRAGMENT_TAG).hide(showAllFragment).commit();
             getSupportFragmentManager().beginTransaction().add(R.id.main_container, listsFragment, "1").hide(listsFragment).commit();
@@ -152,9 +160,9 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
         if (listsFragment != null) {
             outState.putString(LISTS_FRAGMENT, listsFragment.getTag());
         }
-        //if (showAllFragment != null) {
-        //    outState.putString(SHOW_ALL_FRAGMENT, showAllFragment.getTag());
-        //}
+        if (showAllFragment != null) {
+            outState.putString(SHOW_ALL_FRAGMENT, showAllFragment.getTag());
+        }
         if (active != null) {
             outState.putString(ACTIVE_FRAGMENT, active.getTag());
         }

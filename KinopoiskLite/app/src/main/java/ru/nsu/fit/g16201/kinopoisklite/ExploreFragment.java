@@ -74,7 +74,6 @@ public class ExploreFragment extends Fragment {
 
                 showAllFragment = new ShowAllFragment();
                 activeFragment = showAllFragment;
-
                 notifyMainActivityShowAllFragmentIsActive(showAllFragment);
 
                 fragmentTransaction.hide(ExploreFragment.this).show(showAllFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
