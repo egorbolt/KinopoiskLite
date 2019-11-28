@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_explore"
+        android:icon="@android:drawable/ic_menu_search"
+        android:title="@string/explore" />
+    <item
+        android:id="@+id/action_random"
+        android:icon="@android:drawable/ic_menu_help"
+        android:title="@string/random" />
+    <item
+        android:id="@+id/action_lists"
+        android:icon="@android:drawable/ic_menu_sort_by_size"
+        android:title="@string/lists" />
+</menu>
