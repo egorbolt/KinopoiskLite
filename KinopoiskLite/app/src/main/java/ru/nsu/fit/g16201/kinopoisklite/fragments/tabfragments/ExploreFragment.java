@@ -62,8 +62,7 @@ public class ExploreFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                ShowAllFragment showAllFragment = ShowAllFragment.newInstance("abc");
-                //todo: передавать что-то, что опзволит получить нунные фильмы
+                ShowAllFragment showAllFragment = ShowAllFragment.newInstance("abc");      //todo: передавать что-то, что опзволит получить нунные фильмы
                 notifyMainActivityFragmentIsActive(showAllFragment);
             }
         });

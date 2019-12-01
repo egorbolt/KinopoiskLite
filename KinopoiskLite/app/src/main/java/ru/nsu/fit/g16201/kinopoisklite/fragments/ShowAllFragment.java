@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,15 +18,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Movie;
+import ru.nsu.fit.g16201.kinopoisklite.MainActivity;
 import ru.nsu.fit.g16201.kinopoisklite.MovieListAdapter;
 import ru.nsu.fit.g16201.kinopoisklite.R;
 import ru.nsu.fit.g16201.kinopoisklite.RecyclerViewMovieClickListener;
-import ru.nsu.fit.g16201.kinopoisklite.fragments.tabfragments.ExploreFragment;
 
 public class ShowAllFragment extends Fragment {
 
     private MovieFragment movieFragment;
-    private Fragment activeFragment;
 
     public ShowAllFragment() {}
 
@@ -88,11 +88,8 @@ public class ShowAllFragment extends Fragment {
             public void recyclerViewListClicked(View v, int position, Movie movie) {
                 //System.out.println(movie.getTitle());
 
-                //FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                 movieFragment = MovieFragment.newInstance(movie.getId());   //todo: передавать что-то, что опзволит получить нунные фильмы
-                activeFragment = movieFragment;
-                //notifyMainActivityMovieFragmentIsActive(showAllFragment);
-                //fragmentTransaction.hide(ShowAllFragment.this).show(movieFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+                notifyMainActivityFragmentIsActive(movieFragment);
             }
         });
 
@@ -101,6 +98,12 @@ public class ShowAllFragment extends Fragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         return view;
+    }
+
+    private void notifyMainActivityFragmentIsActive(MovieFragment movieFragment) {
+        FragmentActivity activity = getActivity();
+        if(activity != null)
+            ((MainActivity)activity).setExploreTabActiveFragment(movieFragment);
     }
 
 
