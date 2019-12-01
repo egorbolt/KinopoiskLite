@@ -25,14 +25,14 @@ public class MovieFragment extends Fragment {
         }
     }
 
-    public static ShowAllFragment newInstance(String key) {
-        ShowAllFragment showAllFragment = new ShowAllFragment();
+    public static MovieFragment newInstance(int id) {
+        MovieFragment movieFragment = new MovieFragment();
 
         Bundle bundle = new Bundle();
-        bundle.putString("key", key);
-        showAllFragment.setArguments(bundle);
+        bundle.putInt("id", id);
+        movieFragment.setArguments(bundle);
 
-        return showAllFragment;
+        return movieFragment;
     }
 
 

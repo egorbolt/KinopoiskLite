@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,8 +20,12 @@ import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Movi
 import ru.nsu.fit.g16201.kinopoisklite.MovieListAdapter;
 import ru.nsu.fit.g16201.kinopoisklite.R;
 import ru.nsu.fit.g16201.kinopoisklite.RecyclerViewMovieClickListener;
+import ru.nsu.fit.g16201.kinopoisklite.fragments.tabfragments.ExploreFragment;
 
 public class ShowAllFragment extends Fragment {
+
+    private MovieFragment movieFragment;
+    private Fragment activeFragment;
 
     public ShowAllFragment() {}
 
@@ -81,7 +86,15 @@ public class ShowAllFragment extends Fragment {
         MovieListAdapter mAdapter = new MovieListAdapter(dataSet, getContext(), new RecyclerViewMovieClickListener() {
             @Override
             public void recyclerViewListClicked(View v, int position, Movie movie) {
-                System.out.println(movie.getTitle());
+                //System.out.println(movie.getTitle());
+
+                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+
+                movieFragment = MovieFragment.newInstance(movie.getId());   //todo: передавать что-то, что опзволит получить нунные фильмы
+                activeFragment = movieFragment;
+                notifyMainActivityMovieFragmentIsActive(showAllFragment);
+
+                fragmentTransaction.hide(ShowAllFragment.this).show(movieFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
             }
         });
 

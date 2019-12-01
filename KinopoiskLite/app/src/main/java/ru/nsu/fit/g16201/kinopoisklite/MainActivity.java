@@ -33,13 +33,16 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
 
     public static final String SHOW_ALL_FRAGMENT_TAG = "show_all_fragment_tag";
 
+
     private ExploreFragment exploreFragment;
     private RandomFragment randomFragment;
     private ListsFragment listsFragment;
     private ShowAllFragment showAllFragment;
     private MovieFragment movieFragment;
 
+
     private Fragment active;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
