@@ -11,13 +11,14 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
 import java.util.Random;
 
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Movie;
 
 public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.MovieInfoViewHolder>  {
 
-    private String[] dataSet;
+    private List<Movie> dataSet;
     private Context context;
     private static RecyclerViewMovieClickListener itemListener;
 
@@ -43,7 +44,7 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
     }
 
 
-    public MovieListAdapter(String[] dataSet, Context context, RecyclerViewMovieClickListener recyclerViewMovieClickListener) {
+    public MovieListAdapter(List<Movie> dataSet, Context context, RecyclerViewMovieClickListener recyclerViewMovieClickListener) {
         this.dataSet = dataSet;
         this.context = context;
         itemListener = recyclerViewMovieClickListener;
@@ -61,13 +62,13 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
 
     @Override
     public void onBindViewHolder(@NonNull MovieInfoViewHolder holder, int position) {
-        holder.ratingBadge.setText(dataSet[position]);
-        holder.movieTitle.setText(String.format("%d", new Random().nextInt(10000)));
+        holder.ratingBadge.setText("7.5");
+        holder.movieTitle.setText(dataSet.get(position).getTitle());
     }
 
     @Override
     public int getItemCount() {
-        return dataSet.length;
+        return dataSet.size();
     }
 
 
