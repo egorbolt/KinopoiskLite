@@ -35,8 +35,6 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
     //private static final String MOVIE_FRAGMENT = "movie_fragment";
 
 
-    public static final String SHOW_ALL_FRAGMENT_TAG = "show_all_fragment_tag";
-
 
     private ExploreFragment exploreFragment;
     //private ShowAllFragment showAllFragment;
@@ -109,11 +107,12 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
             String tagMovieFragment = savedInstanceState.getString(MOVIE_FRAGMENT);
             movieFragment = (MovieFragment) fm.findFragmentByTag(tagMovieFragment);*/
 
+            String tagActiveFragment = savedInstanceState.getString(ACTIVE_FRAGMENT);
+            active = fm.findFragmentByTag(tagActiveFragment);
+
             String tagExploreActiveFragment = savedInstanceState.getString(EXPLORE_ACTIVE_FRAGMENT);
             exploreTabActiveFragment = fm.findFragmentByTag(tagExploreActiveFragment);
 
-            String tagActiveFragment = savedInstanceState.getString(ACTIVE_FRAGMENT);
-            active = fm.findFragmentByTag(tagActiveFragment);
         }
         else
         {
@@ -217,8 +216,8 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
 
     public void setExploreTabActiveFragment(Fragment exploreTabActiveFragment) {
         this.exploreTabActiveFragment = exploreTabActiveFragment;
-        getSupportFragmentManager().beginTransaction().hide(active).add(R.id.main_container, exploreTabActiveFragment, null).commit();
-        this.active = exploreTabActiveFragment;
-
+        //todo: ? а при возврате на домашнюю страницу explore все удалять и обнулять!
+        getSupportFragmentManager().beginTransaction().hide(active).add(R.id.main_container, exploreTabActiveFragment, "ETAF").setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+        active = exploreTabActiveFragment;
     }
 }
