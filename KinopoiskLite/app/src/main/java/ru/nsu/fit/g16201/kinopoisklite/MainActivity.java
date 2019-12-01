@@ -24,8 +24,12 @@ import ru.nsu.fit.g16201.kinopoisklite.fragments.ShowAllFragment;
 public class MainActivity extends AppCompatActivity  implements SearchView.OnQueryTextListener {
 
     private static final String EXPLORE_FRAGMENT = "explore_fragment";
+    private static final String EXPLORE_ACTIVE_FRAGMENT = "explore_active_fragment";
+
     private static final String RANDOM_FRAGMENT = "random_fragment";
+
     private static final String LISTS_FRAGMENT = "lists_fragment";
+
     private static final String ACTIVE_FRAGMENT = "active_fragment";
     //private static final String SHOW_ALL_FRAGMENT = "show_all_fragment";
     //private static final String MOVIE_FRAGMENT = "movie_fragment";
@@ -64,22 +68,22 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
 
                                 if(active == randomFragment || active == listsFragment)
                                 {
-                                    getSupportFragmentManager().beginTransaction().hide(active).show(exploreTabActiveFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).addToBackStack(null).commit();
+                                    getSupportFragmentManager().beginTransaction().hide(active).show(exploreTabActiveFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
                                     active = exploreTabActiveFragment;
                                 }
                                 else
                                 {
-                                    getSupportFragmentManager().beginTransaction().hide(active).show(exploreFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).addToBackStack(null).commit();
+                                    getSupportFragmentManager().beginTransaction().hide(active).show(exploreFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
                                     exploreTabActiveFragment = exploreFragment;
                                     active = exploreFragment;
                                 }
                                 return true;
                             case R.id.action_random:
-                                getSupportFragmentManager().beginTransaction().hide(active).show(randomFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).addToBackStack(null).commit();
+                                getSupportFragmentManager().beginTransaction().hide(active).show(randomFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
                                 active = randomFragment;
                                 return true;
                             case R.id.action_lists:
-                                getSupportFragmentManager().beginTransaction().hide(active).show(listsFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).addToBackStack(null).commit();
+                                getSupportFragmentManager().beginTransaction().hide(active).show(listsFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
                                 active = listsFragment;
                                 return true;
                         }
@@ -105,6 +109,9 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
             String tagMovieFragment = savedInstanceState.getString(MOVIE_FRAGMENT);
             movieFragment = (MovieFragment) fm.findFragmentByTag(tagMovieFragment);*/
 
+            String tagExploreActiveFragment = savedInstanceState.getString(EXPLORE_ACTIVE_FRAGMENT);
+            exploreTabActiveFragment = fm.findFragmentByTag(tagExploreActiveFragment);
+
             String tagActiveFragment = savedInstanceState.getString(ACTIVE_FRAGMENT);
             active = fm.findFragmentByTag(tagActiveFragment);
         }
@@ -119,6 +126,7 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
             getSupportFragmentManager().beginTransaction().add(R.id.main_container, exploreFragment, "3").commit();
 
             active =  exploreFragment;
+            exploreTabActiveFragment = exploreFragment;
             bottomNavigationView.setSelectedItemId(R.id.action_explore);
         }
 
@@ -184,6 +192,10 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
         }*/
         if (active != null) {
             outState.putString(ACTIVE_FRAGMENT, active.getTag());
+        }
+
+        if (exploreTabActiveFragment != null) {
+            outState.putString(EXPLORE_ACTIVE_FRAGMENT, exploreTabActiveFragment.getTag());
         }
     }
 
