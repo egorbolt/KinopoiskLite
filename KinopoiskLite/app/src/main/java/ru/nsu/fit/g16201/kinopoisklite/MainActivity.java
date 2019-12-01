@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
     }
 
 
-    @Override
+    /*@Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         BottomNavigationView bnv = findViewById(R.id.bottom_navigation);
         if (keyCode == KeyEvent.KEYCODE_BACK && bnv.getSelectedItemId() == R.id.action_explore && exploreTabActiveFragment != exploreFragment) {
@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
             return true;
         }
         return super.onKeyDown(keyCode, event);
-    }
+    }*/
 
 
     @Override
@@ -201,8 +201,8 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
 
     public void setExploreTabActiveFragment(Fragment exploreTabActiveFragment) {
         this.exploreTabActiveFragment = exploreTabActiveFragment;
+        getSupportFragmentManager().beginTransaction().hide(active).add(R.id.main_container, exploreTabActiveFragment, null).commit();
         this.active = exploreTabActiveFragment;
 
-        getSupportFragmentManager().beginTransaction().add(R.id.main_container, exploreTabActiveFragment, null).commit();
     }
 }
