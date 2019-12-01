@@ -25,7 +25,6 @@ import ru.nsu.fit.g16201.kinopoisklite.RecyclerViewMovieClickListener;
 
 public class ShowAllFragment extends Fragment {
 
-    private MovieFragment movieFragment;
 
     public ShowAllFragment() {}
 
@@ -83,12 +82,10 @@ public class ShowAllFragment extends Fragment {
             m.setTitle("fgfdgfdgfdg");
             dataSet.add(m);
         }
-        MovieListAdapter mAdapter = new MovieListAdapter(dataSet, getContext(), new RecyclerViewMovieClickListener() {
+        MovieListAdapter mAdapter = new MovieListAdapter(dataSet, new RecyclerViewMovieClickListener() {
             @Override
             public void recyclerViewListClicked(View v, int position, Movie movie) {
-                //System.out.println(movie.getTitle());
-
-                movieFragment = MovieFragment.newInstance(movie.getId());   //todo: передавать что-то, что опзволит получить нунные фильмы
+                MovieFragment movieFragment = MovieFragment.newInstance(movie.getId());   //todo: передавать что-то, что опзволит получить нунные фильмы
                 notifyMainActivityFragmentIsActive(movieFragment);
             }
         });

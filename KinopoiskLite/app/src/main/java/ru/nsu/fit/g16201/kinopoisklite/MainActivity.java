@@ -178,7 +178,7 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
     public void setExploreTabActiveFragment(Fragment exploreTabActiveFragment) {
         this.exploreTabActiveFragment = exploreTabActiveFragment;
         //todo: ? а при возврате на домашнюю страницу explore все удалять и обнулять
-        getSupportFragmentManager().beginTransaction().hide(active).add(R.id.main_container, exploreTabActiveFragment, "ETAF"/* + tagCounter++*/).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+        getSupportFragmentManager().beginTransaction().hide(active).add(R.id.main_container, exploreTabActiveFragment, "ETAF"/* + tagCounter++*/).show(exploreTabActiveFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
         active = exploreTabActiveFragment;
     }
 }

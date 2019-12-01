@@ -18,9 +18,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
 
+import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Movie;
 import ru.nsu.fit.g16201.kinopoisklite.MainActivity;
 import ru.nsu.fit.g16201.kinopoisklite.MovieRatingsAdapter;
 import ru.nsu.fit.g16201.kinopoisklite.R;
+import ru.nsu.fit.g16201.kinopoisklite.RecyclerViewMovieClickListener;
+import ru.nsu.fit.g16201.kinopoisklite.fragments.MovieFragment;
 import ru.nsu.fit.g16201.kinopoisklite.fragments.ShowAllFragment;
 
 public class ExploreFragment extends Fragment {
@@ -75,17 +78,26 @@ public class ExploreFragment extends Fragment {
         LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(horizontalLayoutManagaer);
 
-        MovieRatingsAdapter mAdapter = new MovieRatingsAdapter(dataSet);
+        //MovieRatingsAdapter mAdapter = new MovieRatingsAdapter(dataSet);
+        MovieRatingsAdapter mAdapter = new MovieRatingsAdapter(dataSet, new RecyclerViewMovieClickListener() {
+            @Override
+            public void recyclerViewListClicked(View v, int position, Movie movie) {
+                //System.out.println(movie.getTitle());
+
+                MovieFragment movieFragment = MovieFragment.newInstance(movie.getId());   //todo: передавать что-то, что опзволит получить нунные фильмы
+                notifyMainActivityFragmentIsActive(movieFragment);
+            }
+        });
 
         recyclerView.setAdapter(mAdapter);
 
         recyclerView.setItemAnimator(new DefaultItemAnimator());
     }
 
-    private void notifyMainActivityFragmentIsActive(ShowAllFragment showAllFragment) {
+    private void notifyMainActivityFragmentIsActive(Fragment fragment) {
         FragmentActivity activity = getActivity();
         if(activity != null)
-            ((MainActivity)activity).setExploreTabActiveFragment(showAllFragment);
+            ((MainActivity)activity).setExploreTabActiveFragment(fragment);
     }
 
 

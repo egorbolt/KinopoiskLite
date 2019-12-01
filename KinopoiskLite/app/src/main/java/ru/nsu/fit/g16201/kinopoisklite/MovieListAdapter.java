@@ -19,7 +19,6 @@ import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Movi
 public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.MovieInfoViewHolder>  {
 
     private List<Movie> dataSet;
-    private Context context;
     private RecyclerViewMovieClickListener itemListener;
 
     class MovieInfoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -44,9 +43,8 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
     }
 
 
-    public MovieListAdapter(List<Movie> dataSet, Context context, RecyclerViewMovieClickListener recyclerViewMovieClickListener) {
+    public MovieListAdapter(List<Movie> dataSet, RecyclerViewMovieClickListener recyclerViewMovieClickListener) {
         this.dataSet = dataSet;
-        this.context = context;
         itemListener = recyclerViewMovieClickListener;
 
     } //todo: в будущем это будет список фильмов (класс Movie)
