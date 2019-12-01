@@ -1,5 +1,6 @@
 package ru.nsu.fit.g16201.kinopoisklite;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +33,7 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
     }
 
 
-    public MovieListAdapter(String[] dataSet) {
+    public MovieListAdapter(String[] dataSet, Context context, RecyclerViewClickListener recyclerViewClickListener) {
         this.dataSet = dataSet;
     } //todo: в будущем это будет список фильмов (класс Movie)
 
@@ -48,7 +49,7 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
     @Override
     public void onBindViewHolder(@NonNull MovieInfoViewHolder holder, int position) {
         holder.ratingBadge.setText(dataSet[position]);
-        holder.movieTitle.setText(String.format("%d", new Random().nextInt()));
+        holder.movieTitle.setText(String.format("%d", new Random().nextInt(10000)));
     }
 
     @Override

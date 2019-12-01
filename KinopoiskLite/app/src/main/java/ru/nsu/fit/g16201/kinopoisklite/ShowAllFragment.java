@@ -43,20 +43,15 @@ public class ShowAllFragment extends Fragment {
                 "6.6", "1.8", "4.5", "8.4", "5.7"
         };
 
-        MovieListAdapter mAdapter = new MovieListAdapter(dataSet);
+        MovieListAdapter mAdapter = new MovieListAdapter(dataSet, getContext(), new RecyclerViewClickListener() {
+            @Override
+            public void recyclerViewListClicked(View v, int position) {
+
+            }
+        });
 
         recyclerView.setAdapter(mAdapter);
-        recyclerView.addOnItemTouchListener(
-                new RecyclerItemClickListener(getContext(), recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
-                    @Override public void onItemClick(View view, int position) {
-                        // do whatever
-                    }
 
-                    @Override public void onLongItemClick(View view, int position) {
-                        // do whatever
-                    }
-                })
-        );
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         return view;
