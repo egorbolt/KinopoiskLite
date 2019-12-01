@@ -68,6 +68,10 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
                                 else
                                 {
                                     getSupportFragmentManager().beginTransaction().hide(active).show(exploreFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+                                    /*for(; tagCounter > 0; tagCounter--)
+                                    {
+                                        getSupportFragmentManager().beginTransaction().remove(getSupportFragmentManager().findFragmentByTag("ETAF" + (tagCounter - 1))).commit();
+                                    }*/
                                     exploreTabActiveFragment = exploreFragment;
                                     active = exploreFragment;
                                 }
@@ -121,6 +125,7 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
 
     }
 
+    //todo: создать свой стек для первой табы и переопределить поведение кнопки назад для него!
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -168,10 +173,12 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
         }
     }
 
+    private int tagCounter = 0;
+
     public void setExploreTabActiveFragment(Fragment exploreTabActiveFragment) {
         this.exploreTabActiveFragment = exploreTabActiveFragment;
-        //todo: ? а при возврате на домашнюю страницу explore все удалять и обнулять!
-        getSupportFragmentManager().beginTransaction().hide(active).add(R.id.main_container, exploreTabActiveFragment, "ETAF").setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+        //todo: ? а при возврате на домашнюю страницу explore все удалять и обнулять
+        getSupportFragmentManager().beginTransaction().hide(active).add(R.id.main_container, exploreTabActiveFragment, "ETAF"/* + tagCounter++*/).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
         active = exploreTabActiveFragment;
     }
 }
