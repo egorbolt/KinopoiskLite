@@ -54,9 +54,9 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                         switch (menuItem.getItemId()) {
-                            //можно вместо hide и show использовать бэкстек, тогда он будет сохранять всю историю переходов и разматывать её обратно при нажатии на back
+                            //можно использовать бэкстек, тогда он будет сохранять всю историю переходов и разматывать её обратно при нажатии на back
                             case R.id.action_explore:
-                                Fragment exploreActiveFragment = exploreFragment.getActiveFragment();
+                                Fragment exploreActiveFragment = getExploreTabActiveFragment();
                                 if(active != showAllFragment)
                                 {
                                     getSupportFragmentManager().beginTransaction().hide(active).show(exploreActiveFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
@@ -117,6 +117,10 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
             bottomNavigationView.setSelectedItemId(R.id.action_explore);
         }
 
+    }
+
+    private Fragment getExploreTabActiveFragment() {
+        return exploreFragment.getActiveFragment();
     }
 
     @Override
@@ -180,6 +184,7 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
             outState.putString(ACTIVE_FRAGMENT, active.getTag());
         }
     }
+
 
     public void setShowAllActive(ShowAllFragment showAllFragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
