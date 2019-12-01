@@ -78,12 +78,9 @@ public class ExploreFragment extends Fragment {
         LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(horizontalLayoutManagaer);
 
-        //MovieRatingsAdapter mAdapter = new MovieRatingsAdapter(dataSet);
         MovieRatingsAdapter mAdapter = new MovieRatingsAdapter(dataSet, new RecyclerViewMovieClickListener() {
             @Override
             public void recyclerViewListClicked(View v, int position, Movie movie) {
-                //System.out.println(movie.getTitle());
-
                 MovieFragment movieFragment = MovieFragment.newInstance(movie.getId());   //todo: передавать что-то, что опзволит получить нунные фильмы
                 notifyMainActivityFragmentIsActive(movieFragment);
             }

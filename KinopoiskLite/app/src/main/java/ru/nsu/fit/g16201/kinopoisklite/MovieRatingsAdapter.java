@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Movie;
+
 public class MovieRatingsAdapter extends RecyclerView.Adapter<MovieRatingsAdapter.MoviePosterViewHolder> {
     private RecyclerViewMovieClickListener itemListener;
     private String[] mDataset;
@@ -28,15 +30,21 @@ public class MovieRatingsAdapter extends RecyclerView.Adapter<MovieRatingsAdapte
         // each data item is just a string in this case
         ImageView imageView;
         TextView ratingBadge;
-        MoviePosterViewHolder(View ll) {
-            super(ll);
-            imageView = ll.findViewById(R.id.movie_poster_image_view);
-            ratingBadge = ll.findViewById(R.id.badge_rating);
+        MoviePosterViewHolder(View view) {
+            super(view);
+            imageView = view.findViewById(R.id.movie_poster_image_view);
+            ratingBadge = view.findViewById(R.id.badge_rating);
+
+            view.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            itemListener.recyclerViewListClicked(v, this.getLayoutPosition(), dataSet.get(this.getLayoutPosition()));
+            Movie m = new Movie();
+            m.setId(342);
+            //todo
+            System.out.println("ASASASASASA");
+            itemListener.recyclerViewListClicked(v, this.getLayoutPosition(), m);
         }
     }
 
