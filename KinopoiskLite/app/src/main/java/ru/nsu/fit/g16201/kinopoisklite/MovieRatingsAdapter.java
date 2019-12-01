@@ -11,17 +11,20 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class MovieRatingsAdapter extends RecyclerView.Adapter<MovieRatingsAdapter.MoviePosterViewHolder> {
+    private RecyclerViewMovieClickListener itemListener;
     private String[] mDataset;
 
     public MovieRatingsAdapter(String[] itemsData, RecyclerViewMovieClickListener recyclerViewMovieClickListener) {
         this.mDataset = itemsData;
+        itemListener = recyclerViewMovieClickListener;
+
     }   //todo: в будущем это будет список фильмов (класс Movie)
 
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
-    static class MoviePosterViewHolder extends RecyclerView.ViewHolder {
+    class MoviePosterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         // each data item is just a string in this case
         ImageView imageView;
         TextView ratingBadge;
@@ -29,6 +32,11 @@ public class MovieRatingsAdapter extends RecyclerView.Adapter<MovieRatingsAdapte
             super(ll);
             imageView = ll.findViewById(R.id.movie_poster_image_view);
             ratingBadge = ll.findViewById(R.id.badge_rating);
+        }
+
+        @Override
+        public void onClick(View v) {
+            itemListener.recyclerViewListClicked(v, this.getLayoutPosition(), dataSet.get(this.getLayoutPosition()));
         }
     }
 
