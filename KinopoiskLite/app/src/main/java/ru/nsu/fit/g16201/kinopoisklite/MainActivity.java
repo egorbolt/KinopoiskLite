@@ -62,12 +62,12 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
                             //можно использовать бэкстек, тогда он будет сохранять всю историю переходов и разматывать её обратно при нажатии на back
                             case R.id.action_explore:
 
-                                /*if(active != showAllFragment)
+                                if(active == randomFragment || active == listsFragment)
                                 {
                                     getSupportFragmentManager().beginTransaction().hide(active).show(exploreTabActiveFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
                                     active = exploreTabActiveFragment;
                                 }
-                                else*/
+                                else
                                 {
                                     getSupportFragmentManager().beginTransaction().hide(active).show(exploreFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
                                     exploreTabActiveFragment = exploreFragment;
