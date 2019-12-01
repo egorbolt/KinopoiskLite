@@ -46,7 +46,17 @@ public class ShowAllFragment extends Fragment {
         MovieListAdapter mAdapter = new MovieListAdapter(dataSet);
 
         recyclerView.setAdapter(mAdapter);
+        recyclerView.addOnItemTouchListener(
+                new RecyclerItemClickListener(getContext(), recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override public void onItemClick(View view, int position) {
+                        // do whatever
+                    }
 
+                    @Override public void onLongItemClick(View view, int position) {
+                        // do whatever
+                    }
+                })
+        );
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         return view;
