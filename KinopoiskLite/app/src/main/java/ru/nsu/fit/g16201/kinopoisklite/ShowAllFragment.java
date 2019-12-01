@@ -74,7 +74,7 @@ public class ShowAllFragment extends Fragment {
         MovieListAdapter mAdapter = new MovieListAdapter(dataSet, getContext(), new RecyclerViewMovieClickListener() {
             @Override
             public void recyclerViewListClicked(View v, int position, Movie movie) {
-                System.out.println(position);
+                System.out.println(movie.getTitle());
             }
         });
 

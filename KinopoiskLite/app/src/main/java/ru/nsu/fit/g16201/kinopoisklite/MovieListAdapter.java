@@ -20,9 +20,9 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
 
     private List<Movie> dataSet;
     private Context context;
-    private static RecyclerViewMovieClickListener itemListener;
+    private RecyclerViewMovieClickListener itemListener;
 
-    static class MovieInfoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class MovieInfoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView imageView;
         TextView ratingBadge;
         TextView movieTitle;
@@ -39,7 +39,7 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
 
         @Override
         public void onClick(View v) {
-            itemListener.recyclerViewListClicked(v, this.getLayoutPosition(), new Movie());
+            itemListener.recyclerViewListClicked(v, this.getLayoutPosition(), dataSet.get(this.getLayoutPosition()));
         }
     }
 
