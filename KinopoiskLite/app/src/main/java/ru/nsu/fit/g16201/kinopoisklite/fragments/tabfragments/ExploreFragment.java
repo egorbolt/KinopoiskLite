@@ -68,13 +68,12 @@ public class ExploreFragment extends Fragment {
             public void onClick(View v) {
                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
 
-                showAllFragment = new ShowAllFragment();
+                showAllFragment = ShowAllFragment.newInstance("abc");   //todo: передавать что-то, что опзволит получить нунные фильмы
+
                 activeFragment = showAllFragment;
                 notifyMainActivityShowAllFragmentIsActive(showAllFragment);
 
-                Bundle bundle = new Bundle();
-                bundle.putString("key", "abc"); //todo: передавать в фрагмент что-то, по чему можно понять, какой список выводить
-                showAllFragment.setArguments(bundle);
+
 
                 fragmentTransaction.hide(ExploreFragment.this).show(showAllFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
             }

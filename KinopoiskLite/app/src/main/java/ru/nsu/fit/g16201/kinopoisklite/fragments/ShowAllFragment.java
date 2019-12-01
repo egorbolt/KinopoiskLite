@@ -24,6 +24,7 @@ public class ShowAllFragment extends Fragment {
 
     public ShowAllFragment()
     {
+
     }
 
     @Override
@@ -36,6 +37,15 @@ public class ShowAllFragment extends Fragment {
         }
     }
 
+    public static ShowAllFragment newInstance(String key) {
+        ShowAllFragment showAllFragment = new ShowAllFragment();
+
+        Bundle bundle = new Bundle();
+        bundle.putString("key", key);
+        showAllFragment.setArguments(bundle);
+
+        return showAllFragment;
+    }
 
     @Nullable
     @Override
