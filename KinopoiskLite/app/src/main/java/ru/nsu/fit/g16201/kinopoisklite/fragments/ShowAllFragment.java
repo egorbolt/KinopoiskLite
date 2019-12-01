@@ -1,4 +1,4 @@
-package ru.nsu.fit.g16201.kinopoisklite;
+package ru.nsu.fit.g16201.kinopoisklite.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,6 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Movie;
+import ru.nsu.fit.g16201.kinopoisklite.MovieListAdapter;
+import ru.nsu.fit.g16201.kinopoisklite.R;
+import ru.nsu.fit.g16201.kinopoisklite.RecyclerViewMovieClickListener;
 
 public class ShowAllFragment extends Fragment {
 
@@ -51,23 +54,23 @@ public class ShowAllFragment extends Fragment {
         Movie m;
         {
             m = new Movie();
-            m.setId(3);
+            m.setId(333);
             m.setTitle("Hello");
             dataSet.add(m);
             m = new Movie();
-            m.setId(5);
+            m.setId(521);
             m.setTitle("Gggggg");
             dataSet.add(m);
             m = new Movie();
-            m.setId(9);
+            m.setId(932);
             m.setTitle("dfdfsfsdf");
             dataSet.add(m);
             m = new Movie();
-            m.setId(11);
+            m.setId(113);
             m.setTitle("fsdfsdfsdfd");
             dataSet.add(m);
             m = new Movie();
-            m.setId(2);
+            m.setId(223);
             m.setTitle("fgfdgfdgfdg");
             dataSet.add(m);
         }

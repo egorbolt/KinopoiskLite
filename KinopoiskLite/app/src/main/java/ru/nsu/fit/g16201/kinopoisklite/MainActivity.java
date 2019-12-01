@@ -15,6 +15,12 @@ import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import ru.nsu.fit.g16201.kinopoisklite.fragments.tabfragments.ExploreFragment;
+import ru.nsu.fit.g16201.kinopoisklite.fragments.tabfragments.ListsFragment;
+import ru.nsu.fit.g16201.kinopoisklite.fragments.MovieFragment;
+import ru.nsu.fit.g16201.kinopoisklite.fragments.tabfragments.RandomFragment;
+import ru.nsu.fit.g16201.kinopoisklite.fragments.ShowAllFragment;
+
 public class MainActivity extends AppCompatActivity  implements SearchView.OnQueryTextListener {
 
     private static final String EXPLORE_FRAGMENT = "explore_fragment";
@@ -29,6 +35,7 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
     private RandomFragment randomFragment;
     private ListsFragment listsFragment;
     private ShowAllFragment showAllFragment;
+    private MovieFragment movieFragment;
 
     private Fragment active;
 

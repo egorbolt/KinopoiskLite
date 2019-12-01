@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class MovieRatingsAdapter extends RecyclerView.Adapter<MovieRatingsAdapter.MoviePosterViewHolder> {
     private String[] mDataset;
 
-    MovieRatingsAdapter(String[] itemsData) {
+    public MovieRatingsAdapter(String[] itemsData) {
         this.mDataset = itemsData;
     }   //todo: в будущем это будет список фильмов (класс Movie)
 

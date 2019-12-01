@@ -1,7 +1,6 @@
-package ru.nsu.fit.g16201.kinopoisklite;
+package ru.nsu.fit.g16201.kinopoisklite.fragments.tabfragments;
 
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -19,6 +17,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
+
+import ru.nsu.fit.g16201.kinopoisklite.MainActivity;
+import ru.nsu.fit.g16201.kinopoisklite.MovieRatingsAdapter;
+import ru.nsu.fit.g16201.kinopoisklite.R;
+import ru.nsu.fit.g16201.kinopoisklite.fragments.ShowAllFragment;
 
 public class ExploreFragment extends Fragment {
     public ExploreFragment() {
@@ -99,12 +102,12 @@ public class ExploreFragment extends Fragment {
     }
 
 
-    Fragment getActiveFragment()
+    public Fragment getActiveFragment()
     {
         return activeFragment;
     }
 
-    void setExploreActive() {
+    public void setExploreActive() {
         activeFragment = this;
     }
 
