@@ -13,11 +13,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.Random;
 
+import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Movie;
+
 public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.MovieInfoViewHolder>  {
 
     private String[] dataSet;
     private Context context;
-    private static RecyclerViewClickListener itemListener;
+    private static RecyclerViewMovieClickListener itemListener;
 
     static class MovieInfoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView imageView;
@@ -36,15 +38,15 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
 
         @Override
         public void onClick(View v) {
-            itemListener.recyclerViewListClicked(v, this.getPosition());
+            itemListener.recyclerViewListClicked(v, this.getLayoutPosition(), new Movie());
         }
     }
 
 
-    public MovieListAdapter(String[] dataSet, Context context, RecyclerViewClickListener recyclerViewClickListener) {
+    public MovieListAdapter(String[] dataSet, Context context, RecyclerViewMovieClickListener recyclerViewMovieClickListener) {
         this.dataSet = dataSet;
         this.context = context;
-        itemListener = recyclerViewClickListener;
+        itemListener = recyclerViewMovieClickListener;
 
     } //todo: в будущем это будет список фильмов (класс Movie)
 

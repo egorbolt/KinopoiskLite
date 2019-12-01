@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Movie;
+
 public class ShowAllFragment extends Fragment {
 
     public ShowAllFragment()
@@ -43,9 +45,9 @@ public class ShowAllFragment extends Fragment {
                 "6.6", "1.8", "4.5", "8.4", "5.7"
         };
 
-        MovieListAdapter mAdapter = new MovieListAdapter(dataSet, getContext(), new RecyclerViewClickListener() {
+        MovieListAdapter mAdapter = new MovieListAdapter(dataSet, getContext(), new RecyclerViewMovieClickListener() {
             @Override
-            public void recyclerViewListClicked(View v, int position) {
+            public void recyclerViewListClicked(View v, int position, Movie movie) {
                 System.out.println(position);
             }
         });
