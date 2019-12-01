@@ -27,16 +27,16 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
     private static final String RANDOM_FRAGMENT = "random_fragment";
     private static final String LISTS_FRAGMENT = "lists_fragment";
     private static final String ACTIVE_FRAGMENT = "active_fragment";
-    private static final String SHOW_ALL_FRAGMENT = "show_all_fragment";
-    private static final String MOVIE_FRAGMENT = "movie_fragment";
+    //private static final String SHOW_ALL_FRAGMENT = "show_all_fragment";
+    //private static final String MOVIE_FRAGMENT = "movie_fragment";
 
 
     public static final String SHOW_ALL_FRAGMENT_TAG = "show_all_fragment_tag";
 
 
     private ExploreFragment exploreFragment;
-    private ShowAllFragment showAllFragment;
-    private MovieFragment movieFragment;
+    //private ShowAllFragment showAllFragment;
+    //private MovieFragment movieFragment;
     private Fragment exploreTabActiveFragment;
 
     private RandomFragment randomFragment;
@@ -62,12 +62,12 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
                             //можно использовать бэкстек, тогда он будет сохранять всю историю переходов и разматывать её обратно при нажатии на back
                             case R.id.action_explore:
 
-                                if(active != showAllFragment)
+                                /*if(active != showAllFragment)
                                 {
                                     getSupportFragmentManager().beginTransaction().hide(active).show(exploreTabActiveFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
                                     active = exploreTabActiveFragment;
                                 }
-                                else
+                                else*/
                                 {
                                     getSupportFragmentManager().beginTransaction().hide(active).show(exploreFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
                                     exploreTabActiveFragment = exploreFragment;
@@ -99,11 +99,11 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
             String tagListsFragment = savedInstanceState.getString(LISTS_FRAGMENT);
             listsFragment = (ListsFragment) fm.findFragmentByTag(tagListsFragment);
 
-            String tagShowAllFragment = savedInstanceState.getString(SHOW_ALL_FRAGMENT);
+            /*String tagShowAllFragment = savedInstanceState.getString(SHOW_ALL_FRAGMENT);
             showAllFragment = (ShowAllFragment) fm.findFragmentByTag(tagShowAllFragment);
 
             String tagMovieFragment = savedInstanceState.getString(MOVIE_FRAGMENT);
-            movieFragment = (MovieFragment) fm.findFragmentByTag(tagMovieFragment);
+            movieFragment = (MovieFragment) fm.findFragmentByTag(tagMovieFragment);*/
 
             String tagActiveFragment = savedInstanceState.getString(ACTIVE_FRAGMENT);
             active = fm.findFragmentByTag(tagActiveFragment);
@@ -155,7 +155,7 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
         BottomNavigationView bnv = findViewById(R.id.bottom_navigation);
         if (keyCode == KeyEvent.KEYCODE_BACK && bnv.getSelectedItemId() == R.id.action_explore && exploreTabActiveFragment != exploreFragment) {
             exploreTabActiveFragment = exploreFragment;
-            getSupportFragmentManager().beginTransaction().hide(showAllFragment).show(exploreFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+            //getSupportFragmentManager().beginTransaction().hide(showAllFragment).show(exploreFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
             active = exploreFragment;
             return true;
         }
@@ -176,19 +176,19 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
         if (listsFragment != null) {
             outState.putString(LISTS_FRAGMENT, listsFragment.getTag());
         }
-        if (showAllFragment != null) {
+        /*if (showAllFragment != null) {
             outState.putString(SHOW_ALL_FRAGMENT, showAllFragment.getTag());
         }
         if (movieFragment != null) {
             outState.putString(MOVIE_FRAGMENT, movieFragment.getTag());
-        }
+        }*/
         if (active != null) {
             outState.putString(ACTIVE_FRAGMENT, active.getTag());
         }
     }
 
 
-    public void setShowAllActive(ShowAllFragment showAllFragment) {
+    /*public void setShowAllActive(ShowAllFragment showAllFragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         if(this.showAllFragment != null)
             transaction.remove(this.showAllFragment).add(R.id.main_container, showAllFragment, SHOW_ALL_FRAGMENT_TAG).hide(showAllFragment).commit();
@@ -197,9 +197,12 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
 
         this.showAllFragment = showAllFragment;
         active = showAllFragment;
-    }
+    }*/
 
     public void setExploreTabActiveFragment(Fragment exploreTabActiveFragment) {
         this.exploreTabActiveFragment = exploreTabActiveFragment;
+        this.active = exploreTabActiveFragment;
+
+        getSupportFragmentManager().beginTransaction().add(R.id.main_container, exploreTabActiveFragment, null).commit();
     }
 }

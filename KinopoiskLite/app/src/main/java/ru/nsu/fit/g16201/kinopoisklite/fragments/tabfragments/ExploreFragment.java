@@ -99,11 +99,11 @@ public class ExploreFragment extends Fragment {
             ((MainActivity)activity).setExploreTabActiveFragment(showAllFragment);
     }
 
-    private void notifyMainActivityShowAllFragmentIsActive(ShowAllFragment showAllFragment) {
+    /*private void notifyMainActivityShowAllFragmentIsActive(ShowAllFragment showAllFragment) {
         FragmentActivity activity = getActivity();
         if(activity != null)
             ((MainActivity)activity).setShowAllActive(showAllFragment);
-    }
+    }*/
 
 
     /*public Fragment getActiveFragment()
