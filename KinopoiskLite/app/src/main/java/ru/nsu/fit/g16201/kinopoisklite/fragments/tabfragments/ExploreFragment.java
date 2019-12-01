@@ -69,11 +69,8 @@ public class ExploreFragment extends Fragment {
                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
 
                 showAllFragment = ShowAllFragment.newInstance("abc");   //todo: передавать что-то, что опзволит получить нунные фильмы
-
                 activeFragment = showAllFragment;
                 notifyMainActivityShowAllFragmentIsActive(showAllFragment);
-
-
 
                 fragmentTransaction.hide(ExploreFragment.this).show(showAllFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
             }
@@ -109,6 +106,4 @@ public class ExploreFragment extends Fragment {
     public void setExploreActive() {
         activeFragment = this;
     }
-
-    //todo: newInstance?
 }

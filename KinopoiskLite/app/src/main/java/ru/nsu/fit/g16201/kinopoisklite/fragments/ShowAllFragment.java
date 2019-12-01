@@ -22,10 +22,7 @@ import ru.nsu.fit.g16201.kinopoisklite.RecyclerViewMovieClickListener;
 
 public class ShowAllFragment extends Fragment {
 
-    public ShowAllFragment()
-    {
-
-    }
+    public ShowAllFragment() {}
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,9 +54,6 @@ public class ShowAllFragment extends Fragment {
         LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(verticalLayoutManager);
 
-        /*String[] dataSet = {
-                "6.6", "1.8", "4.5", "8.4", "5.7"
-        };*/
         List<Movie> dataSet = new ArrayList<>();
         Movie m;
         {

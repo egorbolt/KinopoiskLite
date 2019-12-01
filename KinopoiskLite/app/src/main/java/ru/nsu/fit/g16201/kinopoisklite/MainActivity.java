@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
     private static final String LISTS_FRAGMENT = "lists_fragment";
     private static final String ACTIVE_FRAGMENT = "active_fragment";
     private static final String SHOW_ALL_FRAGMENT = "show_all_fragment";
+    private static final String MOVIE_FRAGMENT = "movie_fragment";
+
 
     public static final String SHOW_ALL_FRAGMENT_TAG = "show_all_fragment_tag";
 
@@ -94,6 +96,9 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
 
             String tagShowAllFragment = savedInstanceState.getString(SHOW_ALL_FRAGMENT);
             showAllFragment = (ShowAllFragment) fm.findFragmentByTag(tagShowAllFragment);
+
+            String tagMovieFragment = savedInstanceState.getString(MOVIE_FRAGMENT);
+            movieFragment = (MovieFragment) fm.findFragmentByTag(tagMovieFragment);
 
             String tagActiveFragment = savedInstanceState.getString(ACTIVE_FRAGMENT);
             active = fm.findFragmentByTag(tagActiveFragment);
@@ -167,6 +172,9 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
         }
         if (showAllFragment != null) {
             outState.putString(SHOW_ALL_FRAGMENT, showAllFragment.getTag());
+        }
+        if (movieFragment != null) {
+            outState.putString(MOVIE_FRAGMENT, movieFragment.getTag());
         }
         if (active != null) {
             outState.putString(ACTIVE_FRAGMENT, active.getTag());
