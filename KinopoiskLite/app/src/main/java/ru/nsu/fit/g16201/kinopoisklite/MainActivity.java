@@ -31,17 +31,13 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
     private static final String LISTS_FRAGMENT = "lists_fragment";
 
     private static final String ACTIVE_FRAGMENT = "active_fragment";
-    //private static final String SHOW_ALL_FRAGMENT = "show_all_fragment";
-    //private static final String MOVIE_FRAGMENT = "movie_fragment";
-
 
 
     private ExploreFragment exploreFragment;
-    //private ShowAllFragment showAllFragment;
-    //private MovieFragment movieFragment;
     private Fragment exploreTabActiveFragment;
 
     private RandomFragment randomFragment;
+
     private ListsFragment listsFragment;
 
 
@@ -101,12 +97,6 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
             String tagListsFragment = savedInstanceState.getString(LISTS_FRAGMENT);
             listsFragment = (ListsFragment) fm.findFragmentByTag(tagListsFragment);
 
-            /*String tagShowAllFragment = savedInstanceState.getString(SHOW_ALL_FRAGMENT);
-            showAllFragment = (ShowAllFragment) fm.findFragmentByTag(tagShowAllFragment);
-
-            String tagMovieFragment = savedInstanceState.getString(MOVIE_FRAGMENT);
-            movieFragment = (MovieFragment) fm.findFragmentByTag(tagMovieFragment);*/
-
             String tagActiveFragment = savedInstanceState.getString(ACTIVE_FRAGMENT);
             active = fm.findFragmentByTag(tagActiveFragment);
 
@@ -156,24 +146,6 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
         return false;
     }
 
-
-    /*
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        BottomNavigationView bnv = findViewById(R.id.bottom_navigation);
-        if (keyCode == KeyEvent.KEYCODE_BACK && bnv.getSelectedItemId() == R.id.action_explore && exploreTabActiveFragment != exploreFragment) {
-            FragmentManager fm = getSupportFragmentManager();
-            //getSupportFragmentManager().beginTransaction().hide(showAllFragment).show(exploreFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
-            getSupportFragmentManager().popBackStack();
-            exploreTabActiveFragment = fm.getPrimaryNavigationFragment();
-            active = exploreFragment;
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
-    }
-    */
-
-
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -187,12 +159,6 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
         if (listsFragment != null) {
             outState.putString(LISTS_FRAGMENT, listsFragment.getTag());
         }
-        /*if (showAllFragment != null) {
-            outState.putString(SHOW_ALL_FRAGMENT, showAllFragment.getTag());
-        }
-        if (movieFragment != null) {
-            outState.putString(MOVIE_FRAGMENT, movieFragment.getTag());
-        }*/
         if (active != null) {
             outState.putString(ACTIVE_FRAGMENT, active.getTag());
         }
@@ -201,18 +167,6 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
             outState.putString(EXPLORE_ACTIVE_FRAGMENT, exploreTabActiveFragment.getTag());
         }
     }
-
-
-    /*public void setShowAllActive(ShowAllFragment showAllFragment) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        if(this.showAllFragment != null)
-            transaction.remove(this.showAllFragment).add(R.id.main_container, showAllFragment, SHOW_ALL_FRAGMENT_TAG).hide(showAllFragment).commit();
-        else
-            transaction.add(R.id.main_container, showAllFragment, SHOW_ALL_FRAGMENT_TAG).hide(showAllFragment).commit();
-
-        this.showAllFragment = showAllFragment;
-        active = showAllFragment;
-    }*/
 
     public void setExploreTabActiveFragment(Fragment exploreTabActiveFragment) {
         this.exploreTabActiveFragment = exploreTabActiveFragment;
