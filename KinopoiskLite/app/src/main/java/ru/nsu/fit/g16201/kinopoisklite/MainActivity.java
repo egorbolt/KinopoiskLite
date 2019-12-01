@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
     private ExploreFragment exploreFragment;
     private ShowAllFragment showAllFragment;
     private MovieFragment movieFragment;
-    private Fragment exploreTabACtiveFragment;
+    private Fragment exploreTabActiveFragment;
 
     private RandomFragment randomFragment;
     private ListsFragment listsFragment;
@@ -61,16 +61,16 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
                         switch (menuItem.getItemId()) {
                             //можно использовать бэкстек, тогда он будет сохранять всю историю переходов и разматывать её обратно при нажатии на back
                             case R.id.action_explore:
-                                Fragment exploreActiveFragment = getExploreTabActiveFragment();
+
                                 if(active != showAllFragment)
                                 {
-                                    getSupportFragmentManager().beginTransaction().hide(active).show(exploreActiveFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
-                                    active = exploreActiveFragment;
+                                    getSupportFragmentManager().beginTransaction().hide(active).show(exploreTabActiveFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+                                    active = exploreTabActiveFragment;
                                 }
                                 else
                                 {
                                     getSupportFragmentManager().beginTransaction().hide(active).show(exploreFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
-                                    exploreFragment.setExploreActive();
+                                    exploreTabActiveFragment = exploreFragment;
                                     active = exploreFragment;
                                 }
                                 return true;
@@ -124,9 +124,6 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
 
     }
 
-    private Fragment getExploreTabActiveFragment() {
-        return exploreFragment.getActiveFragment();
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -156,8 +153,8 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         BottomNavigationView bnv = findViewById(R.id.bottom_navigation);
-        if (keyCode == KeyEvent.KEYCODE_BACK && bnv.getSelectedItemId() == R.id.action_explore && exploreFragment.getActiveFragment() != exploreFragment) {
-            exploreFragment.setExploreActive();
+        if (keyCode == KeyEvent.KEYCODE_BACK && bnv.getSelectedItemId() == R.id.action_explore && exploreTabActiveFragment != exploreFragment) {
+            exploreTabActiveFragment = exploreFragment;
             getSupportFragmentManager().beginTransaction().hide(showAllFragment).show(exploreFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
             active = exploreFragment;
             return true;
@@ -202,6 +199,7 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
         active = showAllFragment;
     }
 
-    public void setActive(ShowAllFragment showAllFragment) {
+    public void setExploreTabActiveFragment(Fragment exploreTabActiveFragment) {
+        this.exploreTabActiveFragment = exploreTabActiveFragment;
     }
 }

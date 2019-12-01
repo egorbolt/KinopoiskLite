@@ -96,7 +96,7 @@ public class ExploreFragment extends Fragment {
     private void notifyMainActivityFragmentIsActive(ShowAllFragment showAllFragment) {
         FragmentActivity activity = getActivity();
         if(activity != null)
-            ((MainActivity)activity).setActive(showAllFragment);
+            ((MainActivity)activity).setExploreTabActiveFragment(showAllFragment);
     }
 
     private void notifyMainActivityShowAllFragmentIsActive(ShowAllFragment showAllFragment) {
