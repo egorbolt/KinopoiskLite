@@ -27,10 +27,6 @@ public class ExploreFragment extends Fragment {
     public ExploreFragment() {
     }
 
-    //private ShowAllFragment showAllFragment;
-
-    //private Fragment activeFragment = this;
-
     private View view;
 
     @Nullable
@@ -53,7 +49,6 @@ public class ExploreFragment extends Fragment {
     }
 
 
-
     private void configureMovieCollection(int id, String[] dataSet, String name)
     {
         View movieCollection = view.findViewById(id);
@@ -67,14 +62,9 @@ public class ExploreFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                ShowAllFragment showAllFragment = ShowAllFragment.newInstance("abc");   //todo: передавать что-то, что опзволит получить нунные фильмы
+                ShowAllFragment showAllFragment = ShowAllFragment.newInstance("abc");
+                //todo: передавать что-то, что опзволит получить нунные фильмы
                 notifyMainActivityFragmentIsActive(showAllFragment);
-                /*FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-
-                activeFragment = showAllFragment;
-
-
-                fragmentTransaction.hide(ExploreFragment.this).show(showAllFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();*/
             }
         });
 
@@ -99,19 +89,5 @@ public class ExploreFragment extends Fragment {
             ((MainActivity)activity).setExploreTabActiveFragment(showAllFragment);
     }
 
-    /*private void notifyMainActivityShowAllFragmentIsActive(ShowAllFragment showAllFragment) {
-        FragmentActivity activity = getActivity();
-        if(activity != null)
-            ((MainActivity)activity).setShowAllActive(showAllFragment);
-    }*/
 
-
-    /*public Fragment getActiveFragment()
-    {
-        return activeFragment;
-    }
-
-    public void setExploreActive() {
-        activeFragment = this;
-    }*/
 }
