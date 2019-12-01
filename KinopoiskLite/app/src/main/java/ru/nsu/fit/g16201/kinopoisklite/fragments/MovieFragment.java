@@ -9,11 +9,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Movie;
 import ru.nsu.fit.g16201.kinopoisklite.R;
 
 public class MovieFragment extends Fragment {
-    public MovieFragment() {}
 
+    private Movie movie;
+
+
+
+    public MovieFragment() {}
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -21,7 +26,7 @@ public class MovieFragment extends Fragment {
 
         Bundle bundle = this.getArguments();
         if (bundle != null) {
-            System.out.println("gfgdfgdfgfdg");
+            System.out.println("NNNNN");
         }
     }
 
@@ -39,7 +44,7 @@ public class MovieFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_lists, container, false);
+        View view = inflater.inflate(R.layout.fragment_movie, container, false);
         return view;
     }
 
