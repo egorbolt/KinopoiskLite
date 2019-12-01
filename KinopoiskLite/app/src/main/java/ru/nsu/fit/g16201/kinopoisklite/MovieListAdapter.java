@@ -16,8 +16,10 @@ import java.util.Random;
 public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.MovieInfoViewHolder>  {
 
     private String[] dataSet;
+    private Context context;
+    private static RecyclerViewClickListener itemListener;
 
-    static class MovieInfoViewHolder extends RecyclerView.ViewHolder {
+    static class MovieInfoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView imageView;
         TextView ratingBadge;
         TextView movieTitle;
@@ -29,12 +31,21 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
             movieTitle = view.findViewById(R.id.textViewMovieTitle);
             movieDescription = view.findViewById(R.id.textViewMovieDescription);
 
+            view.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            itemListener.recyclerViewListClicked(v, this.getPosition());
         }
     }
 
 
     public MovieListAdapter(String[] dataSet, Context context, RecyclerViewClickListener recyclerViewClickListener) {
         this.dataSet = dataSet;
+        this.context = context;
+        itemListener = recyclerViewClickListener;
+
     } //todo: в будущем это будет список фильмов (класс Movie)
 
     @NonNull
