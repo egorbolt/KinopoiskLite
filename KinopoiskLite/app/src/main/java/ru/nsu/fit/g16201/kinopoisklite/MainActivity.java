@@ -35,10 +35,12 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
 
 
     private ExploreFragment exploreFragment;
-    private RandomFragment randomFragment;
-    private ListsFragment listsFragment;
     private ShowAllFragment showAllFragment;
     private MovieFragment movieFragment;
+    private Fragment exploreTabACtiveFragment;
+
+    private RandomFragment randomFragment;
+    private ListsFragment listsFragment;
 
 
     private Fragment active;
@@ -198,5 +200,8 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
 
         this.showAllFragment = showAllFragment;
         active = showAllFragment;
+    }
+
+    public void setActive(ShowAllFragment showAllFragment) {
     }
 }

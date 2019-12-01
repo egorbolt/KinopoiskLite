@@ -27,9 +27,9 @@ public class ExploreFragment extends Fragment {
     public ExploreFragment() {
     }
 
-    private ShowAllFragment showAllFragment;
+    //private ShowAllFragment showAllFragment;
 
-    private Fragment activeFragment = this;
+    //private Fragment activeFragment = this;
 
     private View view;
 
@@ -66,13 +66,15 @@ public class ExploreFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
 
-                showAllFragment = ShowAllFragment.newInstance("abc");   //todo: передавать что-то, что опзволит получить нунные фильмы
+                ShowAllFragment showAllFragment = ShowAllFragment.newInstance("abc");   //todo: передавать что-то, что опзволит получить нунные фильмы
+                notifyMainActivityFragmentIsActive(showAllFragment);
+                /*FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+
                 activeFragment = showAllFragment;
-                notifyMainActivityShowAllFragmentIsActive(showAllFragment);
 
-                fragmentTransaction.hide(ExploreFragment.this).show(showAllFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+
+                fragmentTransaction.hide(ExploreFragment.this).show(showAllFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();*/
             }
         });
 
@@ -91,6 +93,12 @@ public class ExploreFragment extends Fragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
     }
 
+    private void notifyMainActivityFragmentIsActive(ShowAllFragment showAllFragment) {
+        FragmentActivity activity = getActivity();
+        if(activity != null)
+            ((MainActivity)activity).setActive(showAllFragment);
+    }
+
     private void notifyMainActivityShowAllFragmentIsActive(ShowAllFragment showAllFragment) {
         FragmentActivity activity = getActivity();
         if(activity != null)
@@ -98,12 +106,12 @@ public class ExploreFragment extends Fragment {
     }
 
 
-    public Fragment getActiveFragment()
+    /*public Fragment getActiveFragment()
     {
         return activeFragment;
     }
 
     public void setExploreActive() {
         activeFragment = this;
-    }
+    }*/
 }

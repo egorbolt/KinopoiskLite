@@ -88,13 +88,11 @@ public class ShowAllFragment extends Fragment {
             public void recyclerViewListClicked(View v, int position, Movie movie) {
                 //System.out.println(movie.getTitle());
 
-                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-
+                //FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                 movieFragment = MovieFragment.newInstance(movie.getId());   //todo: передавать что-то, что опзволит получить нунные фильмы
                 activeFragment = movieFragment;
-                notifyMainActivityMovieFragmentIsActive(showAllFragment);
-
-                fragmentTransaction.hide(ShowAllFragment.this).show(movieFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+                //notifyMainActivityMovieFragmentIsActive(showAllFragment);
+                //fragmentTransaction.hide(ShowAllFragment.this).show(movieFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
             }
         });
 
