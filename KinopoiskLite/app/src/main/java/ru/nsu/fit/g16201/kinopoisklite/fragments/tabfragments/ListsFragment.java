@@ -22,5 +22,4 @@ public class ListsFragment extends Fragment {
         return view;
     }
 
-    //todo: newInstance?
 }
