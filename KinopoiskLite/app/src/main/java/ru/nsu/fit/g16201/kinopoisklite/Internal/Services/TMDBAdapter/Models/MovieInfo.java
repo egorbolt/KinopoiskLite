@@ -2,7 +2,7 @@ package ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models;
 
 import com.squareup.moshi.Json;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class MovieInfo {
@@ -10,7 +10,7 @@ public class MovieInfo {
     @Json(name = "backdrop_path")private String backdropPath; //optional
     @Json(name = "belongs_to_collection")private MoviesCollection belongsToCollection; //optional
     private Integer budget;
-    private ArrayList<Genre> genres;
+    private List<Genre> genres;
     private String homepage; //optional
     private Integer id;
     @Json(name = "imbd_id")private String imdbId; //optional
@@ -19,12 +19,12 @@ public class MovieInfo {
     private String overview; //optional
     private Double popularity;
     @Json(name = "poster_path")private String posterPath; //optional
-    @Json(name = "production_companies")private ArrayList<ProductionCompany> productionCompanies;
-    @Json(name = "production_countries")private ArrayList<ProductionCountry> productionCountries;
+    @Json(name = "production_companies")private List<ProductionCompany> productionCompanies;
+    @Json(name = "production_countries")private List<ProductionCountry> productionCountries;
     @Json(name = "release_date")private String releaseDate;
     private Integer revenue;
     private Integer runtime; //optional
-    @Json(name = "spoken_language")private ArrayList<SpokenLanguage> spokenLanguages;
+    @Json(name = "spoken_language")private List<SpokenLanguage> spokenLanguages;
     private String status;
     private String tagline; //optional
     private String title;
@@ -64,11 +64,11 @@ public class MovieInfo {
         this.budget = budget;
     }
 
-    public ArrayList<Genre> getGenres() {
+    public List<Genre> getGenres() {
         return genres;
     }
 
-    public void setGenres(ArrayList<Genre> genres) {
+    public void setGenres(List<Genre> genres) {
         this.genres = genres;
     }
 
@@ -136,19 +136,19 @@ public class MovieInfo {
         this.posterPath = posterPath;
     }
 
-    public ArrayList<ProductionCompany> getProductionCompanies() {
+    public List<ProductionCompany> getProductionCompanies() {
         return productionCompanies;
     }
 
-    public void setProductionCompanies(ArrayList<ProductionCompany> productionCompanies) {
+    public void setProductionCompanies(List<ProductionCompany> productionCompanies) {
         this.productionCompanies = productionCompanies;
     }
 
-    public ArrayList<ProductionCountry> getProductionCountries() {
+    public List<ProductionCountry> getProductionCountries() {
         return productionCountries;
     }
 
-    public void setProductionCountries(ArrayList<ProductionCountry> productionCountries) {
+    public void setProductionCountries(List<ProductionCountry> productionCountries) {
         this.productionCountries = productionCountries;
     }
 
@@ -176,11 +176,11 @@ public class MovieInfo {
         this.runtime = runtime;
     }
 
-    public ArrayList<SpokenLanguage> getSpokenLanguages() {
+    public List<SpokenLanguage> getSpokenLanguages() {
         return spokenLanguages;
     }
 
-    public void setSpokenLanguages(ArrayList<SpokenLanguage> spokenLanguages) {
+    public void setSpokenLanguages(List<SpokenLanguage> spokenLanguages) {
         this.spokenLanguages = spokenLanguages;
     }
 
