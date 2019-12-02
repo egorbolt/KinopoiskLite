@@ -10,14 +10,16 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import java.net.MalformedURLException;
+import java.util.concurrent.ExecutionException;
 
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.API;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Movie;
+import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.MovieInfo;
 import ru.nsu.fit.g16201.kinopoisklite.R;
 
 public class MovieFragment extends Fragment {
 
-    private Movie movie;
+    private MovieInfo movieInfo;
 
 
     public MovieFragment() {}
@@ -29,8 +31,9 @@ public class MovieFragment extends Fragment {
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             try {
-                movie = API.loadMovieInfo(bundle.getInt("id"), "en-US").get();
-            } catch (MalformedURLException e) {
+                movieInfo = API.loadMovieInfo(bundle.getInt("id"), "en-US").get();
+                System.out.println("aaaaaaaaaaaaaaaaa");
+            } catch (MalformedURLException | InterruptedException | ExecutionException e) {
                 e.printStackTrace();
             }
         }
