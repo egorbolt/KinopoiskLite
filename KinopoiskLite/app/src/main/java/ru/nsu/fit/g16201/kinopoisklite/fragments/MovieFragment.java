@@ -32,7 +32,10 @@ public class MovieFragment extends Fragment {
         if (bundle != null) {
             try {
                 movieInfo = API.loadMovieInfo(bundle.getInt("id"), "en-US").get();
-                System.out.println("aaaaaaaaaaaaaaaaa");
+                if(movieInfo == null)
+                    System.out.println(bundle.getInt("id") + " BAD");
+                else
+                    System.out.println(movieInfo.getTitle() + " BAD");
             } catch (MalformedURLException | InterruptedException | ExecutionException e) {
                 e.printStackTrace();
             }

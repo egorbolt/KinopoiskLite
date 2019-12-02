@@ -25,7 +25,7 @@ public class MovieInfoTask extends AsyncTask<URL, Void, MovieInfo> {
         HttpsURLConnection req;
         try {
             req = (HttpsURLConnection) url.openConnection();
-            req.setRequestMethod("POST");
+            req.setRequestMethod("GET");
         } catch (IOException e) {
             Log.e("MovieInfoTask","Cannot create connection: "+e.getMessage());
             return null;
