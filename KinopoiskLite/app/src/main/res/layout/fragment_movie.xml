@@ -11,22 +11,6 @@
     >
 
 
-
-    <include
-        android:id="@+id/poster_view"
-        layout="@layout/movie_poster_view"
-
-        android:layout_width="100dp"
-        android:layout_height="150dp"
-
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="6dp"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <TextView
         android:id="@+id/textViewMovieTitle"
 
@@ -47,13 +31,32 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/poster_view"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/poster_view"
 
         android:gravity="start"
 
         android:text="Zero movie review dsfdfdsfdsfsdsf sdfdfs"
         />
+
+    <include
+        android:id="@+id/poster_view"
+        layout="@layout/movie_poster_view"
+
+        android:layout_width="100dp"
+        android:layout_height="150dp"
+
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="6dp"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
 
     <TextView
         android:id="@+id/textViewMovieDescription"
@@ -66,9 +69,11 @@
         android:layout_marginBottom="8dp"
         android:textSize="15sp"
 
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/poster_view"
+        app:layout_constraintTop_toBottomOf="parent"
+
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/poster_view"
+        app:layout_constraintStart_toEndOf="parent"
 
         android:text="Zero movie review: Shah Rukh Khan, Katrina Kaif and Anushka Sharma gffdgfdgfdgfdgfdg"
 
