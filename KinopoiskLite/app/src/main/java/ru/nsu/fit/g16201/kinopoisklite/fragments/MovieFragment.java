@@ -21,7 +21,6 @@ public class MovieFragment extends Fragment {
 
     private MovieInfo movieInfo;
 
-
     public MovieFragment() {}
 
     @Override
