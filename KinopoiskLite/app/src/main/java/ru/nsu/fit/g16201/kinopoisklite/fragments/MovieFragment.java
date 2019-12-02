@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,10 +33,6 @@ public class MovieFragment extends Fragment {
         if (bundle != null) {
             try {
                 movieInfo = API.loadMovieInfo(bundle.getInt("id"), "en-US").get();
-                if(movieInfo == null)
-                    System.out.println(bundle.getInt("id") + " BAD");
-                else
-                    System.out.println(movieInfo.getTitle() + " BAD");
             } catch (MalformedURLException | InterruptedException | ExecutionException e) {
                 e.printStackTrace();
             }
@@ -56,6 +54,19 @@ public class MovieFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_movie, container, false);
+
+        ImageView imageView = view.findViewById(R.id.movie_poster_image_view);
+        TextView ratingBadge = view.findViewById(R.id.badge_rating);
+        TextView movieTitle = view.findViewById(R.id.textViewMovieTitle);
+        TextView movieDescription = view.findViewById(R.id.textViewMovieDescription);
+
+        if(movieInfo != null)
+        {
+            movieTitle.setText(movieInfo.getTitle());
+            ratingBadge.setText(Double.toString(movieInfo.getVoteAverage()));
+            movieDescription.setText(movieInfo.getOverview().get());
+        }
+
         return view;
     }
 
