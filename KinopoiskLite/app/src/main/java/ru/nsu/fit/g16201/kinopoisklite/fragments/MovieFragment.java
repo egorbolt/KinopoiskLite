@@ -17,7 +17,6 @@ import java.net.MalformedURLException;
 import java.util.concurrent.ExecutionException;
 
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.API;
-import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Movie;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.MovieInfo;
 import ru.nsu.fit.g16201.kinopoisklite.R;
 
@@ -66,8 +65,10 @@ public class MovieFragment extends Fragment {
         {
             movieTitle.setText(movieInfo.getTitle());
             ratingBadge.setText(Double.toString(movieInfo.getVoteAverage()));
-            movieDescription.setText(movieInfo.getOverview().get());
-            Picasso.get().load(movieInfo.getPosterPath()).into(imageView);
+            if(movieInfo.getOverview().isPresent())
+                movieDescription.setText(movieInfo.getOverview().get());
+            if(movieInfo.getPosterPath().isPresent())
+                ;//Picasso.get().load(movieInfo.getPosterPath().get()).into(imageView);
         }
 
         return view;
