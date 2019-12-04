@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.squareup.picasso.Picasso;
+
 import java.net.MalformedURLException;
 import java.util.concurrent.ExecutionException;
 
@@ -65,6 +67,7 @@ public class MovieFragment extends Fragment {
             movieTitle.setText(movieInfo.getTitle());
             ratingBadge.setText(Double.toString(movieInfo.getVoteAverage()));
             movieDescription.setText(movieInfo.getOverview().get());
+            Picasso.get().load(movieInfo.getPosterPath()).into(imageView);
         }
 
         return view;
