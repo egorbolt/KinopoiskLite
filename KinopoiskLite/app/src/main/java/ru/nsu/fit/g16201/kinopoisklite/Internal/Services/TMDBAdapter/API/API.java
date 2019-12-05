@@ -51,4 +51,12 @@ public class API {
         task.execute(url);
         return task;
     }
+
+    //Загружает информацию о выходящих скоро фильмах
+    public static PagedMovieListTask loadUpcoming(int page, String language) throws MalformedURLException {
+        URL url = new URL(UrlConstructor.urlUpcoming(page,language));
+        PagedMovieListTask task = new PagedMovieListTask();
+        task.execute(url);
+        return task;
+    }
 }
