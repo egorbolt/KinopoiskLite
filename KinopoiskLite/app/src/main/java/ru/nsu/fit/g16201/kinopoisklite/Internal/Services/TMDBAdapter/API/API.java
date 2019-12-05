@@ -27,4 +27,11 @@ public class API {
         task.execute(url);
         return task;
     }
+
+    public static PagedMovieListTask loadNowPlayingList(int page, String language) throws MalformedURLException {
+        URL url = new URL(UrlConstructor.urlNowPlaying(page,language));
+        PagedMovieListTask task = new PagedMovieListTask();
+        task.execute(url);
+        return task;
+    }
 }
