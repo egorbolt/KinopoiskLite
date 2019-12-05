@@ -1,11 +1,11 @@
 package ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Pictures {
     private Integer id;
-    private ArrayList<MovieRelatedImages> backdrops;
-    private ArrayList<MovieRelatedImages> posters;
+    private List<MovieRelatedImages> backdrops;
+    private List<MovieRelatedImages> posters;
 
     public Integer getId() {
         return id;
@@ -15,19 +15,19 @@ public class Pictures {
         this.id = id;
     }
 
-    public ArrayList<MovieRelatedImages> getBackdrops() {
+    public List<MovieRelatedImages> getBackdrops() {
         return backdrops;
     }
 
-    public void setBackdrops(ArrayList<MovieRelatedImages> backdrops) {
+    public void setBackdrops(List<MovieRelatedImages> backdrops) {
         this.backdrops = backdrops;
     }
 
-    public ArrayList<MovieRelatedImages> getPosters() {
+    public List<MovieRelatedImages> getPosters() {
         return posters;
     }
 
-    public void setPosters(ArrayList<MovieRelatedImages> posters) {
+    public void setPosters(List<MovieRelatedImages> posters) {
         this.posters = posters;
     }
 }

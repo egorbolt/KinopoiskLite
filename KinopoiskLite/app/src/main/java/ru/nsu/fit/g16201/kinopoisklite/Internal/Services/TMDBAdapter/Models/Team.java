@@ -1,11 +1,11 @@
 package ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Team {
     private Integer id;
-    private ArrayList<Actor> cast;
-    private ArrayList<CrewPerson> crew;
+    private List<Actor> cast;
+    private List<CrewPerson> crew;
 
     public Integer getId() {
         return id;
@@ -15,19 +15,19 @@ public class Team {
         this.id = id;
     }
 
-    public ArrayList<Actor> getCast() {
+    public List<Actor> getCast() {
         return cast;
     }
 
-    public void setCast(ArrayList<Actor> cast) {
+    public void setCast(List<Actor> cast) {
         this.cast = cast;
     }
 
-    public ArrayList<CrewPerson> getCrew() {
+    public List<CrewPerson> getCrew() {
         return crew;
     }
 
-    public void setCrew(ArrayList<CrewPerson> crew) {
+    public void setCrew(List<CrewPerson> crew) {
         this.crew = crew;
     }
 }

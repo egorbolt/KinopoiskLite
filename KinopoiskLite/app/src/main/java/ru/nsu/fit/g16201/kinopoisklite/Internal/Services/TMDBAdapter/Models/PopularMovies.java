@@ -2,11 +2,11 @@ package ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models;
 
 import com.squareup.moshi.Json;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class PopularMovies {
     private Integer page;
-    private ArrayList<Movie> results;
+    private List<Movie> results;
     @Json(name = "total_results")private Integer totalResults;
     @Json(name = "total_pages")private Integer totalPages;
 
@@ -18,11 +18,11 @@ public class PopularMovies {
         this.page = page;
     }
 
-    public ArrayList<Movie> getResults() {
+    public List<Movie> getResults() {
         return results;
     }
 
-    public void setResults(ArrayList<Movie> results) {
+    public void setResults(List<Movie> results) {
         this.results = results;
     }
 

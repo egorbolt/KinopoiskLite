@@ -1,10 +1,10 @@
 package ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Trailer {
     private Integer id;
-    private ArrayList<TrailerInfo> results;
+    private List<TrailerInfo> results;
 
     public Integer getId() {
         return id;
@@ -14,11 +14,11 @@ public class Trailer {
         this.id = id;
     }
 
-    public ArrayList<TrailerInfo> getResults() {
+    public List<TrailerInfo> getResults() {
         return results;
     }
 
-    public void setResults(ArrayList<TrailerInfo> results) {
+    public void setResults(List<TrailerInfo> results) {
         this.results = results;
     }
 }

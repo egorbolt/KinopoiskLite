@@ -2,7 +2,7 @@ package ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models;
 
 import com.squareup.moshi.Json;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class Movie {
@@ -10,7 +10,7 @@ public class Movie {
     private Boolean adult;
     private String overview;
     @Json(name = "release_date")private String releaseDate;
-    @Json(name = "genre_ids")private ArrayList<Integer> genreIDs;
+    @Json(name = "genre_ids")private List<Integer> genreIDs;
     private Integer id;
     @Json(name = "original_title")private String originalTitle;
     @Json(name = "original_language")private String originalLanguage;
@@ -53,11 +53,11 @@ public class Movie {
         this.releaseDate = releaseDate;
     }
 
-    public ArrayList<Integer> getGenreIDs() {
+    public List<Integer> getGenreIDs() {
         return genreIDs;
     }
 
-    public void setGenreIDs(ArrayList<Integer> genreIDs) {
+    public void setGenreIDs(List<Integer> genreIDs) {
         this.genreIDs = genreIDs;
     }
 
