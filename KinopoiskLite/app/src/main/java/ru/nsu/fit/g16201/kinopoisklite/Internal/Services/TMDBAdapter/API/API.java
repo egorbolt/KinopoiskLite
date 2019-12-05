@@ -44,5 +44,11 @@ public class API {
         return task;
     }
 
-
+    //Загружает информацию о топе по оценкам
+    public static PagedMovieListTask loadTopRated(int page, String language) throws MalformedURLException {
+        URL url = new URL(UrlConstructor.urlTopRated(page,language));
+        PagedMovieListTask task = new PagedMovieListTask();
+        task.execute(url);
+        return task;
+    }
 }
