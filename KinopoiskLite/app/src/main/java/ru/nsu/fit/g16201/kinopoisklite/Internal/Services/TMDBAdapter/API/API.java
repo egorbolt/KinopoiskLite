@@ -28,10 +28,21 @@ public class API {
         return task;
     }
 
+    //Загружает информацию о фильмах в прокате
     public static PagedMovieListTask loadNowPlayingList(int page, String language) throws MalformedURLException {
         URL url = new URL(UrlConstructor.urlNowPlaying(page,language));
         PagedMovieListTask task = new PagedMovieListTask();
         task.execute(url);
         return task;
     }
+
+    //Загружает информацию о популярных фильмах
+    public static PagedMovieListTask loadPopularList(int page, String language) throws MalformedURLException {
+        URL url = new URL(UrlConstructor.urlPopular(page,language));
+        PagedMovieListTask task = new PagedMovieListTask();
+        task.execute(url);
+        return task;
+    }
+
+
 }
