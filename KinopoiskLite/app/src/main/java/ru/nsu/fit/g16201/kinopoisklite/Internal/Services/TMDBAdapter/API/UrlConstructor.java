@@ -7,11 +7,11 @@ public class UrlConstructor {
     private static final String HOST = "https://api.themoviedb.org/3";
     private static final String APIKEY = "api_key=e4bc0f9cee69e195923579d0cf450c48";
 
-    static String urlTrending(String page, String language) {
+    static String urlTrending(int page, String language) {
         return HOST+"/trending/movie/week?"+APIKEY+"&page="+page+"&language="+language;
     }
 
-    static String urlNowPlaying(String page, String language) {
+    static String urlNowPlaying(int page, String language) {
         return HOST+"/movie/now_playing?"+APIKEY+"&page="+page+"&language="+language;
     }
 
@@ -19,15 +19,15 @@ public class UrlConstructor {
         return HOST+"/genre/movie/list?"+APIKEY+"&language="+language;
     }
 
-    static String urlPopular(String page, String language) {
+    static String urlPopular(int page, String language) {
         return HOST+"/movie/popular?"+APIKEY+"&page="+page+"&language="+language;
     }
 
-    static String urlTopRated(String page, String language) {
+    static String urlTopRated(int page, String language) {
         return HOST+"/movie/top_rated?"+APIKEY+"&page="+page+"&language="+language;
     }
 
-    static String urlUpcoming(String page, String language) {
+    static String urlUpcoming(int page, String language) {
         return HOST+"/movie/upcoming?"+APIKEY+"&page="+page+"&language="+language;
     }
 
