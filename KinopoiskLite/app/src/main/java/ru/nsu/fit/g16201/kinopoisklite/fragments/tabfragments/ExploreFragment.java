@@ -24,6 +24,7 @@ import java.util.function.BiFunction;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.API;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.PagedMovieListTask;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Movie;
+import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.listloader.ListType;
 import ru.nsu.fit.g16201.kinopoisklite.MainActivity;
 import ru.nsu.fit.g16201.kinopoisklite.MovieRatingsAdapter;
 import ru.nsu.fit.g16201.kinopoisklite.R;
@@ -45,26 +46,12 @@ public class ExploreFragment extends Fragment {
         String[] popularDataSet = {
                 "5.6", "7.8", "4.5", "8.6", "5.5"
         };
-        configureMovieCollection(R.id.popular_movie_collection, popularDataSet, "Popular", (page, language) -> {
-            try {
-                return API.loadPopularList(page, language);
-            } catch (MalformedURLException e) {
-                Log.e("ExploreFragment","Malformed URL Exception: "+ e.getMessage());
-            }
-            return null;
-        });
+        configureMovieCollection(R.id.popular_movie_collection, popularDataSet, "Popular", ListType.POPULAR);
 
         String[] trendingDataSet = {
                 "6.6", "1.8", "4.5", "8.4", "5.7"
         };
-        configureMovieCollection(R.id.trending_movie_collection, trendingDataSet, "Trending", (page, language) -> {
-            try {
-                return API.loadTrendingList(page, language);
-            } catch (MalformedURLException e) {
-                Log.e("ExploreFragment", "Malformed URL Exception: " + e.getMessage());
-            }
-            return null;
-        });
+        configureMovieCollection(R.id.trending_movie_collection, trendingDataSet, "Trending", ListType.TRENDING);
 
 
         return view;
@@ -72,7 +59,7 @@ public class ExploreFragment extends Fragment {
 
 
 
-    private void configureMovieCollection(int id, String[] dataSet, String name, BiFunction<Integer, String, PagedMovieListTask> exploreFragment)
+    private void configureMovieCollection(int id, String[] dataSet, String name, ListType listType)
     {
         View movieCollection = view.findViewById(id);
 
@@ -82,7 +69,7 @@ public class ExploreFragment extends Fragment {
         MaterialButton button = movieCollection.findViewById(R.id.show_button);
 
         button.setOnClickListener(v -> {
-            ShowAllFragment showAllFragment = ShowAllFragment.newInstance("abc");      //todo: передавать что-то, что опзволит получить нунные фильмы
+            ShowAllFragment showAllFragment = ShowAllFragment.newInstance(listType);      //todo: передавать что-то, что опзволит получить нунные фильмы
             notifyMainActivityFragmentIsActive(showAllFragment);
         });
 

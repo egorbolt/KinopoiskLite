@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Movie;
+import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.listloader.ListType;
 import ru.nsu.fit.g16201.kinopoisklite.MainActivity;
 import ru.nsu.fit.g16201.kinopoisklite.MovieListAdapter;
 import ru.nsu.fit.g16201.kinopoisklite.R;
@@ -38,11 +39,11 @@ public class ShowAllFragment extends Fragment {
         }
     }
 
-    public static ShowAllFragment newInstance(String key) {
+    public static ShowAllFragment newInstance(ListType key) {
         ShowAllFragment showAllFragment = new ShowAllFragment();
 
         Bundle bundle = new Bundle();
-        bundle.putString("key", key);
+        //bundle.putString("key", key);
         showAllFragment.setArguments(bundle);
 
         return showAllFragment;

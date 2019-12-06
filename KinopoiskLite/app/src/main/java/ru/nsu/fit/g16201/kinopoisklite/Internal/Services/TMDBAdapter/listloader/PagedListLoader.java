@@ -1,22 +1,24 @@
 package ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.listloader;
 
+import java.net.MalformedURLException;
+
+import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.API;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.PagedMovieListTask;
 
 public class PagedListLoader {
-    public PagedMovieListTask loadList(ListType type, int page, String language)
-    {
+    public PagedMovieListTask loadList(ListType type, int page, String language) throws MalformedURLException {
         switch(type)
         {
             case POPULAR:
-                break;
+                return API.loadPopularList(page, language);
             case TRENDING:
-                break;
+                return API.loadTrendingList(page, language);
             case UPCOMING:
-                break;
+                return API.loadUpcoming(page, language);
             case TOP_RATED:
-                break;
+                return API.loadTopRated(page, language);
             case NOW_PLAYING:
-                break;
+                return API.loadNowPlayingList(page, language);
         }
         return null;
     }
