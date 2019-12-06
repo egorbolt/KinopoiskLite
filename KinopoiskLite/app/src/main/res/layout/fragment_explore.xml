@@ -33,12 +33,6 @@
                 android:id="@+id/top_rated_movie_collection"
                 layout="@layout/movie_collection"/>
 
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/scrolling_test_text"/>
-
         </LinearLayout>
     </ScrollView>
 </layout>
