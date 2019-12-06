@@ -12,7 +12,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,9 +21,7 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
-import java.util.function.BiFunction;
 
-import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.API;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.PagedMovieListTask;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Movie;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.PopularMovies;
@@ -48,8 +45,9 @@ public class ExploreFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_explore, container, false);
 
-        configureMovieCollection(R.id.popular_movie_collection, "Popular", ListType.POPULAR);
         configureMovieCollection(R.id.trending_movie_collection, "Trending", ListType.TRENDING);
+        configureMovieCollection(R.id.popular_movie_collection, "Popular", ListType.POPULAR);
+        configureMovieCollection(R.id.upcoming_movie_collection, "Upcoming", ListType.UPCOMING);
 
 
         return view;
@@ -91,7 +89,7 @@ public class ExploreFragment extends Fragment {
             try {
                 PopularMovies movies = task.get();
                 if(movies != null)
-                    dataSet = movies.getResults().subList(0, 10);
+                    dataSet = movies.getResults().subList(0, 20);
             } catch (ExecutionException | InterruptedException e) {
                 Log.e("ExploreFragment", "Can't retrieve data: " + e.getMessage());
             }

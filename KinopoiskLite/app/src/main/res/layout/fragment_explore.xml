@@ -13,13 +13,16 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <include
+                android:id="@+id/trending_movie_collection"
+                layout="@layout/movie_collection"/>
 
             <include
                 android:id="@+id/popular_movie_collection"
                 layout="@layout/movie_collection"/>
 
             <include
-                android:id="@+id/trending_movie_collection"
+                android:id="@+id/upcoming_movie_collection"
                 layout="@layout/movie_collection"/>
 
             <TextView
