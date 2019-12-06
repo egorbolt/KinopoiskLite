@@ -11,8 +11,11 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
+import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.UrlConstructor;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Movie;
 
 public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.MovieInfoViewHolder>  {
@@ -46,7 +49,7 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
         this.dataSet = dataSet;
         itemListener = recyclerViewMovieClickListener;
 
-    } //todo: в будущем это будет список фильмов (класс Movie)
+    }
 
     @NonNull
     @Override
@@ -59,8 +62,18 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
 
     @Override
     public void onBindViewHolder(@NonNull MovieInfoViewHolder holder, int position) {
-        holder.ratingBadge.setText("7.5");
-        holder.movieTitle.setText(dataSet.get(position).getTitle());
+        Movie movie = dataSet.get(position);
+        if(movie.getVoteAverage() != 0)
+            holder.ratingBadge.setText(Double.toString(movie.getVoteAverage()));
+        else
+            holder.ratingBadge.setVisibility(View.INVISIBLE);
+
+        holder.movieDescription.setText(movie.getOverview());
+
+        holder.movieTitle.setText(movie.getTitle());
+
+        if(movie.getPosterPath().isPresent())
+            Picasso.get().load(UrlConstructor.urlSingleImage(movie.getPosterPath().get())).into(holder.imageView);
     }
 
     @Override
