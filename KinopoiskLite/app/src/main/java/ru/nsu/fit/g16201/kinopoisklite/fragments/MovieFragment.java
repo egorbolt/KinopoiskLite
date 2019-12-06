@@ -1,6 +1,7 @@
 package ru.nsu.fit.g16201.kinopoisklite.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,12 +18,14 @@ import java.net.MalformedURLException;
 import java.util.concurrent.ExecutionException;
 
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.API;
+import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.MovieInfoTask;
+import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.UrlConstructor;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.MovieInfo;
 import ru.nsu.fit.g16201.kinopoisklite.R;
 
 public class MovieFragment extends Fragment {
 
-    private MovieInfo movieInfo;
+    private MovieInfoTask task;
 
     public MovieFragment() {}
 
@@ -33,9 +36,9 @@ public class MovieFragment extends Fragment {
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             try {
-                movieInfo = API.loadMovieInfo(bundle.getInt("id"), "en-US").get();
-            } catch (MalformedURLException | InterruptedException | ExecutionException e) {
-                e.printStackTrace();
+                task = API.loadMovieInfo(bundle.getInt("id"), "en-US");
+            } catch (MalformedURLException e) {
+                Log.e("ExploreFragment", "Malformed URL" + e.getMessage());
             }
         }
     }
@@ -61,6 +64,13 @@ public class MovieFragment extends Fragment {
         TextView movieTitle = view.findViewById(R.id.textViewMovieTitle);
         TextView movieDescription = view.findViewById(R.id.textViewMovieDescription);
 
+        MovieInfo movieInfo = null;
+        try {
+            movieInfo = task.get();
+        } catch (ExecutionException | InterruptedException e) {
+            Log.e("ExploreFragment", "Can't retrieve data: " + e.getMessage());
+        }
+
         if(movieInfo != null)
         {
             movieTitle.setText(movieInfo.getTitle());
@@ -68,7 +78,7 @@ public class MovieFragment extends Fragment {
             if(movieInfo.getOverview().isPresent())
                 movieDescription.setText(movieInfo.getOverview().get());
             if(movieInfo.getPosterPath().isPresent())
-                ;//Picasso.get().load(movieInfo.getPosterPath().get()).into(imageView);
+                Picasso.get().load(UrlConstructor.urlSingleImage(movieInfo.getPosterPath().get())).into(imageView);
         }
 
         return view;
