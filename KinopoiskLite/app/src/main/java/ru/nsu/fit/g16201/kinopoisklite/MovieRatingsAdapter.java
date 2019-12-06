@@ -67,12 +67,12 @@ public class MovieRatingsAdapter extends RecyclerView.Adapter<MovieRatingsAdapte
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         //holder.imageView.set(mDataset[position]); //todo
-        holder.ratingBadge.setText(mDataset[position]);
+        holder.ratingBadge.setText(Double.toString(mDataset.get(position).getVoteAverage()));
     }
 
     @Override
     public int getItemCount() {
-        return mDataset.length;
+        return mDataset.size();
     }
 
 }
