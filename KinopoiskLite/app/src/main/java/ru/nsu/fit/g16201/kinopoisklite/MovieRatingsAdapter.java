@@ -8,6 +8,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -31,11 +32,13 @@ public class MovieRatingsAdapter extends RecyclerView.Adapter<MovieRatingsAdapte
     class MoviePosterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         // each data item is just a string in this case
         ImageView imageView;
-        TextView ratingBadge;
+        TextView ratingBadge, titleView;
         MoviePosterViewHolder(View view) {
             super(view);
             imageView = view.findViewById(R.id.movie_poster_image_view);
             ratingBadge = view.findViewById(R.id.badge_rating);
+            titleView = view.findViewById(R.id.textViewMovieTitle);
+
 
             view.setOnClickListener(this);
         }
@@ -55,8 +58,8 @@ public class MovieRatingsAdapter extends RecyclerView.Adapter<MovieRatingsAdapte
     @Override
     public MoviePosterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // create a new view
-        RelativeLayout v = (RelativeLayout) LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.movie_poster_view, parent, false);
+        ConstraintLayout v = (ConstraintLayout) LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.movie_poster_name, parent, false);
 
         return new MoviePosterViewHolder(v);
 
@@ -67,7 +70,10 @@ public class MovieRatingsAdapter extends RecyclerView.Adapter<MovieRatingsAdapte
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         //holder.imageView.set(mDataset[position]); //todo
-        holder.ratingBadge.setText(Double.toString(mDataset.get(position).getVoteAverage()));
+        Movie movie = mDataset.get(position);
+        holder.ratingBadge.setText(Double.toString(movie.getVoteAverage()));
+        holder.titleView.setText(movie.getTitle());
+
     }
 
     @Override
