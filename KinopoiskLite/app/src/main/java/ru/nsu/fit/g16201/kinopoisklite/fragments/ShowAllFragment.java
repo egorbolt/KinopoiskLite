@@ -19,9 +19,11 @@ import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.PagedMovieListTask;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Movie;
+import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.PopularMovies;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.listloader.ListType;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.listloader.PagedListLoader;
 import ru.nsu.fit.g16201.kinopoisklite.MainActivity;
@@ -75,6 +77,18 @@ public class ShowAllFragment extends Fragment {
         recyclerView.setLayoutManager(verticalLayoutManager);
 
         List<Movie> dataSet = new ArrayList<>();
+        if(task != null) {
+            try
+            {
+                PopularMovies movies = task.get();
+                if(movies != null)
+                    dataSet = movies.getResults();
+            }
+            catch (ExecutionException | InterruptedException e)
+            {
+                Log.e("ShowAllFragment", "Can't retrieve data: " + e.getMessage());
+            }
+        }
         /*Movie m;
         {
             m = new Movie();
