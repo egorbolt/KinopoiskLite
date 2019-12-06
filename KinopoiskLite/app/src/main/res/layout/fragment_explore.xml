@@ -22,8 +22,17 @@
                 layout="@layout/movie_collection"/>
 
             <include
+                android:id="@+id/now_playing_movie_collection"
+                layout="@layout/movie_collection"/>
+
+            <include
                 android:id="@+id/upcoming_movie_collection"
                 layout="@layout/movie_collection"/>
+
+            <include
+                android:id="@+id/top_rated_movie_collection"
+                layout="@layout/movie_collection"/>
+
 
             <TextView
                 android:layout_width="match_parent"

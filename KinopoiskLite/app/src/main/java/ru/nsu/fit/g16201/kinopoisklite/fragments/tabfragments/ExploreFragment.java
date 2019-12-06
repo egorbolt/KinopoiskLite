@@ -48,7 +48,8 @@ public class ExploreFragment extends Fragment {
         configureMovieCollection(R.id.trending_movie_collection, "Trending", ListType.TRENDING);
         configureMovieCollection(R.id.popular_movie_collection, "Popular", ListType.POPULAR);
         configureMovieCollection(R.id.upcoming_movie_collection, "Upcoming", ListType.UPCOMING);
-
+        configureMovieCollection(R.id.top_rated_movie_collection, "Top Rated", ListType.TOP_RATED);
+        configureMovieCollection(R.id.now_playing_movie_collection, "Now Playing", ListType.NOW_PLAYING);
 
         return view;
     }

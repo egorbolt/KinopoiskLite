@@ -76,7 +76,6 @@ public class MovieRatingsAdapter extends RecyclerView.Adapter<MovieRatingsAdapte
 
         if(movie.getPosterPath().isPresent())
             Picasso.get().load(UrlConstructor.urlSingleImage(movie.getPosterPath().get())).into(holder.imageView);
-
     }
 
     @Override
