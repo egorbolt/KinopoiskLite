@@ -45,10 +45,7 @@ public class MovieRatingsAdapter extends RecyclerView.Adapter<MovieRatingsAdapte
 
         @Override
         public void onClick(View v) {
-            Movie m = new Movie();
-            m.setId(342);
-            //todo
-            System.out.println("ASASASASASA");
+            Movie m = mDataset.get(this.getLayoutPosition());
             itemListener.recyclerViewListClicked(v, this.getLayoutPosition(), m);
         }
     }
