@@ -65,7 +65,10 @@ public class MovieRatingsAdapter extends RecyclerView.Adapter<MovieRatingsAdapte
         // - replace the contents of the view with that element
         //holder.imageView.set(mDataset[position]); //todo
         Movie movie = mDataset.get(position);
-        holder.ratingBadge.setText(Double.toString(movie.getVoteAverage()));
+        if(movie.getVoteAverage() != 0)
+            holder.ratingBadge.setText(Double.toString(movie.getVoteAverage()));
+        else
+            holder.ratingBadge.setVisibility(View.INVISIBLE);
         holder.titleView.setText(movie.getTitle());
 
     }
