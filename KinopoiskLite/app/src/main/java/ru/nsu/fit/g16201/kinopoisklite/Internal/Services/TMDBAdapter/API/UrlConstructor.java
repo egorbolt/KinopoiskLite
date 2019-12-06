@@ -59,7 +59,7 @@ public class UrlConstructor {
         return HOST+"/person/"+id+"/movie_credits?"+APIKEY+"&language="+language;
     }
 
-    static String urlSingleImage(String image) {
+    public static String urlSingleImage(String image) {
         return "https://image.tmdb.org/t/p/w500/"+image;
     }
 

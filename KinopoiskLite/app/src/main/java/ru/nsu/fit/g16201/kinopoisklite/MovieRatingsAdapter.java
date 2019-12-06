@@ -9,8 +9,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
+import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.UrlConstructor;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Movie;
 
 public class MovieRatingsAdapter extends RecyclerView.Adapter<MovieRatingsAdapter.MoviePosterViewHolder> {
@@ -70,6 +73,9 @@ public class MovieRatingsAdapter extends RecyclerView.Adapter<MovieRatingsAdapte
         else
             holder.ratingBadge.setVisibility(View.INVISIBLE);
         holder.titleView.setText(movie.getTitle());
+
+        if(movie.getPosterPath().isPresent())
+            Picasso.get().load(UrlConstructor.urlSingleImage(movie.getPosterPath().get())).into(holder.imageView);
 
     }
 
