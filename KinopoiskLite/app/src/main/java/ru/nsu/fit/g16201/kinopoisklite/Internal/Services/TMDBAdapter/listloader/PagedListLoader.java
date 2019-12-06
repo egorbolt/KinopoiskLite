@@ -6,7 +6,7 @@ import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.API;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.PagedMovieListTask;
 
 public class PagedListLoader {
-    public PagedMovieListTask loadList(ListType type, int page, String language) throws MalformedURLException {
+    public static PagedMovieListTask loadList(ListType type, int page, String language) throws MalformedURLException {
         switch(type)
         {
             case POPULAR:

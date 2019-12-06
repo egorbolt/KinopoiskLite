@@ -10,13 +10,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Movie;
 
 public class MovieRatingsAdapter extends RecyclerView.Adapter<MovieRatingsAdapter.MoviePosterViewHolder> {
     private RecyclerViewMovieClickListener itemListener;
-    private String[] mDataset;
+    private List<Movie> mDataset;
 
-    public MovieRatingsAdapter(String[] itemsData, RecyclerViewMovieClickListener recyclerViewMovieClickListener) {
+    public MovieRatingsAdapter(List<Movie> itemsData, RecyclerViewMovieClickListener recyclerViewMovieClickListener) {
         this.mDataset = itemsData;
         itemListener = recyclerViewMovieClickListener;
 

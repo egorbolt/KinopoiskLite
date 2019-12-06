@@ -39,11 +39,11 @@ public class ShowAllFragment extends Fragment {
         }
     }
 
-    public static ShowAllFragment newInstance(ListType key) {
+    public static ShowAllFragment newInstance(ListType type) {
         ShowAllFragment showAllFragment = new ShowAllFragment();
 
         Bundle bundle = new Bundle();
-        //bundle.putString("key", key);
+        bundle.putSerializable("type", type);
         showAllFragment.setArguments(bundle);
 
         return showAllFragment;

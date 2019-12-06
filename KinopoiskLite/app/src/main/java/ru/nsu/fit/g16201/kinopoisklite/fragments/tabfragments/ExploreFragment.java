@@ -19,12 +19,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.button.MaterialButton;
 
 import java.net.MalformedURLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.function.BiFunction;
 
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.API;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.PagedMovieListTask;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Movie;
+import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.PopularMovies;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.listloader.ListType;
+import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.listloader.PagedListLoader;
 import ru.nsu.fit.g16201.kinopoisklite.MainActivity;
 import ru.nsu.fit.g16201.kinopoisklite.MovieRatingsAdapter;
 import ru.nsu.fit.g16201.kinopoisklite.R;
@@ -43,15 +48,9 @@ public class ExploreFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_explore, container, false);
 
-        String[] popularDataSet = {
-                "5.6", "7.8", "4.5", "8.6", "5.5"
-        };
-        configureMovieCollection(R.id.popular_movie_collection, popularDataSet, "Popular", ListType.POPULAR);
+        configureMovieCollection(R.id.popular_movie_collection, "Popular", ListType.POPULAR);
 
-        String[] trendingDataSet = {
-                "6.6", "1.8", "4.5", "8.4", "5.7"
-        };
-        configureMovieCollection(R.id.trending_movie_collection, trendingDataSet, "Trending", ListType.TRENDING);
+        configureMovieCollection(R.id.trending_movie_collection, "Trending", ListType.TRENDING);
 
 
         return view;
@@ -59,8 +58,18 @@ public class ExploreFragment extends Fragment {
 
 
 
-    private void configureMovieCollection(int id, String[] dataSet, String name, ListType listType)
+    private void configureMovieCollection(int id, String name, ListType listType)
     {
+        PagedMovieListTask task = null;
+        try {
+            task = PagedListLoader.loadList(listType, 1, "en-US");
+            if(task != null)
+                task.execute();
+        } catch (MalformedURLException e) {
+            Log.e("ExploreFragment", "Malformed URL" + e.getMessage());
+        }
+
+
         View movieCollection = view.findViewById(id);
 
         TextView textView = movieCollection.findViewById(R.id.colection_name_text_view);
@@ -78,8 +87,21 @@ public class ExploreFragment extends Fragment {
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.HORIZONTAL)); //todo :удалить
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL)); //todo :удалить
 
-        LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        recyclerView.setLayoutManager(horizontalLayoutManagaer);
+        LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(horizontalLayoutManager);
+
+
+        List<Movie> dataSet = new ArrayList<>();
+        if(task != null) {
+            try {
+                PopularMovies movies = task.get();
+                if(movies != null)
+                    dataSet = movies.getResults();
+            } catch (ExecutionException | InterruptedException e) {
+                Log.e("ExploreFragment", "Can't retrieve data: " + e.getMessage());
+            }
+        }
+
 
         MovieRatingsAdapter mAdapter = new MovieRatingsAdapter(dataSet, new RecyclerViewMovieClickListener() {
             @Override
