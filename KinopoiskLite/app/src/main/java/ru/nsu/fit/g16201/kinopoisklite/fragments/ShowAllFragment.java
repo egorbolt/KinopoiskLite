@@ -10,12 +10,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -89,29 +87,6 @@ public class ShowAllFragment extends Fragment {
                 Log.e("ShowAllFragment", "Can't retrieve data: " + e.getMessage());
             }
         }
-        /*Movie m;
-        {
-            m = new Movie();
-            m.setId(333);
-            m.setTitle("Hello");
-            dataSet.add(m);
-            m = new Movie();
-            m.setId(521);
-            m.setTitle("Gggggg");
-            dataSet.add(m);
-            m = new Movie();
-            m.setId(932);
-            m.setTitle("dfdfsfsdf");
-            dataSet.add(m);
-            m = new Movie();
-            m.setId(113);
-            m.setTitle("fsdfsdfsdfd");
-            dataSet.add(m);
-            m = new Movie();
-            m.setId(223);
-            m.setTitle("fgfdgfdgfdg");
-            dataSet.add(m);
-        }*/
 
         PagedMovieListTask task = null;
         try {
