@@ -81,8 +81,6 @@ public class ExploreFragment extends Fragment {
 
         RecyclerView recyclerView = movieCollection.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
-        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.HORIZONTAL)); //todo :удалить
-        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL)); //todo :удалить
 
         LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(horizontalLayoutManager);
@@ -93,7 +91,7 @@ public class ExploreFragment extends Fragment {
             try {
                 PopularMovies movies = task.get();
                 if(movies != null)
-                    dataSet = movies.getResults();
+                    dataSet = movies.getResults().subList(0, 10);
             } catch (ExecutionException | InterruptedException e) {
                 Log.e("ExploreFragment", "Can't retrieve data: " + e.getMessage());
             }
