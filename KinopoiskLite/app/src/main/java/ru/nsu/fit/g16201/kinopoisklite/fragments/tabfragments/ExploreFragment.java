@@ -62,8 +62,6 @@ public class ExploreFragment extends Fragment {
         PagedMovieListTask task = null;
         try {
             task = PagedListLoader.loadList(listType, 1, "en-US");
-            if(task != null)
-                task.execute();
         } catch (MalformedURLException e) {
             Log.e("ExploreFragment", "Malformed URL" + e.getMessage());
         }
