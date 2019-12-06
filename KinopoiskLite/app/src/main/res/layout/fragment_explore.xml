@@ -19,7 +19,7 @@
                 layout="@layout/movie_collection"/>
 
             <include
-                android:id="@+id/another_movie_collection"
+                android:id="@+id/trending_movie_collection"
                 layout="@layout/movie_collection"/>
 
             <TextView
