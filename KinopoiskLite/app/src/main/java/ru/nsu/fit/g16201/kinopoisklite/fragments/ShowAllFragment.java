@@ -1,6 +1,7 @@
 package ru.nsu.fit.g16201.kinopoisklite.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +15,15 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.Serializable;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.PagedMovieListTask;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Movie;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.listloader.ListType;
+import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.listloader.PagedListLoader;
 import ru.nsu.fit.g16201.kinopoisklite.MainActivity;
 import ru.nsu.fit.g16201.kinopoisklite.MovieListAdapter;
 import ru.nsu.fit.g16201.kinopoisklite.R;
@@ -27,6 +32,9 @@ import ru.nsu.fit.g16201.kinopoisklite.RecyclerViewMovieClickListener;
 public class ShowAllFragment extends Fragment {
 
 
+    private ListType type;
+    private PagedMovieListTask task = null;
+
     public ShowAllFragment() {}
 
     @Override
@@ -34,8 +42,15 @@ public class ShowAllFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         Bundle bundle = this.getArguments();
+
         if (bundle != null) {
-            System.out.println("gfgdfgdfgfdg");
+            this.type = (ListType)bundle.getSerializable("type");
+
+            try {
+                task = PagedListLoader.loadList(type, 1, "en-US");
+            } catch (MalformedURLException e) {
+                Log.e("ShowAllFragment", "Malformed URL" + e.getMessage());
+            }
         }
     }
 
@@ -60,7 +75,7 @@ public class ShowAllFragment extends Fragment {
         recyclerView.setLayoutManager(verticalLayoutManager);
 
         List<Movie> dataSet = new ArrayList<>();
-        Movie m;
+        /*Movie m;
         {
             m = new Movie();
             m.setId(333);
@@ -82,7 +97,15 @@ public class ShowAllFragment extends Fragment {
             m.setId(223);
             m.setTitle("fgfdgfdgfdg");
             dataSet.add(m);
+        }*/
+
+        PagedMovieListTask task = null;
+        try {
+            task = PagedListLoader.loadList(type, 1, "en-US");
+        } catch (MalformedURLException e) {
+            Log.e("ExploreFragment", "Malformed URL" + e.getMessage());
         }
+
         MovieListAdapter mAdapter = new MovieListAdapter(dataSet, new RecyclerViewMovieClickListener() {
             @Override
             public void recyclerViewListClicked(View v, int position, Movie movie) {

@@ -38,7 +38,7 @@ public class MovieFragment extends Fragment {
             try {
                 task = API.loadMovieInfo(bundle.getInt("id"), "en-US");
             } catch (MalformedURLException e) {
-                Log.e("ExploreFragment", "Malformed URL" + e.getMessage());
+                Log.e("MovieFragment", "Malformed URL" + e.getMessage());
             }
         }
     }
@@ -68,7 +68,7 @@ public class MovieFragment extends Fragment {
         try {
             movieInfo = task.get();
         } catch (ExecutionException | InterruptedException e) {
-            Log.e("ExploreFragment", "Can't retrieve data: " + e.getMessage());
+            Log.e("MovieFragment", "Can't retrieve data: " + e.getMessage());
         }
 
         if(movieInfo != null)
