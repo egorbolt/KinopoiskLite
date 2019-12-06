@@ -2,7 +2,7 @@ package ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models;
 
 import com.squareup.moshi.Json;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class Person {
@@ -11,7 +11,7 @@ public class Person {
     private String deathday; //optional
     private Integer id;
     private String name;
-    @Json(name = "also_known_as")private ArrayList<String> alsoKnownAs;
+    @Json(name = "also_known_as")private List<String> alsoKnownAs;
     private Integer gender;
     private String biography;
     private Double popularity;
@@ -61,11 +61,11 @@ public class Person {
         this.name = name;
     }
 
-    public ArrayList<String> getAlsoKnownAs() {
+    public List<String> getAlsoKnownAs() {
         return alsoKnownAs;
     }
 
-    public void setAlsoKnownAs(ArrayList<String> alsoKnownAs) {
+    public void setAlsoKnownAs(List<String> alsoKnownAs) {
         this.alsoKnownAs = alsoKnownAs;
     }
 

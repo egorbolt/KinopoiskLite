@@ -1,10 +1,10 @@
 package ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class PersonImagesInfo {
     private Integer id;
-    private ArrayList<Image> profiles;
+    private List<Image> profiles;
 
     public Integer getId() {
         return id;
@@ -14,11 +14,11 @@ public class PersonImagesInfo {
         this.id = id;
     }
 
-    public ArrayList<Image> getProfiles() {
+    public List<Image> getProfiles() {
         return profiles;
     }
 
-    public void setProfiles(ArrayList<Image> profiles) {
+    public void setProfiles(List<Image> profiles) {
         this.profiles = profiles;
     }
 }

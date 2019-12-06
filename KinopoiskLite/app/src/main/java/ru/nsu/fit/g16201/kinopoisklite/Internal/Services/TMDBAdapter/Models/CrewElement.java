@@ -2,7 +2,7 @@ package ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models;
 
 import com.squareup.moshi.Json;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class CrewElement {
@@ -18,7 +18,7 @@ public class CrewElement {
     @Json(name = "backdrop_path")private String backdropPath; //optional
     private String title;
     private Double popularity;
-    @Json(name = "genre_ids")private ArrayList<Integer> genreIds;
+    @Json(name = "genre_ids")private List<Integer> genreIds;
     @Json(name = "vote_average")private Double voteAverage;
     private Boolean adult;
     @Json(name = "release_date")private String releaseDate;
@@ -120,11 +120,11 @@ public class CrewElement {
         this.popularity = popularity;
     }
 
-    public ArrayList<Integer> getGenreIds() {
+    public List<Integer> getGenreIds() {
         return genreIds;
     }
 
-    public void setGenreIds(ArrayList<Integer> genreIds) {
+    public void setGenreIds(List<Integer> genreIds) {
         this.genreIds = genreIds;
     }
 
