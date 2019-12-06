@@ -49,7 +49,6 @@ public class ExploreFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_explore, container, false);
 
         configureMovieCollection(R.id.popular_movie_collection, "Popular", ListType.POPULAR);
-
         configureMovieCollection(R.id.trending_movie_collection, "Trending", ListType.TRENDING);
 
 
@@ -78,7 +77,7 @@ public class ExploreFragment extends Fragment {
         MaterialButton button = movieCollection.findViewById(R.id.show_button);
 
         button.setOnClickListener(v -> {
-            ShowAllFragment showAllFragment = ShowAllFragment.newInstance(listType);      //todo: передавать что-то, что опзволит получить нунные фильмы
+            ShowAllFragment showAllFragment = ShowAllFragment.newInstance(listType);
             notifyMainActivityFragmentIsActive(showAllFragment);
         });
 
@@ -106,7 +105,7 @@ public class ExploreFragment extends Fragment {
         MovieRatingsAdapter mAdapter = new MovieRatingsAdapter(dataSet, new RecyclerViewMovieClickListener() {
             @Override
             public void recyclerViewListClicked(View v, int position, Movie movie) {
-                MovieFragment movieFragment = MovieFragment.newInstance(movie.getId());   //todo: передавать что-то, что опзволит получить нунные фильмы
+                MovieFragment movieFragment = MovieFragment.newInstance(movie.getId());
                 notifyMainActivityFragmentIsActive(movieFragment);
             }
         });
