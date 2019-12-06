@@ -4,11 +4,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -22,8 +20,7 @@ public class MovieRatingsAdapter extends RecyclerView.Adapter<MovieRatingsAdapte
     public MovieRatingsAdapter(List<Movie> itemsData, RecyclerViewMovieClickListener recyclerViewMovieClickListener) {
         this.mDataset = itemsData;
         itemListener = recyclerViewMovieClickListener;
-
-    }   //todo: в будущем это будет список фильмов (класс Movie)
+    }
 
 
     // Provide a reference to the views for each data item
@@ -55,7 +52,7 @@ public class MovieRatingsAdapter extends RecyclerView.Adapter<MovieRatingsAdapte
     @Override
     public MoviePosterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // create a new view
-        ConstraintLayout v = (ConstraintLayout) LayoutInflater.from(parent.getContext())
+        View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.movie_poster_name, parent, false);
 
         return new MoviePosterViewHolder(v);

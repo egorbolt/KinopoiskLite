@@ -34,14 +34,15 @@
         android:variablePadding="true"
 
         android:textColor="@color/red"
-        android:textSize="12sp"
+        android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="@id/poster_view"
         app:layout_constraintStart_toStartOf="@id/poster_view"
         app:layout_constraintTop_toBottomOf="@id/poster_view"
 
         android:gravity="center"
+
         android:ellipsize="end"
-        android:maxLines="3"
+        android:maxLines="1"
 
 
         android:text="Movie title"
