@@ -17,7 +17,7 @@ import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Trai
 import static ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.API.TIMEOUT;
 import static ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.API.moshi;
 
-public class LoadTrailerTask extends AsyncTask<URL, Void, Trailer> {
+public class LoadTrailersTask extends AsyncTask<URL, Void, Trailer> {
     private JsonAdapter<Trailer> adapter = moshi.adapter(Trailer.class);
 
     @Override
