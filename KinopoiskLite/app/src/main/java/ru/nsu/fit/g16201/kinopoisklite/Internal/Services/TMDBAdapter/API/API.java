@@ -6,11 +6,13 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.GenresListTask;
+import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.LoadTrailerTask;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.MovieInfoTask;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.PagedMovieListTask;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.PersonInfoTask;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Genre;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.GenreList;
+import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Trailer;
 
 public class API {
     public static final int TIMEOUT = 10000;
@@ -84,4 +86,10 @@ public class API {
         task.execute(url);
         return task;
     }
+
+    public static LoadTrailerTask loadTrailerTask(int id, String language) throws MalformedURLException {
+        URL url = new URL(UrlConstructor.urlTrailers(id, language));
+        LoadTrailerTask task = new LoadTrailerTask();
+        task.execute(url);
+        return task;
 }
