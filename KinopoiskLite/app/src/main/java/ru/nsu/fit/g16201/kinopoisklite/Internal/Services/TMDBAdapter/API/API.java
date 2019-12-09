@@ -92,5 +92,10 @@ public class API {
         return task;
     }
 
-
+    public static LoadCreditsTask loadCredits(int id, String language)throws MalformedURLException {
+        URL url = new URL(UrlConstructor.urlCredits(id, language));
+        LoadCreditsTask task = new LoadCreditsTask();
+        task.execute(url);
+        return task;
+    }
 }
