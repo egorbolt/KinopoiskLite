@@ -72,7 +72,7 @@ public class ExploreFragment extends Fragment {
         textView.setText(name);
 
         MaterialButton button = movieCollection.findViewById(R.id.show_button);
-
+        button.setTag("showAllButton" + name);
         button.setOnClickListener(v -> {
             ShowAllFragment showAllFragment = ShowAllFragment.newInstance(listType);
             notifyMainActivityFragmentIsActive(showAllFragment);
