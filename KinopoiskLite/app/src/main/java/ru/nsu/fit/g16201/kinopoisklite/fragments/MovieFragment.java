@@ -67,7 +67,14 @@ public class MovieFragment extends Fragment {
         MovieInfo movieInfo = null;
         try {
             movieInfo = task.get();
-        } catch (ExecutionException | InterruptedException e) {
+        }
+        catch (InterruptedException e)
+        {
+            Log.e("MovieFragment", "Can't retrieve data: " + e.getMessage());
+            Thread.currentThread().interrupt();
+        }
+        catch (ExecutionException e)
+        {
             Log.e("MovieFragment", "Can't retrieve data: " + e.getMessage());
         }
 

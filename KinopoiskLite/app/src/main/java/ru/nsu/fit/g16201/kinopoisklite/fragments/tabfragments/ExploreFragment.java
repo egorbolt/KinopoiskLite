@@ -91,7 +91,14 @@ public class ExploreFragment extends Fragment {
                 PopularMovies movies = task.get();
                 if(movies != null)
                     dataSet = movies.getResults().subList(0, 10);
-            } catch (ExecutionException | InterruptedException e) {
+            }
+            catch (InterruptedException e)
+            {
+                Log.e("ExploreFragment", "Can't retrieve data: " + e.getMessage());
+                Thread.currentThread().interrupt();
+            }
+            catch (ExecutionException e)
+            {
                 Log.e("ExploreFragment", "Can't retrieve data: " + e.getMessage());
             }
         }

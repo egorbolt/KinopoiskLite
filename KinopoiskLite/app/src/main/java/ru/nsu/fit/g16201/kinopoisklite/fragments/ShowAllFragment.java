@@ -82,7 +82,12 @@ public class ShowAllFragment extends Fragment {
                 if(movies != null)
                     dataSet = movies.getResults();
             }
-            catch (ExecutionException | InterruptedException e)
+            catch (InterruptedException e)
+            {
+                Log.e("ShowAllFragment", "Can't retrieve data: " + e.getMessage());
+                Thread.currentThread().interrupt();
+            }
+            catch (ExecutionException e)
             {
                 Log.e("ShowAllFragment", "Can't retrieve data: " + e.getMessage());
             }
