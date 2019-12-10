@@ -7,12 +7,14 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static android.service.autofill.Validators.or;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.*;
 
 
@@ -25,12 +27,13 @@ public class MainActivityTest {
 
     @Test
     public void shouldChangeTabAfterMenuClick() {
-        //onView(withId(R.id.action_explore)).perform(click());
-        //onView(withId(R.id.text)).check(matches(withText("Hello World!")));
+        onView(withId(R.id.action_explore)).perform(click());
+        onView(withText("Lists!")).check(matches(not(isDisplayed())));
+        onView(withId(R.id.rmDescription)).check(matches(not(isDisplayed())));
 
-        //onView(withId(R.id.action_random)).perform(click());
-        //onView(withId(R.layout.fragment_random)).check(matches(isDisplayed()));
 
+        onView(withId(R.id.action_random)).perform(click());
+        onView(withId(R.id.rmDescription)).check(matches(isDisplayed()));
 
         onView(withId(R.id.action_lists)).perform(click());
         onView(withText("Lists!")).check(matches(isDisplayed()));

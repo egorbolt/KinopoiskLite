@@ -29,6 +29,14 @@ android {
         }
     }
 
+    testOptions {
+        unitTests.all {
+            jacoco {
+                includeNoLocationClasses = true
+            }
+        }
+    }
+
     dataBinding {
         enabled = true
     }
