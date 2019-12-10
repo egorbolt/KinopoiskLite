@@ -14,6 +14,8 @@ import androidx.fragment.app.Fragment;
 
 import com.squareup.picasso.Picasso;
 
+import org.w3c.dom.Text;
+
 import java.net.MalformedURLException;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -62,9 +64,14 @@ public class MovieFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_movie, container, false);
 
         ImageView imageView = view.findViewById(R.id.movie_poster_image_view);
+
         TextView ratingBadge = view.findViewById(R.id.badge_rating);
+
         TextView movieTitle = view.findViewById(R.id.textViewMovieTitle);
-        TextView movieDescription = view.findViewById(R.id.textViewMovieDescription);
+
+        TextView movieDescription = view.findViewById(R.id.description_text_card).findViewById(R.id.card_text);
+        TextView movieDescriptionCardTitle = view.findViewById(R.id.description_text_card).findViewById(R.id.card_name_text_view);
+        movieDescriptionCardTitle.setText("Description");
 
         MovieInfo movieInfo = null;
         try {
