@@ -27,7 +27,7 @@ public class MovieFragment extends Fragment {
 
     private MovieInfoTask task;
 
-    public MovieFragment() {}
+    private MovieFragment() {}
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
