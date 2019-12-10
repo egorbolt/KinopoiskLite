@@ -19,6 +19,11 @@ public class UrlConstructor {
         return HOST+"/genre/movie/list?"+APIKEY+"&language="+language;
     }
 
+    static String urlMoviesListByGenre(int page, int id, String language) {
+        return HOST+"/discover/movie?"+APIKEY+"&include_adult=false" +
+                "+&page="+page+"with_genres="+id+"&language="+language;
+    }
+
     static String urlPopular(int page, String language) {
         return HOST+"/movie/popular?"+APIKEY+"&page="+page+"&language="+language;
     }

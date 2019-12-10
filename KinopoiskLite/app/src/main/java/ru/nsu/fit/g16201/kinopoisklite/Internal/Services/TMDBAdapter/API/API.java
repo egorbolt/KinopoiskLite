@@ -5,8 +5,11 @@ import com.squareup.moshi.Moshi;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.GenresListTask;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.MovieInfoTask;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.PagedMovieListTask;
+import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Genre;
+import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.GenreList;
 
 public class API {
     public static final int TIMEOUT = 10000;
@@ -55,6 +58,20 @@ public class API {
     //Загружает информацию о выходящих скоро фильмах
     public static PagedMovieListTask loadUpcoming(int page, String language) throws MalformedURLException {
         URL url = new URL(UrlConstructor.urlUpcoming(page,language));
+        PagedMovieListTask task = new PagedMovieListTask();
+        task.execute(url);
+        return task;
+    }
+
+    public static GenresListTask loadGenreList(String language) throws MalformedURLException {
+        URL url = new URL(UrlConstructor.urlGenreList(language));
+        GenresListTask task = new GenresListTask();
+        task.execute(url);
+        return task;
+    }
+
+    public static PagedMovieListTask loadMoviesByGenre(int page, int genre, String language) throws MalformedURLException {
+        URL url = new URL(UrlConstructor.urlMoviesListByGenre(page,genre,language));
         PagedMovieListTask task = new PagedMovieListTask();
         task.execute(url);
         return task;
