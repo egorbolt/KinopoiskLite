@@ -27,15 +27,12 @@ import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.listloader.
 import ru.nsu.fit.g16201.kinopoisklite.MainActivity;
 import ru.nsu.fit.g16201.kinopoisklite.MovieListAdapter;
 import ru.nsu.fit.g16201.kinopoisklite.R;
-import ru.nsu.fit.g16201.kinopoisklite.RecyclerViewMovieClickListener;
 
 public class ShowAllFragment extends Fragment {
-
-
-    private ListType type;
     private PagedMovieListTask task = null;
 
-    public ShowAllFragment() {}
+    private static final String ERROR_TAG = "ShowAllFragment";
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,12 +41,12 @@ public class ShowAllFragment extends Fragment {
         Bundle bundle = this.getArguments();
 
         if (bundle != null) {
-            this.type = (ListType)bundle.getSerializable("type");
+            ListType type = (ListType) bundle.getSerializable("type");
 
             try {
                 task = PagedListLoader.loadList(type, 1, "en-US");
             } catch (MalformedURLException e) {
-                Log.e("ShowAllFragment", "Malformed URL" + e.getMessage());
+                Log.e(ERROR_TAG, "Malformed URL" + e.getMessage());
             }
         }
     }
@@ -84,28 +81,20 @@ public class ShowAllFragment extends Fragment {
             }
             catch (InterruptedException e)
             {
-                Log.e("ShowAllFragment", "Can't retrieve data: " + e.getMessage());
+                Log.e(ERROR_TAG, "Can't retrieve data: " + e.getMessage());
                 Thread.currentThread().interrupt();
             }
             catch (ExecutionException e)
             {
-                Log.e("ShowAllFragment", "Can't retrieve data: " + e.getMessage());
+                Log.e(ERROR_TAG, "Can't retrieve data: " + e.getMessage());
             }
         }
 
-        PagedMovieListTask task = null;
-        try {
-            task = PagedListLoader.loadList(type, 1, "en-US");
-        } catch (MalformedURLException e) {
-            Log.e("ExploreFragment", "Malformed URL" + e.getMessage());
-        }
 
-        MovieListAdapter mAdapter = new MovieListAdapter(dataSet, new RecyclerViewMovieClickListener() {
-            @Override
-            public void recyclerViewListClicked(View v, int position, Movie movie) {
-                MovieFragment movieFragment = MovieFragment.newInstance(movie.getId());   //todo: передавать что-то, что опзволит получить нунные фильмы
-                notifyMainActivityFragmentIsActive(movieFragment);
-            }
+
+        MovieListAdapter mAdapter = new MovieListAdapter(dataSet, (v, position, movie) -> {
+            MovieFragment movieFragment = MovieFragment.newInstance(movie.getId());
+            notifyMainActivityFragmentIsActive(movieFragment);
         });
 
         recyclerView.setAdapter(mAdapter);

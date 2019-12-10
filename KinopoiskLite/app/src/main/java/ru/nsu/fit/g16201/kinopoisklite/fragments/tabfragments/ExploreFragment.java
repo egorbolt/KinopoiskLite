@@ -30,13 +30,12 @@ import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.listloader.
 import ru.nsu.fit.g16201.kinopoisklite.MainActivity;
 import ru.nsu.fit.g16201.kinopoisklite.MovieRatingsAdapter;
 import ru.nsu.fit.g16201.kinopoisklite.R;
-import ru.nsu.fit.g16201.kinopoisklite.RecyclerViewMovieClickListener;
 import ru.nsu.fit.g16201.kinopoisklite.fragments.MovieFragment;
 import ru.nsu.fit.g16201.kinopoisklite.fragments.ShowAllFragment;
 
 public class ExploreFragment extends Fragment {
-    public ExploreFragment() {
-    }
+
+    private static final String ERROR_TAG = "ExploreFragment";
 
     private View view;
 
@@ -62,7 +61,7 @@ public class ExploreFragment extends Fragment {
         try {
             task = PagedListLoader.loadList(listType, 1, "en-US");
         } catch (MalformedURLException e) {
-            Log.e("ExploreFragment", "Malformed URL" + e.getMessage());
+            Log.e(ERROR_TAG, "Malformed URL" + e.getMessage());
         }
 
 
@@ -94,22 +93,19 @@ public class ExploreFragment extends Fragment {
             }
             catch (InterruptedException e)
             {
-                Log.e("ExploreFragment", "Can't retrieve data: " + e.getMessage());
+                Log.e(ERROR_TAG, "Can't retrieve data: " + e.getMessage());
                 Thread.currentThread().interrupt();
             }
             catch (ExecutionException e)
             {
-                Log.e("ExploreFragment", "Can't retrieve data: " + e.getMessage());
+                Log.e(ERROR_TAG, "Can't retrieve data: " + e.getMessage());
             }
         }
 
 
-        MovieRatingsAdapter mAdapter = new MovieRatingsAdapter(dataSet, new RecyclerViewMovieClickListener() {
-            @Override
-            public void recyclerViewListClicked(View v, int position, Movie movie) {
-                MovieFragment movieFragment = MovieFragment.newInstance(movie.getId());
-                notifyMainActivityFragmentIsActive(movieFragment);
-            }
+        MovieRatingsAdapter mAdapter = new MovieRatingsAdapter(dataSet, (v, position, movie) -> {
+            MovieFragment movieFragment = MovieFragment.newInstance(movie.getId());
+            notifyMainActivityFragmentIsActive(movieFragment);
         });
 
         recyclerView.setAdapter(mAdapter);
