@@ -70,7 +70,6 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
             app:cardCornerRadius="2dp"
             app:cardElevation="6dp"
 
-
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
@@ -131,9 +130,6 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                         />
 
                 </LinearLayout>
-
-
-
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>

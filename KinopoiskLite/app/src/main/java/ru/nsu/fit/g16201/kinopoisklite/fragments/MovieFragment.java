@@ -15,11 +15,13 @@ import androidx.fragment.app.Fragment;
 import com.squareup.picasso.Picasso;
 
 import java.net.MalformedURLException;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.API;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.MovieInfoTask;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.UrlConstructor;
+import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Genre;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.MovieInfo;
 import ru.nsu.fit.g16201.kinopoisklite.R;
 
@@ -86,6 +88,7 @@ public class MovieFragment extends Fragment {
                 movieDescription.setText(movieInfo.getOverview().get());
             if(movieInfo.getPosterPath().isPresent())
                 Picasso.get().load(UrlConstructor.urlSingleImage(movieInfo.getPosterPath().get())).into(imageView);
+            List<Genre> genres = movieInfo.getGenres();
         }
 
         return view;
