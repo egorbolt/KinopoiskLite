@@ -14,11 +14,10 @@ import androidx.fragment.app.Fragment;
 
 import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
-
 import java.net.MalformedURLException;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+import java.util.stream.Collectors;
 
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.API;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.MovieInfoTask;
@@ -70,8 +69,10 @@ public class MovieFragment extends Fragment {
         TextView movieTitle = view.findViewById(R.id.textViewMovieTitle);
 
         TextView movieDescription = view.findViewById(R.id.description_text_card).findViewById(R.id.card_text);
-        TextView movieDescriptionCardTitle = view.findViewById(R.id.description_text_card).findViewById(R.id.card_name_text_view);
-        movieDescriptionCardTitle.setText("Description");
+        ((TextView)view.findViewById(R.id.description_text_card).findViewById(R.id.card_name_text_view)).setText("Description");
+
+        TextView movieGenres = view.findViewById(R.id.genres_text_card).findViewById(R.id.card_text);
+        ((TextView)view.findViewById(R.id.genres_text_card).findViewById(R.id.card_name_text_view)).setText("Genres");
 
         MovieInfo movieInfo = null;
         try {
@@ -96,6 +97,8 @@ public class MovieFragment extends Fragment {
             if(movieInfo.getPosterPath().isPresent())
                 Picasso.get().load(UrlConstructor.urlSingleImage(movieInfo.getPosterPath().get())).into(imageView);
             List<Genre> genres = movieInfo.getGenres();
+            if(genres != null)
+                movieGenres.setText(genres.stream().map(Genre::getName).collect(Collectors.joining(", ")));
         }
 
         return view;
