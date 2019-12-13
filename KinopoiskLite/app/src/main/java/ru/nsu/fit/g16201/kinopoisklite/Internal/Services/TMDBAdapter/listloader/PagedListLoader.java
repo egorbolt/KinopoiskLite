@@ -22,4 +22,18 @@ public class PagedListLoader {
         }
         return null;
     }
+
+    public static PagedMovieListTask loadParametrisedList(ListType type, int page, int id, String language) throws MalformedURLException {
+        switch(type) {
+            case POPULAR:
+            case TRENDING:
+            case UPCOMING:
+            case TOP_RATED:
+            case NOW_PLAYING:
+                return loadList(type, page, language);
+            case SIMILAR:
+                return API.loadSimilar(page, id, language);
+        }
+        return null;
+    }
 }

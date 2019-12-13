@@ -75,7 +75,7 @@ public class MovieFragment extends Fragment {
         TextView movieGenres = view.findViewById(R.id.genres_text_card).findViewById(R.id.card_text);
         ((TextView)view.findViewById(R.id.genres_text_card).findViewById(R.id.card_name_text_view)).setText("Genres");
 
-        configureMovieCollection(R.id.similar_movie_collection, "Similar movie", ListType.TRENDING);
+        configureMovieCollection(R.id.similar_movie_collection, "Similar movie", ListType.SIMILAR);
 
 
         MovieInfo movieInfo = null;
@@ -106,6 +106,11 @@ public class MovieFragment extends Fragment {
         }
 
         return view;
+    }
+
+    private void configureMovieCollection(int id, String name, ListType listType)
+    {
+
     }
 
 }

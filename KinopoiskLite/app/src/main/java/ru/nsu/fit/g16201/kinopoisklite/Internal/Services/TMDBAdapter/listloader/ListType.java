@@ -5,5 +5,6 @@ public enum ListType {
     TRENDING,
     NOW_PLAYING,
     TOP_RATED,
-    UPCOMING
+    UPCOMING,
+    SIMILAR
 }
