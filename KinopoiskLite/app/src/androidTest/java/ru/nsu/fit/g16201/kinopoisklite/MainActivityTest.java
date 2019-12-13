@@ -1,5 +1,6 @@
 package ru.nsu.fit.g16201.kinopoisklite;
 
+import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.internal.runner.InstrumentationConnection;
 import androidx.test.rule.ActivityTestRule;
@@ -52,12 +53,7 @@ public class MainActivityTest {
     @Test
     public void shouldBeProperlyRecreated() {
 
-        getInstrumentation().runOnMainSync(new Runnable() {
-            @Override
-            public void run() {
-                rule.getActivity().recreate();
-            }
-        });
+        getInstrumentation().runOnMainSync(() -> rule.getActivity().recreate());
 
         onView(withId(R.id.action_explore)).perform(click());
         onView(withText("Lists!")).check(matches(not(isDisplayed())));
@@ -93,6 +89,26 @@ public class MainActivityTest {
         onView(withId(R.id.rmDescription)).check(matches(not(isDisplayed())));
 
         onView(withId(R.id.action_explore)).perform(click());
+        onView(withId(R.id.action_explore)).perform(click());
+
+    }
+
+    @Test
+    public void onShowMovieInfo() {
+
+        onView(withTagValue(is("recyclerViewPopular"))).perform(RecyclerViewActions.actionOnItemAtPosition(1, click()));
+
+        onView(withId(R.id.action_random)).perform(click());
+        onView(withId(R.id.rmDescription)).check(matches(isDisplayed()));
+
+
+        onView(withId(R.id.action_explore)).perform(click());
+        onView(withText("Lists!")).check(matches(not(isDisplayed())));
+        onView(withId(R.id.rmDescription)).check(matches(not(isDisplayed())));
+
+        onView(withId(R.id.action_explore)).perform(click());
+        onView(withId(R.id.action_explore)).perform(click());
+
     }
 
 }

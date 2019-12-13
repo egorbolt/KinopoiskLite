@@ -78,6 +78,7 @@ public class ExploreFragment extends Fragment {
         });
 
         RecyclerView recyclerView = movieCollection.findViewById(R.id.recycler_view);
+        recyclerView.setTag("recyclerView" + name);
         recyclerView.setHasFixedSize(true);
 
         LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
