@@ -162,6 +162,11 @@ public class MovieFragment extends Fragment {
                 PopularMovies movies = task.get();
                 if(movies != null) {
                     List<Movie> movieList = movies.getResults();
+                    if(movieList.isEmpty())
+                    {
+                        movieCollection.setVisibility(View.GONE);
+                        return;
+                    }
                     dataSet = movieList.subList(0, 10 < movieList.size() ? 10 : movieList.size());
                 }
             }

@@ -121,10 +121,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
             app:layout_constraintStart_toStartOf="parent"
 
             app:layout_constraintTop_toBottomOf="@id/genres_text_card"
-
             />
-
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
