@@ -29,12 +29,16 @@ stages:
 lintDebug:
   stage: build
   script:
-    - ./KinopoiskLite/gradlew -Pci --console=plain :app:lintDebug -PbuildDir=lint
+    - cd KinopoiskLite
+    - ./gradlew -Pci --console=plain :app:lintDebug -PbuildDir=lint
+    - cd ..
 
 assembleDebug:
   stage: build
   script:
-    - ./KinopoiskLite/gradlew assembleDebug
+    - cd KinopoiskLite
+    - ./gradlew assembleDebug
+    - cd ..
   artifacts:
     paths:
     - app/build/outputs/
@@ -42,4 +46,6 @@ assembleDebug:
 debugTests:
   stage: test
   script:
-    - ./KinopoiskLite/gradlew -Pci --console=plain :app:testDebug
+    - cd KinopoiskLite
+    - ./gradlew -Pci --console=plain :app:testDebug
+    - cd ..
