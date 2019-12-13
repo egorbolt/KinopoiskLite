@@ -1,4 +1,4 @@
-package ru.nsu.fit.g16201.kinopoisklite.fragments.tabfragments;
+package ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.tabfragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

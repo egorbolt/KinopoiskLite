@@ -14,9 +14,9 @@ import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import ru.nsu.fit.g16201.kinopoisklite.fragments.tabfragments.ExploreFragment;
-import ru.nsu.fit.g16201.kinopoisklite.fragments.tabfragments.ListsFragment;
-import ru.nsu.fit.g16201.kinopoisklite.fragments.tabfragments.RandomFragment;
+import ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.tabfragments.explorefragment.ExploreFragment;
+import ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.tabfragments.ListsFragment;
+import ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.tabfragments.RandomFragment;
 
 public class MainActivity extends AppCompatActivity  implements SearchView.OnQueryTextListener {
 

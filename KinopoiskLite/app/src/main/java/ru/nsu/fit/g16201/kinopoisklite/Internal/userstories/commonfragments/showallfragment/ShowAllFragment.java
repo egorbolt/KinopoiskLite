@@ -1,4 +1,4 @@
-package ru.nsu.fit.g16201.kinopoisklite.fragments;
+package ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.commonfragments.showallfragment;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -24,8 +24,8 @@ import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Movi
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.PopularMovies;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.listloader.ListType;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.listloader.PagedListLoader;
+import ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.commonfragments.MovieFragment;
 import ru.nsu.fit.g16201.kinopoisklite.MainActivity;
-import ru.nsu.fit.g16201.kinopoisklite.MovieListAdapter;
 import ru.nsu.fit.g16201.kinopoisklite.R;
 
 public class ShowAllFragment extends Fragment {

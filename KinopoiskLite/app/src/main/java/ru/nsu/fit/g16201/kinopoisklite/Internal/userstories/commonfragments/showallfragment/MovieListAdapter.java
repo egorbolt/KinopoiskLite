@@ -1,6 +1,5 @@
-package ru.nsu.fit.g16201.kinopoisklite;
+package ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.commonfragments.showallfragment;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +16,8 @@ import java.util.List;
 
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.UrlConstructor;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Movie;
+import ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.reusables.RecyclerViewMovieClickListener;
+import ru.nsu.fit.g16201.kinopoisklite.R;
 
 public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.MovieInfoViewHolder>  {
 

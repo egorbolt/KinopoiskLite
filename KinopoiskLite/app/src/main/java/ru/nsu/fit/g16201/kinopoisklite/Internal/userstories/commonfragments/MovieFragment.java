@@ -1,4 +1,4 @@
-package ru.nsu.fit.g16201.kinopoisklite.fragments;
+package ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.commonfragments;
 
 import android.os.Bundle;
 import android.util.Log;

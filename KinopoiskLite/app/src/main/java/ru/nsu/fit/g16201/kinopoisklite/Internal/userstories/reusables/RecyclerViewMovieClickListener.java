@@ -1,4 +1,4 @@
-package ru.nsu.fit.g16201.kinopoisklite;
+package ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.reusables;
 
 import android.view.View;
 

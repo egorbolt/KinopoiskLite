@@ -2,6 +2,8 @@ package ru.nsu.fit.g16201.kinopoisklite.fragments;
 
 import org.junit.Test;
 
+import ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.commonfragments.MovieFragment;
+
 import static org.junit.Assert.*;
 
 public class MovieFragmentTest {
