@@ -80,8 +80,8 @@ public class ShowAllFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_show_all, container, false);
 
-        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
-
+        RecyclerView recyclerView = view.findViewById(R.id.showAllRecyclerView);
+        recyclerView.setTag("showAllRecyclerView");
         LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(verticalLayoutManager);
 

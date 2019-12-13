@@ -29,7 +29,6 @@ public class MainActivityTest {
     @Rule
     public ActivityTestRule<MainActivity> rule = new ActivityTestRule<>(MainActivity.class);
 
-
     @Test
     public void shouldChangeTabAfterMenuClick() {
         onView(withId(R.id.action_explore)).perform(click());
@@ -82,33 +81,45 @@ public class MainActivityTest {
         onView(withId(R.id.action_random)).perform(click());
         onView(withId(R.id.rmDescription)).check(matches(isDisplayed()));
 
-
-
         onView(withId(R.id.action_explore)).perform(click());
         onView(withText("Lists!")).check(matches(not(isDisplayed())));
         onView(withId(R.id.rmDescription)).check(matches(not(isDisplayed())));
 
         onView(withId(R.id.action_explore)).perform(click());
-        onView(withId(R.id.action_explore)).perform(click());
 
     }
 
     @Test
-    public void onShowMovieInfo() {
+    public void onShowMovieInfoFromExplore() {
 
         onView(withTagValue(is("recyclerViewPopular"))).perform(RecyclerViewActions.actionOnItemAtPosition(1, click()));
 
         onView(withId(R.id.action_random)).perform(click());
         onView(withId(R.id.rmDescription)).check(matches(isDisplayed()));
 
+        onView(withId(R.id.action_explore)).perform(click());
+        onView(withText("Lists!")).check(matches(not(isDisplayed())));
+        onView(withId(R.id.rmDescription)).check(matches(not(isDisplayed())));
+
+        onView(withId(R.id.action_explore)).perform(click());
+
+    }
+
+    @Test
+    public void onShowMovieInfoFromShowAll()
+    {
+        onView(withTagValue(is("showAllButtonPopular"))).perform(click());
+
+        onView(withTagValue(is("showAllRecyclerView"))).perform(RecyclerViewActions.actionOnItemAtPosition(1, click()));
+
+        onView(withId(R.id.action_random)).perform(click());
+        onView(withId(R.id.rmDescription)).check(matches(isDisplayed()));
 
         onView(withId(R.id.action_explore)).perform(click());
         onView(withText("Lists!")).check(matches(not(isDisplayed())));
         onView(withId(R.id.rmDescription)).check(matches(not(isDisplayed())));
 
         onView(withId(R.id.action_explore)).perform(click());
-        onView(withId(R.id.action_explore)).perform(click());
-
     }
 
 }
