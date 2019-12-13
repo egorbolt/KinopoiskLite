@@ -34,6 +34,8 @@ public class ShowAllFragment extends Fragment {
     private static final String ERROR_TAG = "ShowAllFragment";
 
 
+
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +61,18 @@ public class ShowAllFragment extends Fragment {
         showAllFragment.setArguments(bundle);
 
         return showAllFragment;
+    }
+
+    public static ShowAllFragment newInstance(ListType type, Integer movieId) {
+        ShowAllFragment showAllFragment = new ShowAllFragment();
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("type", type);
+        bundle.putInt("id", movieId);
+        showAllFragment.setArguments(bundle);
+
+        return showAllFragment;
+
     }
 
     @Nullable
