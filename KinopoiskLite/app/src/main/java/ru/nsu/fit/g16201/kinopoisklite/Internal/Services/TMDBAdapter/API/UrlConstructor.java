@@ -45,7 +45,7 @@ public class UrlConstructor {
     }
 
     static String urlSimilarMovies(int page, int id, String language) {
-        return HOST+"/movie/"+id+"similar?"+APIKEY+"&page="+page+"&language="+language;
+        return HOST+"/movie/"+id+"/similar?"+APIKEY+"&page="+page+"&language="+language;
     }
 
     static String urlTrailers(int id, String language) {
