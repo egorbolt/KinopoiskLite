@@ -47,5 +47,5 @@ debugTests:
   stage: test
   script:
     - cd KinopoiskLite
-    - ./gradlew -Pci --console=plain :app:testDebug
+    - ./gradlew -Pci --console=plain :app:testDebugUnitTestCoverage
     - cd ..
