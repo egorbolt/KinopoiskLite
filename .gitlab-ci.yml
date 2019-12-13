@@ -49,10 +49,10 @@ coverageReport:
     - cd KinopoiskLite
     - wget --quiet --output-document=android-wait-for-emulator https://raw.githubusercontent.com/travis-ci/travis-cookbooks/0f497eb71291b52a703143c5cd63a217c8766dc9/community-cookbooks/android-sdk/files/default/android-wait-for-emulator
     - chmod +x android-wait-for-emulator
-    - echo y | ${ANDROID_HOME}/tools/bin/sdkmanager "system-images;android-${ANDROID_COMPILE_SDK};google_apis_playstore;x86"
-    - echo y | ${ANDROID_HOME}/tools/bin/sdkmanager --update
-    - echo no | ${ANDROID_HOME}/tools/bin/avdmanager create avd -k "system-images;android-${ANDROID_COMPILE_SDK};google_apis_playstore;x86" -n test
-    - ${ANDROID_HOME}/tools/emulator -avd test -no-window -no-audio 
+    - android-sdk-linux/tools/bin/sdkmanager --update > update.log
+    - android-sdk-linux/tools/bin/sdkmanager "platform-tools" "emulator" "system-images;android-${EMULATOR_VERSION};default;armeabi-v7a"  > installEmulator.log
+    - echo no | android-sdk-linux/tools/bin/avdmanager create avd -n test -k "system-images;android-${EMULATOR_VERSION};default;armeabi-v7a"
+    - android-sdk-linux/emulator/emulator -avd test -no-window -no-audio &
     - ./android-wait-for-emulator
     - adb shell input keyevent 82
     - ./gradlew createDebugCoverageReport sonarqube -Dsonar.projectKey=KL -Dsonar.projectName="Kinopoisk Lite" -Dsonar.host.url=http://84.237.50.237:9000 -Dsonar.login=eb67dfe88f699ce908db2c43a7836d59d4504c24 -Dsonar.coverage.jacoco.xmlReportPaths=".\build\reports\coverage\debug\report.xml"
