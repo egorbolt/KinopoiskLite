@@ -41,7 +41,7 @@ assembleDebug:
     - cd ..
   artifacts:
     paths:
-    - app/build/outputs/
+    - KinopoiskLite/app/build/outputs/
 
 debugTests:
   stage: test
