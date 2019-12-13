@@ -64,6 +64,13 @@ public class API {
         return task;
     }
 
+    public static PagedMovieListTask loadSimilar(int page, int id, String language) throws MalformedURLException {
+        /*URL url = new URL(UrlConstructor.url);
+        PagedMovieListTask task = new PagedMovieListTask();
+        task.execute(url);
+        return task;*/ return null;
+    }
+
     public static GenresListTask loadGenreList(String language) throws MalformedURLException {
         URL url = new URL(UrlConstructor.urlGenreList(language));
         GenresListTask task = new GenresListTask();
