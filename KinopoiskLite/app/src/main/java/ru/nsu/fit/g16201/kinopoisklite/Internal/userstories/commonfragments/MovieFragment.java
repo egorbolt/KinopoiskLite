@@ -160,8 +160,10 @@ public class MovieFragment extends Fragment {
         if(task != null) {
             try {
                 PopularMovies movies = task.get();
-                if(movies != null)
-                    dataSet = movies.getResults().subList(0, 10);
+                if(movies != null) {
+                    List<Movie> movieList = movies.getResults();
+                    dataSet = movieList.subList(0, 10 < movieList.size() ? 10 : movieList.size());
+                }
             }
             catch (InterruptedException e)
             {
