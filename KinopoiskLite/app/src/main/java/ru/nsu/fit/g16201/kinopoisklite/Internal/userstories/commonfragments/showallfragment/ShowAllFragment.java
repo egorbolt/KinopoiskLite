@@ -44,9 +44,9 @@ public class ShowAllFragment extends Fragment {
 
         if (bundle != null) {
             ListType type = (ListType) bundle.getSerializable("type");
-
+            int id = bundle.getInt("movie_id");
             try {
-                task = PagedListLoader.loadList(type, 1, "en-US");
+                task = PagedListLoader.loadParametrisedList(type, 1, id,"en-US");
             } catch (MalformedURLException e) {
                 Log.e(ERROR_TAG, "Malformed URL" + e.getMessage());
             }
@@ -68,7 +68,7 @@ public class ShowAllFragment extends Fragment {
 
         Bundle bundle = new Bundle();
         bundle.putSerializable("type", type);
-        bundle.putInt("id", movieId);
+        bundle.putInt("movie_id", movieId);
         showAllFragment.setArguments(bundle);
 
         return showAllFragment;
