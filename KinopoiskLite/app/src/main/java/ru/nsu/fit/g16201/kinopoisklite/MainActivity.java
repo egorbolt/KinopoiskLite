@@ -14,7 +14,7 @@ import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.tabfragments.explorefragment.ExploreFragment;
+import ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.tabfragments.ExploreFragment;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.tabfragments.ListsFragment;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.tabfragments.RandomFragment;
 

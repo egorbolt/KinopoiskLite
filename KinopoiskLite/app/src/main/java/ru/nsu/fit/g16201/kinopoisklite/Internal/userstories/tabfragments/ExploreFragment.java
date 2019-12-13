@@ -1,4 +1,4 @@
-package ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.tabfragments.explorefragment;
+package ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.tabfragments;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -27,6 +27,7 @@ import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Movi
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.PopularMovies;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.listloader.ListType;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.listloader.PagedListLoader;
+import ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.reusables.MovieRatingsAdapter;
 import ru.nsu.fit.g16201.kinopoisklite.MainActivity;
 import ru.nsu.fit.g16201.kinopoisklite.R;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.commonfragments.MovieFragment;

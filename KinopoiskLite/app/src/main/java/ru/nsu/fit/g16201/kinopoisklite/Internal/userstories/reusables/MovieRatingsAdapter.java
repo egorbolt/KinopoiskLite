@@ -1,4 +1,4 @@
-package ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.tabfragments.explorefragment;
+package ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.reusables;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +15,6 @@ import java.util.List;
 
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.UrlConstructor;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Movie;
-import ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.reusables.RecyclerViewMovieClickListener;
 import ru.nsu.fit.g16201.kinopoisklite.R;
 
 public class MovieRatingsAdapter extends RecyclerView.Adapter<MovieRatingsAdapter.MoviePosterViewHolder> {

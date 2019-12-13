@@ -24,6 +24,7 @@ import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.M
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.UrlConstructor;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Genre;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.MovieInfo;
+import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.listloader.ListType;
 import ru.nsu.fit.g16201.kinopoisklite.R;
 
 public class MovieFragment extends Fragment {
@@ -73,6 +74,9 @@ public class MovieFragment extends Fragment {
 
         TextView movieGenres = view.findViewById(R.id.genres_text_card).findViewById(R.id.card_text);
         ((TextView)view.findViewById(R.id.genres_text_card).findViewById(R.id.card_name_text_view)).setText("Genres");
+
+        configureMovieCollection(R.id.similar_movie_collection, "Similar movie", ListType.TRENDING);
+
 
         MovieInfo movieInfo = null;
         try {
