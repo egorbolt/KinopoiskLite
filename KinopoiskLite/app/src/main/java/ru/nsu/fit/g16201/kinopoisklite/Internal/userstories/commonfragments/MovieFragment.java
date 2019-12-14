@@ -46,7 +46,8 @@ public class MovieFragment extends Fragment {
 
     private View view;
 
-    private MovieInfoTask task;
+    private MovieInfoTask movieInfoTask;
+    private PagedMovieListTask similarMoviesTask;
 
     private MovieFragment() {}
 
@@ -57,7 +58,9 @@ public class MovieFragment extends Fragment {
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             try {
-                task = API.loadMovieInfo(bundle.getInt("id"), "en-US");
+                int id = bundle.getInt("id");
+                movieInfoTask = API.loadMovieInfo(id, "en-US");
+                similarMoviesTask = API.loadSimilar(1, id, "en-US");
             } catch (MalformedURLException e) {
                 Log.e("MovieFragment", "Malformed URL" + e.getMessage());
             }
@@ -96,7 +99,7 @@ public class MovieFragment extends Fragment {
 
         MovieInfo movieInfo = null;
         try {
-            movieInfo = task.get();
+            movieInfo = movieInfoTask.get();
         }
         catch (InterruptedException e)
         {
@@ -110,7 +113,7 @@ public class MovieFragment extends Fragment {
 
         if(movieInfo != null)
         {
-            configureMovieCollection(R.id.similar_movie_collection, "Similar movie", ListType.SIMILAR, movieInfo.getId());
+            configureMovieCollection(R.id.similar_movie_collection, "Similar movies", movieInfo.getId());
 
 
             movieTitle.setText(movieInfo.getTitle());
@@ -127,16 +130,8 @@ public class MovieFragment extends Fragment {
         return view;
     }
 
-    private void configureMovieCollection(int id, String name, ListType listType, Integer movieId)
+    private void configureMovieCollection(int id, String name, Integer movieId)
     {
-        PagedMovieListTask task = null;
-        try {
-            task = PagedListLoader.loadParametrisedList(listType, 1, movieId, "en-US");
-        } catch (MalformedURLException e) {
-            Log.e(ERROR_TAG, "Malformed URL" + e.getMessage());
-        }
-
-
         View movieCollection = view.findViewById(id);
 
         TextView textView = movieCollection.findViewById(R.id.colection_name_text_view);
@@ -145,7 +140,7 @@ public class MovieFragment extends Fragment {
         MaterialButton button = movieCollection.findViewById(R.id.show_button);
         button.setTag("showAllButton" + name);
         button.setOnClickListener(v -> {
-            ShowAllFragment showAllFragment = ShowAllFragment.newInstance(listType, movieId);
+            ShowAllFragment showAllFragment = ShowAllFragment.newInstance(ListType.SIMILAR, movieId);
             notifyMainActivityFragmentIsActive(showAllFragment);
         });
 
@@ -157,9 +152,9 @@ public class MovieFragment extends Fragment {
 
 
         List<Movie> dataSet = new ArrayList<>();
-        if(task != null) {
+        if(similarMoviesTask != null) {
             try {
-                PopularMovies movies = task.get();
+                PopularMovies movies = similarMoviesTask.get();
                 if(movies != null) {
                     List<Movie> movieList = movies.getResults();
                     if(movieList.isEmpty())
