@@ -54,8 +54,7 @@ public class MovieFragment extends Fragment {
     private PagedMovieListTask similarMoviesTask;
     private PicturesTask picturesTask;
 
-
-    private MovieFragment() {}
+    public MovieFragment() {}
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
