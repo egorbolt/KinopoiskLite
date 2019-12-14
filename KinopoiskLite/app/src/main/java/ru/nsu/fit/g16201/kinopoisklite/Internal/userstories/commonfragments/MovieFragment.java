@@ -36,6 +36,7 @@ import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Movi
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.PopularMovies;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.listloader.ListType;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.commonfragments.showallfragment.ShowAllFragment;
+import ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.reusables.GalleryPager;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.reusables.MovieRatingsAdapter;
 import ru.nsu.fit.g16201.kinopoisklite.MainActivity;
 import ru.nsu.fit.g16201.kinopoisklite.R;
@@ -98,7 +99,7 @@ public class MovieFragment extends Fragment {
         TextView movieGenres = view.findViewById(R.id.genres_text_card).findViewById(R.id.card_text);
         ((TextView)view.findViewById(R.id.genres_text_card).findViewById(R.id.card_name_text_view)).setText("Genres");
 
-
+        GalleryPager galleryPager;
 
         MovieInfo movieInfo = null;
         try {
