@@ -28,13 +28,13 @@ import java.util.stream.Collectors;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.API;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.MovieInfoTask;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.PagedMovieListTask;
+import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.PicturesTask;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.UrlConstructor;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Genre;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Movie;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.MovieInfo;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.PopularMovies;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.listloader.ListType;
-import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.listloader.PagedListLoader;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.commonfragments.showallfragment.ShowAllFragment;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.reusables.MovieRatingsAdapter;
 import ru.nsu.fit.g16201.kinopoisklite.MainActivity;
@@ -48,6 +48,8 @@ public class MovieFragment extends Fragment {
 
     private MovieInfoTask movieInfoTask;
     private PagedMovieListTask similarMoviesTask;
+    private PicturesTask picturesTask;
+
 
     private MovieFragment() {}
 
@@ -61,6 +63,7 @@ public class MovieFragment extends Fragment {
                 int id = bundle.getInt("id");
                 movieInfoTask = API.loadMovieInfo(id, "en-US");
                 similarMoviesTask = API.loadSimilar(1, id, "en-US");
+                picturesTask = API.loadMoviePictures(id);
             } catch (MalformedURLException e) {
                 Log.e("MovieFragment", "Malformed URL" + e.getMessage());
             }
