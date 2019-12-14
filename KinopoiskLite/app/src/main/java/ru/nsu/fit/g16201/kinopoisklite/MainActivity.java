@@ -161,7 +161,13 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
 
     public void setExploreTabActiveFragment(Fragment exploreTabActiveFragment) {
         this.exploreTabActiveFragment = exploreTabActiveFragment;
-        getSupportFragmentManager().beginTransaction().hide(active).add(R.id.main_container, exploreTabActiveFragment, "ETAF"/* + tagCounter++*/).show(exploreTabActiveFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction transaction = fm.beginTransaction();
+        if(active == exploreFragment)
+            transaction.hide(active);
+        else
+            transaction.remove(active);
+        transaction.add(R.id.main_container, exploreTabActiveFragment, "ETAF"/* + tagCounter++*/).show(exploreTabActiveFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
         active = exploreTabActiveFragment;
     }
 }
