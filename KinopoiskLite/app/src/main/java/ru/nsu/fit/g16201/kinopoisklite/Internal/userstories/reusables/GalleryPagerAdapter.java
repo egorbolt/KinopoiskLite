@@ -18,12 +18,12 @@ import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.UrlCons
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.MovieRelatedImages;
 import ru.nsu.fit.g16201.kinopoisklite.R;
 
-public class GalleryPager extends PagerAdapter {
+public class GalleryPagerAdapter extends PagerAdapter {
 
     private final List<MovieRelatedImages> images;
     private Context context;
 
-    public GalleryPager(List<MovieRelatedImages> images, Context context)
+    public GalleryPagerAdapter(List<MovieRelatedImages> images, Context context)
     {
         this.images = images;
         this.context = context;

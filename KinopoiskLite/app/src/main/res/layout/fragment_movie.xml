@@ -163,7 +163,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                         android:textStyle="bold"
                         android:layout_centerInParent="true"
                         android:layout_alignParentStart="true"
-                        android:text="Card name"
+                        android:text="Pictures"
                         />
                 </RelativeLayout>
 

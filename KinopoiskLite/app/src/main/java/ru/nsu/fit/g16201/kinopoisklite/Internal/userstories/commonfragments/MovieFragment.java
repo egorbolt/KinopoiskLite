@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.button.MaterialButton;
 import com.squareup.picasso.Picasso;
@@ -33,10 +34,12 @@ import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.UrlCons
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Genre;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Movie;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.MovieInfo;
+import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.MovieRelatedImages;
+import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Pictures;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.PopularMovies;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.listloader.ListType;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.commonfragments.showallfragment.ShowAllFragment;
-import ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.reusables.GalleryPager;
+import ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.reusables.GalleryPagerAdapter;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.reusables.MovieRatingsAdapter;
 import ru.nsu.fit.g16201.kinopoisklite.MainActivity;
 import ru.nsu.fit.g16201.kinopoisklite.R;
@@ -99,7 +102,6 @@ public class MovieFragment extends Fragment {
         TextView movieGenres = view.findViewById(R.id.genres_text_card).findViewById(R.id.card_text);
         ((TextView)view.findViewById(R.id.genres_text_card).findViewById(R.id.card_name_text_view)).setText("Genres");
 
-        GalleryPager galleryPager;
 
         MovieInfo movieInfo = null;
         try {
@@ -117,8 +119,8 @@ public class MovieFragment extends Fragment {
 
         if(movieInfo != null)
         {
-            configureMovieCollection(R.id.similar_movie_collection, "Similar movies", movieInfo.getId());
-
+            configureMovieCollection(movieInfo.getId());
+            configureGallery(movieInfo.getId());
 
             movieTitle.setText(movieInfo.getTitle());
             ratingBadge.setText(Double.toString(movieInfo.getVoteAverage()));
@@ -129,20 +131,56 @@ public class MovieFragment extends Fragment {
             List<Genre> genres = movieInfo.getGenres();
             if(genres != null)
                 movieGenres.setText(genres.stream().map(Genre::getName).collect(Collectors.joining(", ")));
+
+
         }
 
         return view;
     }
 
-    private void configureMovieCollection(int id, String name, Integer movieId)
+    private void configureGallery(Integer movieId)
     {
-        View movieCollection = view.findViewById(id);
+        View picturesGalleryCard = view.findViewById(R.id.images_gallery_card);
+
+        List<MovieRelatedImages> dataSet = new ArrayList<>();
+
+        try {
+            Pictures pictures = picturesTask.get();
+            if(pictures != null) {
+                List<MovieRelatedImages> picturesList = pictures.getBackdrops();
+                if(picturesList.isEmpty())
+                {
+                    picturesGalleryCard.setVisibility(View.GONE);
+                    return;
+                }
+                dataSet = picturesList.subList(0, 10 < picturesList.size() ? 10 : picturesList.size());
+            }
+        }
+        catch (InterruptedException e)
+        {
+            Log.e(ERROR_TAG + ": Gallery", "Can't retrieve data: " + e.getMessage());
+            Thread.currentThread().interrupt();
+        }
+        catch (ExecutionException e)
+        {
+            Log.e(ERROR_TAG + ": Gallery", "Can't retrieve data: " + e.getMessage());
+        }
+
+        GalleryPagerAdapter galleryPagerAdapter = new GalleryPagerAdapter(dataSet, getContext());
+
+        ViewPager viewPager = picturesGalleryCard.findViewById(R.id.view_pager);
+        viewPager.setAdapter(galleryPagerAdapter);
+    }
+
+    private void configureMovieCollection(Integer movieId)
+    {
+        View movieCollection = view.findViewById(R.id.similar_movie_collection);
 
         TextView textView = movieCollection.findViewById(R.id.colection_name_text_view);
-        textView.setText(name);
+        textView.setText("Similar movies");
 
         MaterialButton button = movieCollection.findViewById(R.id.show_button);
-        button.setTag("showAllButton" + name);
+        button.setTag("showAllButton" + "Similar movies");
         button.setOnClickListener(v -> {
             ShowAllFragment showAllFragment = ShowAllFragment.newInstance(ListType.SIMILAR, movieId);
             notifyMainActivityFragmentIsActive(showAllFragment);
