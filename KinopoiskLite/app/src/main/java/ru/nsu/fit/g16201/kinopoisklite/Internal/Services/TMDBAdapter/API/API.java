@@ -11,6 +11,7 @@ import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.L
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.MovieInfoTask;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.PagedMovieListTask;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.PersonInfoTask;
+import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.PicturesTask;
 
 public class API {
     public static final int TIMEOUT = 10000;
@@ -102,6 +103,13 @@ public class API {
     public static LoadCreditsTask loadCredits(int id, String language)throws MalformedURLException {
         URL url = new URL(UrlConstructor.urlCredits(id, language));
         LoadCreditsTask task = new LoadCreditsTask();
+        task.execute(url);
+        return task;
+    }
+
+    public static PicturesTask loadMoviePictures(int id) throws MalformedURLException {
+        URL url = new URL(UrlConstructor.urlMovieRelatedImages(id));
+        PicturesTask task = new PicturesTask();
         task.execute(url);
         return task;
     }
