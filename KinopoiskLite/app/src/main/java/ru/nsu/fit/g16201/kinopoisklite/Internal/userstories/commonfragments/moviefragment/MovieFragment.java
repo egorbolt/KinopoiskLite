@@ -31,6 +31,7 @@ import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.API;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.LoadCreditsTask;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.MovieInfoTask;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.PagedMovieListTask;
+import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.PersonImagesTask;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.PicturesTask;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.UrlConstructor;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Actor;
@@ -271,7 +272,6 @@ public class MovieFragment extends Fragment {
     private void configureActorsCollection(Integer movieId, Team team)
     {
         View actorsCollection = view.findViewById(R.id.actors_collection);
-
         TextView textView = actorsCollection.findViewById(R.id.colection_name_text_view);
         textView.setText("Actors");
 
@@ -291,8 +291,16 @@ public class MovieFragment extends Fragment {
             return;
         }
         List<Actor> dataSet = actorList;
+        List<PersonImagesTask> personImagesTasks = dataSet.stream().map((Actor actor) -> {
+            try {
+                return API.loadActorPictures(actor.getId());
+            } catch (MalformedURLException e) {
+                Log.e(ERROR_TAG, "Malformed URL" + e.getMessage());
+            }
+            return null;
+        }).collect(Collectors.toList());
 
-        ActorListAdapter mAdapter = new ActorListAdapter(dataSet);
+        ActorListAdapter mAdapter = new ActorListAdapter(dataSet, personImagesTasks);
 
         recyclerView.setAdapter(mAdapter);
 

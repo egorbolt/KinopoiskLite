@@ -30,7 +30,7 @@ class ActorListAdapter extends RecyclerView.Adapter<ActorListAdapter.ActorViewHo
     private static final String ACTOR_LIST_ADAPTER_TAG = "ActorListAdapter";
     private List<Actor> dataSet;
 
-    ActorListAdapter(List<Actor> dataSet) {
+    ActorListAdapter(List<Actor> dataSet, List<PersonImagesTask> personImagesTasks) {
         this.dataSet = dataSet;
     }
 
