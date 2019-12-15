@@ -30,7 +30,7 @@ import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.listloader.
 import ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.reusables.MovieRatingsAdapter;
 import ru.nsu.fit.g16201.kinopoisklite.MainActivity;
 import ru.nsu.fit.g16201.kinopoisklite.R;
-import ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.commonfragments.MovieFragment;
+import ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.commonfragments.moviefragment.MovieFragment;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.commonfragments.showallfragment.ShowAllFragment;
 
 public class ExploreFragment extends Fragment {

@@ -1,4 +1,4 @@
-package ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.commonfragments;
+package ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.commonfragments.moviefragment;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -24,7 +24,6 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import me.relex.circleindicator.CircleIndicator;
@@ -34,6 +33,7 @@ import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.M
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.PagedMovieListTask;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.PicturesTask;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.UrlConstructor;
+import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Actor;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.CrewPerson;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Genre;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Movie;
@@ -137,6 +137,7 @@ public class MovieFragment extends Fragment {
         {
             configureMovieCollection(movieInfo.getId());
             configureGallery(movieInfo.getId());
+            configureActorsCollection(movieInfo.getId(), team);
 
             movieTitle.setText(movieInfo.getTitle());
 
@@ -261,6 +262,37 @@ public class MovieFragment extends Fragment {
             MovieFragment movieFragment = MovieFragment.newInstance(movie.getId());
             notifyMainActivityFragmentIsActive(movieFragment);
         });
+
+        recyclerView.setAdapter(mAdapter);
+
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+    }
+
+    private void configureActorsCollection(Integer movieId, Team team)
+    {
+        View actorsCollection = view.findViewById(R.id.actors_collection);
+
+        TextView textView = actorsCollection.findViewById(R.id.colection_name_text_view);
+        textView.setText("Actors");
+
+        MaterialButton button = actorsCollection.findViewById(R.id.show_button);
+        button.setVisibility(View.GONE);
+
+        RecyclerView recyclerView = actorsCollection.findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(true);
+        LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(horizontalLayoutManager);
+
+
+        List<Actor> actorList = team.getCast();
+        if(actorList.isEmpty())
+        {
+            actorsCollection.setVisibility(View.GONE);
+            return;
+        }
+        List<Actor> dataSet = actorList;
+
+        ActorListAdapter mAdapter = new ActorListAdapter(dataSet);
 
         recyclerView.setAdapter(mAdapter);
 
