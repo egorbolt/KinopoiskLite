@@ -24,6 +24,7 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import me.relex.circleindicator.CircleIndicator;
@@ -33,6 +34,7 @@ import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.M
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.PagedMovieListTask;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.PicturesTask;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.UrlConstructor;
+import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.CrewPerson;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Genre;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Movie;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.MovieInfo;
@@ -112,6 +114,9 @@ public class MovieFragment extends Fragment {
         TextView budgetTextView = view.findViewById(R.id.budget_text_card).findViewById(R.id.card_text);
         ((TextView)view.findViewById(R.id.budget_text_card).findViewById(R.id.card_name_text_view)).setText("Budget");
 
+        TextView staffTextView = view.findViewById(R.id.staff_text_card).findViewById(R.id.card_text);
+        ((TextView)view.findViewById(R.id.staff_text_card).findViewById(R.id.card_name_text_view)).setText("Crew");
+
         MovieInfo movieInfo = null;
         Team team = null;
         try {
@@ -128,7 +133,7 @@ public class MovieFragment extends Fragment {
             Log.e("MovieFragment", "Can't retrieve data: " + e.getMessage());
         }
 
-        if(movieInfo != null)
+        if(movieInfo != null && team != null)
         {
             configureMovieCollection(movieInfo.getId());
             configureGallery(movieInfo.getId());
@@ -159,6 +164,10 @@ public class MovieFragment extends Fragment {
                 budgetTextView.setText(String.format("$%d", movieInfo.getBudget()));
             else
                 budgetTextView.setText("No information about budget");
+
+            List<CrewPerson> crew = team.getCrew();
+            if(crew != null)
+                staffTextView.setText(crew.stream().map(crewPerson -> String.format("%s: %s", crewPerson.getJob(), crewPerson.getName())).collect(Collectors.joining("\n")));
         }
 
         return view;
