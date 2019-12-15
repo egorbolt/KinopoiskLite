@@ -123,7 +123,14 @@ public class MovieFragment extends Fragment {
             configureGallery(movieInfo.getId());
 
             movieTitle.setText(movieInfo.getTitle());
-            ratingBadge.setText(Double.toString(movieInfo.getVoteAverage()));
+
+            if(movieInfo.getVoteAverage() != 0) {
+                ratingBadge.setText(Double.toString(movieInfo.getVoteAverage()));
+                ratingBadge.setVisibility(View.VISIBLE);
+            }
+            else
+                ratingBadge.setVisibility(View.GONE);
+
             if(movieInfo.getOverview().isPresent())
                 movieDescription.setText(movieInfo.getOverview().get());
             if(movieInfo.getPosterPath().isPresent())
