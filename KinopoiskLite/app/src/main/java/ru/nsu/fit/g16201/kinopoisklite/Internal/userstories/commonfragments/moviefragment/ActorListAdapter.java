@@ -18,11 +18,11 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.API;
-import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.PicturesTask;
+import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.PersonImagesTask;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.UrlConstructor;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Actor;
-import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.MovieRelatedImages;
-import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Pictures;
+import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Image;
+import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.PersonImagesInfo;
 import ru.nsu.fit.g16201.kinopoisklite.R;
 
 class ActorListAdapter extends RecyclerView.Adapter<ActorListAdapter.ActorViewHolder>{
@@ -60,7 +60,7 @@ class ActorListAdapter extends RecyclerView.Adapter<ActorListAdapter.ActorViewHo
     @Override
     public void onBindViewHolder(@NonNull ActorViewHolder holder, int position) {
         Actor actor = dataSet.get(position);
-        PicturesTask task = null;
+        PersonImagesTask task = null;
         try {
             task = API.loadActorPictures(actor.getId());
         } catch (MalformedURLException e) {
@@ -72,10 +72,10 @@ class ActorListAdapter extends RecyclerView.Adapter<ActorListAdapter.ActorViewHo
 
         if(task != null)
         {
-            Pictures pictures;
+            PersonImagesInfo pictures;
             try {
                 pictures = task.get();
-                List<MovieRelatedImages> posters = pictures.getPosters();
+                List<Image> posters = pictures.getProfiles();
                 if(!posters.isEmpty())
                     Picasso.get().load(UrlConstructor.urlSingleImage(posters.get(0).getFilePath())).into(holder.imageView);
 
