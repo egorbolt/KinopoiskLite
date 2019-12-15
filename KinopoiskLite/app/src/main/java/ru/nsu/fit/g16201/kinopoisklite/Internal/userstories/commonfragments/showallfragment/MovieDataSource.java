@@ -69,7 +69,7 @@ public class MovieDataSource extends PageKeyedDataSource<Integer, Movie> {
 
         PagedMovieListTask pageTask;
         try {
-            pageTask = PagedListLoader.loadParametrisedList(type, 1, id,"en-US");
+            pageTask = PagedListLoader.loadParametrisedList(type, page, id,"en-US");
         } catch (MalformedURLException e) {
             Log.e(ERROR_TAG, "Malformed URL" + e.getMessage());
             return;
