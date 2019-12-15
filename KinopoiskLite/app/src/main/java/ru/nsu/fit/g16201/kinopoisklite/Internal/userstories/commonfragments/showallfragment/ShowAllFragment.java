@@ -124,7 +124,7 @@ public class ShowAllFragment extends Fragment {
 
         PagedList<Movie> pagedList = new PagedList.Builder<>(dataSource, config)
                 .setFetchExecutor(Executors.newSingleThreadExecutor())
-                .setNotifyExecutor(Executors.newSingleThreadExecutor())
+                .setNotifyExecutor(new MainThreadExecutor())
                 .build();
         MoviePagedListAdapter adapter = new MoviePagedListAdapter(new DiffUtil.ItemCallback<Movie>() {
             @Override
