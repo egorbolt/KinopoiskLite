@@ -19,7 +19,7 @@ import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Movi
 import ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.reusables.RecyclerViewMovieClickListener;
 import ru.nsu.fit.g16201.kinopoisklite.R;
 
-public class MoviePagedListAdapter extends PagedListAdapter<Movie, MoviePagedListAdapter.MovieInfoViewHolder> {
+public class MoviePagedListAdapter extends PagedListAdapter<Movie, MoviePagedListAdapter.MovieViewHolder> {
 
     private RecyclerViewMovieClickListener itemListener;
 
@@ -29,12 +29,12 @@ public class MoviePagedListAdapter extends PagedListAdapter<Movie, MoviePagedLis
         this.itemListener = itemListener;
     }
 
-    class MovieInfoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView imageView;
         TextView ratingBadge;
         TextView movieTitle;
         TextView movieDescription;
-        MovieInfoViewHolder(View view) {
+        MovieViewHolder(View view) {
             super(view);
             imageView = view.findViewById(R.id.movie_poster_image_view);
             ratingBadge = view.findViewById(R.id.badge_rating);
@@ -53,14 +53,16 @@ public class MoviePagedListAdapter extends PagedListAdapter<Movie, MoviePagedLis
 
     @NonNull
     @Override
-    public MovieInfoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         CardView v = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_big_view, parent, false);
-        return new MovieInfoViewHolder(v);
+        return new MovieViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MovieInfoViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
         Movie movie = getItem(position);
+        if(movie == null)
+            return;
         if(movie.getVoteAverage() != 0)
             holder.ratingBadge.setText(Double.toString(movie.getVoteAverage()));
         else
