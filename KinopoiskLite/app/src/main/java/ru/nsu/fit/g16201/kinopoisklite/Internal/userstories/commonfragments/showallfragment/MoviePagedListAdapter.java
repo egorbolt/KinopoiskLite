@@ -24,7 +24,7 @@ public class MoviePagedListAdapter extends PagedListAdapter<Movie, MoviePagedLis
     private RecyclerViewMovieClickListener itemListener;
 
 
-    public MoviePagedListAdapter(@NonNull DiffUtil.ItemCallback<Movie> diffCallback, RecyclerViewMovieClickListener itemListener) {
+    MoviePagedListAdapter(@NonNull DiffUtil.ItemCallback<Movie> diffCallback, RecyclerViewMovieClickListener itemListener) {
         super(diffCallback);
         this.itemListener = itemListener;
     }
@@ -63,10 +63,14 @@ public class MoviePagedListAdapter extends PagedListAdapter<Movie, MoviePagedLis
         Movie movie = getItem(position);
         if(movie == null)
             return;
-        if(movie.getVoteAverage() != 0)
+
+        //System.out.println(movie.getVoteAverage() + "  " +  movie.getTitle() + " " + (movie.getVoteAverage() != 0));
+        if(movie.getVoteAverage() != 0) {
             holder.ratingBadge.setText(Double.toString(movie.getVoteAverage()));
+            holder.ratingBadge.setVisibility(View.VISIBLE);
+        }
         else
-            holder.ratingBadge.setVisibility(View.INVISIBLE);
+            holder.ratingBadge.setVisibility(View.GONE);
 
         holder.movieDescription.setText(movie.getOverview());
 

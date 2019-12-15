@@ -91,32 +91,6 @@ public class ShowAllFragment extends Fragment {
         LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(verticalLayoutManager);
 
-        /*List<Movie> dataSet = new ArrayList<>();
-        if(task != null) {
-            try
-            {
-                PopularMovies movies = task.get();
-                if(movies != null)
-                    dataSet = movies.getResults();
-            }
-            catch (InterruptedException e)
-            {
-                Log.e(ERROR_TAG, "Can't retrieve data: " + e.getMessage());
-                Thread.currentThread().interrupt();
-            }
-            catch (ExecutionException e)
-            {
-                Log.e(ERROR_TAG, "Can't retrieve data: " + e.getMessage());
-            }
-        }
-
-
-
-        MovieListAdapter mAdapter = new MovieListAdapter(dataSet, (v, position, movie) -> {
-            MovieFragment movieFragment = MovieFragment.newInstance(movie.getId());
-            notifyMainActivityFragmentIsActive(movieFragment);
-        });*/
-
         PagedList.Config config = new PagedList.Config.Builder()
                 .setEnablePlaceholders(false)
                 .setPageSize(20)
