@@ -220,6 +220,27 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
             app:layout_constraintStart_toStartOf="parent"
 
             app:layout_constraintTop_toBottomOf="@id/images_gallery_card"
+            app:layout_constraintBottom_toTopOf="@id/budget_text_card"
+
+            />
+
+
+        <include
+            android:id="@+id/budget_text_card"
+            layout="@layout/text_card"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:orientation="vertical"
+            app:cardCornerRadius="2dp"
+            app:cardElevation="6dp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+
+            app:layout_constraintTop_toBottomOf="@id/year_text_card"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -105,6 +105,9 @@ public class MovieFragment extends Fragment {
         TextView releaseDateTextView = view.findViewById(R.id.year_text_card).findViewById(R.id.card_text);
         ((TextView)view.findViewById(R.id.year_text_card).findViewById(R.id.card_name_text_view)).setText("Release Date");
 
+        TextView budgetTextView = view.findViewById(R.id.budget_text_card).findViewById(R.id.card_text);
+        ((TextView)view.findViewById(R.id.budget_text_card).findViewById(R.id.card_name_text_view)).setText("Budget");
+
         MovieInfo movieInfo = null;
         try {
             movieInfo = movieInfoTask.get();
@@ -140,8 +143,16 @@ public class MovieFragment extends Fragment {
             List<Genre> genres = movieInfo.getGenres();
             if(genres != null)
                 movieGenres.setText(genres.stream().map(Genre::getName).collect(Collectors.joining(", ")));
-            releaseDateTextView.setText(movieInfo.getReleaseDate());
 
+            if(movieInfo.getReleaseDate() != null && !movieInfo.getReleaseDate().equals(""))
+                releaseDateTextView.setText(movieInfo.getReleaseDate());
+            else
+                budgetTextView.setText("No information about release date");
+
+            if(movieInfo.getBudget() != 0)
+                budgetTextView.setText(String.format("$%d", movieInfo.getBudget()));
+            else
+                budgetTextView.setText("No information about budget");
         }
 
         return view;
