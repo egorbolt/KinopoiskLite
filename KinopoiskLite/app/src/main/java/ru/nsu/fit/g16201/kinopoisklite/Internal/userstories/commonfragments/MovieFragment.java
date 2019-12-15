@@ -102,6 +102,8 @@ public class MovieFragment extends Fragment {
         TextView movieGenres = view.findViewById(R.id.genres_text_card).findViewById(R.id.card_text);
         ((TextView)view.findViewById(R.id.genres_text_card).findViewById(R.id.card_name_text_view)).setText("Genres");
 
+        TextView releaseDateTextView = view.findViewById(R.id.year_text_card).findViewById(R.id.card_text);
+        ((TextView)view.findViewById(R.id.year_text_card).findViewById(R.id.card_name_text_view)).setText("Release Date");
 
         MovieInfo movieInfo = null;
         try {
@@ -138,7 +140,7 @@ public class MovieFragment extends Fragment {
             List<Genre> genres = movieInfo.getGenres();
             if(genres != null)
                 movieGenres.setText(genres.stream().map(Genre::getName).collect(Collectors.joining(", ")));
-
+            releaseDateTextView.setText(movieInfo.getReleaseDate());
 
         }
 

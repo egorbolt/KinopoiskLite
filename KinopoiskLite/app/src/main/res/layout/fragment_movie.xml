@@ -102,9 +102,8 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
 
             app:layout_constraintTop_toBottomOf="@id/description_text_card"
             app:layout_constraintBottom_toTopOf="@id/similar_movie_collection"
-
-
             />
+
         <include
             android:id="@+id/similar_movie_collection"
             layout="@layout/movie_collection"
@@ -141,6 +140,8 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
             app:layout_constraintStart_toStartOf="parent"
 
             app:layout_constraintTop_toBottomOf="@id/similar_movie_collection"
+            app:layout_constraintBottom_toTopOf="@id/year_text_card"
+
             >
 
             <LinearLayout
@@ -198,7 +199,28 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
                 </LinearLayout>
             </LinearLayout>
 
+
+
         </androidx.cardview.widget.CardView>
+
+
+        <include
+            android:id="@+id/year_text_card"
+            layout="@layout/text_card"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:orientation="vertical"
+            app:cardCornerRadius="2dp"
+            app:cardElevation="6dp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+
+            app:layout_constraintTop_toBottomOf="@id/images_gallery_card"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
