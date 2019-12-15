@@ -6,11 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.paging.PagedList;
 import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,6 +21,8 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.PagedMovieListTask;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Movie;
@@ -32,8 +37,7 @@ public class ShowAllFragment extends Fragment {
     private PagedMovieListTask task = null;
 
     private static final String ERROR_TAG = "ShowAllFragment";
-
-
+    private MovieDataSource dataSource;
 
 
     @Override
@@ -45,6 +49,8 @@ public class ShowAllFragment extends Fragment {
         if (bundle != null) {
             ListType type = (ListType) bundle.getSerializable("type");
             int id = bundle.getInt("movie_id");
+            dataSource = new MovieDataSource(type, id);
+
             try {
                 task = PagedListLoader.loadParametrisedList(type, 1, id,"en-US");
             } catch (MalformedURLException e) {
@@ -85,7 +91,7 @@ public class ShowAllFragment extends Fragment {
         LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(verticalLayoutManager);
 
-        List<Movie> dataSet = new ArrayList<>();
+        /*List<Movie> dataSet = new ArrayList<>();
         if(task != null) {
             try
             {
@@ -109,9 +115,36 @@ public class ShowAllFragment extends Fragment {
         MovieListAdapter mAdapter = new MovieListAdapter(dataSet, (v, position, movie) -> {
             MovieFragment movieFragment = MovieFragment.newInstance(movie.getId());
             notifyMainActivityFragmentIsActive(movieFragment);
-        });
+        });*/
 
-        recyclerView.setAdapter(mAdapter);
+        PagedList.Config config = new PagedList.Config.Builder()
+                .setEnablePlaceholders(false)
+                .setPageSize(20)
+                .build();
+
+        PagedList<Movie> pagedList = new PagedList.Builder<>(dataSource, config)
+                .setFetchExecutor(Executors.newSingleThreadExecutor())
+                .setNotifyExecutor(Executors.newSingleThreadExecutor())
+                .build();
+        MoviePagedListAdapter adapter = new MoviePagedListAdapter(new DiffUtil.ItemCallback<Movie>() {
+            @Override
+            public boolean areItemsTheSame(@NonNull Movie oldItem, @NonNull Movie newItem) {
+                return oldItem.getId().equals(newItem.getId());
+            }
+
+            @Override
+            public boolean areContentsTheSame(@NonNull Movie oldItem, @NonNull Movie newItem) {
+                return oldItem.getId().equals(newItem.getId());
+            }
+        },
+        (v, position, movie) -> {
+                    MovieFragment movieFragment = MovieFragment.newInstance(movie.getId());
+                    notifyMainActivityFragmentIsActive(movieFragment);
+                });
+        adapter.submitList(pagedList);
+
+        recyclerView.setAdapter(adapter);
+
 
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
