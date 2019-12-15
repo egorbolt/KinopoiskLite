@@ -19,10 +19,10 @@ import ru.nsu.fit.g16201.kinopoisklite.R;
 
 public class MovieRatingsAdapter extends RecyclerView.Adapter<MovieRatingsAdapter.MoviePosterViewHolder> {
     private RecyclerViewMovieClickListener itemListener;
-    private List<Movie> mDataset;
+    private List<Movie> dataSet;
 
     public MovieRatingsAdapter(List<Movie> itemsData, RecyclerViewMovieClickListener recyclerViewMovieClickListener) {
-        this.mDataset = itemsData;
+        this.dataSet = itemsData;
         itemListener = recyclerViewMovieClickListener;
     }
 
@@ -46,7 +46,7 @@ public class MovieRatingsAdapter extends RecyclerView.Adapter<MovieRatingsAdapte
 
         @Override
         public void onClick(View v) {
-            Movie m = mDataset.get(this.getLayoutPosition());
+            Movie m = dataSet.get(this.getLayoutPosition());
             itemListener.recyclerViewListClicked(v, this.getLayoutPosition(), m);
         }
     }
@@ -67,8 +67,8 @@ public class MovieRatingsAdapter extends RecyclerView.Adapter<MovieRatingsAdapte
     public void onBindViewHolder(@NonNull MoviePosterViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        //holder.imageView.set(mDataset[position]); //todo
-        Movie movie = mDataset.get(position);
+        //holder.imageView.set(dataSet[position]); //todo
+        Movie movie = dataSet.get(position);
         if(movie.getVoteAverage() != 0)
             holder.ratingBadge.setText(Double.toString(movie.getVoteAverage()));
         else
@@ -81,7 +81,7 @@ public class MovieRatingsAdapter extends RecyclerView.Adapter<MovieRatingsAdapte
 
     @Override
     public int getItemCount() {
-        return mDataset.size();
+        return dataSet.size();
     }
 
 }
