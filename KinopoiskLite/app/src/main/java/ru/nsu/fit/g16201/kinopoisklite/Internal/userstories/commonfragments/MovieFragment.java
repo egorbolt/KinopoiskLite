@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
+import me.relex.circleindicator.CircleIndicator;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.API;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.MovieInfoTask;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.PagedMovieListTask;
@@ -169,6 +170,9 @@ public class MovieFragment extends Fragment {
 
         ViewPager viewPager = picturesGalleryCard.findViewById(R.id.view_pager);
         viewPager.setAdapter(galleryPagerAdapter);
+
+        CircleIndicator circleIndicator = picturesGalleryCard.findViewById(R.id.circleIndicator);
+        circleIndicator.setViewPager(viewPager);
     }
 
     private void configureMovieCollection(Integer movieId)
