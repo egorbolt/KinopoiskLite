@@ -1,5 +1,8 @@
 package ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.commonfragments.moviefragment;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,7 +15,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.RequestCreator;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -26,39 +28,18 @@ import ru.nsu.fit.g16201.kinopoisklite.R;
 
 class ActorListAdapter extends RecyclerView.Adapter<ActorListAdapter.ActorViewHolder>{
 
-
-    static class PictureAsyncTask extends AsyncTask<PathImageView, Void, Void> {
-        @Override
-        protected Void doInBackground(PathImageView... urls) {
-            String url = urls[0].path;
-            ImageView imageView = urls[0].imageView;
-
-            Picasso.get().load(UrlConstructor.urlSingleImage(url)).into(imageView);
-            return null;
-        }
-    }
-
-    private class PathImageView
-    {
-        ImageView imageView;
-        String path;
-
-        public PathImageView(ImageView imageView, String path) {
-            this.imageView = imageView;
-            this.path = path;
-        }
-    }
-
     private static final String ERROR_TAG = "ActorListAdapter";
     private List<Actor> dataSet;
     private List<PersonImagesTask> personImagesTasks;
+    private Context context;
 
-    ActorListAdapter(List<Actor> dataSet, List<PersonImagesTask> personImagesTasks) {
+    ActorListAdapter(List<Actor> dataSet, List<PersonImagesTask> personImagesTasks, Context context) {
         this.dataSet = dataSet;
         this.personImagesTasks = personImagesTasks;
+        this.context = context;
     }
 
-    class ActorViewHolder extends RecyclerView.ViewHolder {
+    static class ActorViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
         TextView nameView, roleView;
 
@@ -82,19 +63,19 @@ class ActorListAdapter extends RecyclerView.Adapter<ActorListAdapter.ActorViewHo
     @Override
     public void onBindViewHolder(@NonNull ActorViewHolder holder, int position) {
         Actor actor = dataSet.get(position);
-
         PersonImagesTask personImagesTask = personImagesTasks.get(position);
-        AsyncTask<String, Void, RequestCreator> task = null;
         if(personImagesTask != null)
         {
+            System.out.println("here");
             PersonImagesInfo pictures;
             try {
                 pictures = personImagesTask.get();
-                List<Image> posters = pictures.getProfiles();
+                /*List<Image> posters = pictures.getProfiles();
+
                 if(!posters.isEmpty())
                 {
-                    new PictureAsyncTask().execute(new PathImageView(holder.imageView, posters.get(posters.size() - 1).getFilePath()));
-                }
+                    Picasso.get().load(UrlConstructor.urlSingleImage(posters.get(posters.size() - 1).getFilePath())).into(holder.imageView);
+                }*/
             }
             catch (InterruptedException e)
             {
@@ -110,8 +91,7 @@ class ActorListAdapter extends RecyclerView.Adapter<ActorListAdapter.ActorViewHo
 
         holder.roleView.setText(actor.getCharacter());
         holder.nameView.setText(actor.getName());
-
-
+        System.out.println("here");
     }
 
     @Override

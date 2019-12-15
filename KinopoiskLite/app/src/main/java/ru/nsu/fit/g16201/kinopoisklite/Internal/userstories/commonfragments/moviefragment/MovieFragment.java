@@ -280,6 +280,10 @@ public class MovieFragment extends Fragment {
 
         RecyclerView recyclerView = actorsCollection.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
+        recyclerView.setDrawingCacheEnabled(true);
+        recyclerView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
+
+
         LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(horizontalLayoutManager);
 
@@ -300,7 +304,7 @@ public class MovieFragment extends Fragment {
             }
             return null;
         }).collect(Collectors.toList());
-        ActorListAdapter mAdapter = new ActorListAdapter(dataSet, personImagesTasks);
+        ActorListAdapter mAdapter = new ActorListAdapter(dataSet, personImagesTasks, getContext());
 
         recyclerView.setAdapter(mAdapter);
 
