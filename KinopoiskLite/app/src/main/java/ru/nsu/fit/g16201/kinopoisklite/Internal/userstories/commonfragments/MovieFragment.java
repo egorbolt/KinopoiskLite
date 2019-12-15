@@ -28,6 +28,7 @@ import java.util.stream.Collectors;
 
 import me.relex.circleindicator.CircleIndicator;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.API;
+import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.LoadCreditsTask;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.MovieInfoTask;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.PagedMovieListTask;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.PicturesTask;
@@ -38,6 +39,7 @@ import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Movi
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.MovieRelatedImages;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Pictures;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.PopularMovies;
+import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Team;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.listloader.ListType;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.commonfragments.showallfragment.ShowAllFragment;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.reusables.GalleryPagerAdapter;
@@ -54,6 +56,7 @@ public class MovieFragment extends Fragment {
     private MovieInfoTask movieInfoTask;
     private PagedMovieListTask similarMoviesTask;
     private PicturesTask picturesTask;
+    private LoadCreditsTask creditsTask;
 
     public MovieFragment() {}
 
@@ -68,6 +71,7 @@ public class MovieFragment extends Fragment {
                 movieInfoTask = API.loadMovieInfo(id, "en-US");
                 similarMoviesTask = API.loadSimilar(1, id, "en-US");
                 picturesTask = API.loadMoviePictures(id);
+                creditsTask = API.loadCredits(id, "en-US");
             } catch (MalformedURLException e) {
                 Log.e("MovieFragment", "Malformed URL" + e.getMessage());
             }
@@ -109,8 +113,10 @@ public class MovieFragment extends Fragment {
         ((TextView)view.findViewById(R.id.budget_text_card).findViewById(R.id.card_name_text_view)).setText("Budget");
 
         MovieInfo movieInfo = null;
+        Team team = null;
         try {
             movieInfo = movieInfoTask.get();
+            team = creditsTask.get();
         }
         catch (InterruptedException e)
         {
