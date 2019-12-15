@@ -290,7 +290,8 @@ public class MovieFragment extends Fragment {
             actorsCollection.setVisibility(View.GONE);
             return;
         }
-        List<Actor> dataSet = actorList;
+        List<Actor> dataSet =  actorList.subList(0, 10 < actorList.size() ? 10 : actorList.size());
+
         List<PersonImagesTask> personImagesTasks = dataSet.stream().map((Actor actor) -> {
             try {
                 return API.loadActorPictures(actor.getId());
@@ -299,7 +300,6 @@ public class MovieFragment extends Fragment {
             }
             return null;
         }).collect(Collectors.toList());
-
         ActorListAdapter mAdapter = new ActorListAdapter(dataSet, personImagesTasks);
 
         recyclerView.setAdapter(mAdapter);
