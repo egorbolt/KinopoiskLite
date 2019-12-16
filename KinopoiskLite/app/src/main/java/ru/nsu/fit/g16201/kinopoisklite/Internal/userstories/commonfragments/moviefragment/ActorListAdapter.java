@@ -30,9 +30,6 @@ class ActorListAdapter extends RecyclerView.Adapter<ActorListAdapter.ActorViewHo
     private static final String ERROR_TAG = "ActorListAdapter";
     private List<Actor> dataSet;
     private List<PersonImagesTask> personImagesTasks;
-    private Context context;
-
-
 
     static class PictureAsyncTask extends AsyncTask<PictureAsyncTaskParams, Void, Void> {
         @Override
@@ -57,7 +54,6 @@ class ActorListAdapter extends RecyclerView.Adapter<ActorListAdapter.ActorViewHo
                 String url = posters.get(posters.size() - 1).getFilePath();
                 ImageView imageView = params[0].imageView;
                 new MainThreadExecutor().execute(() -> Picasso.get().load(UrlConstructor.urlSingleImage(url)).into(imageView));
-
             }
 
             return null;
@@ -76,10 +72,9 @@ class ActorListAdapter extends RecyclerView.Adapter<ActorListAdapter.ActorViewHo
     }
 
 
-    ActorListAdapter(List<Actor> dataSet, List<PersonImagesTask> personImagesTasks, Context context) {
+    ActorListAdapter(List<Actor> dataSet, List<PersonImagesTask> personImagesTasks) {
         this.dataSet = dataSet;
         this.personImagesTasks = personImagesTasks;
-        this.context = context;
     }
 
     static class ActorViewHolder extends RecyclerView.ViewHolder {

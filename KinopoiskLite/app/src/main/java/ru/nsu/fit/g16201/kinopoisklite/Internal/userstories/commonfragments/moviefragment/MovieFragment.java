@@ -283,10 +283,8 @@ public class MovieFragment extends Fragment {
         recyclerView.setDrawingCacheEnabled(true);
         recyclerView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
 
-
         LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(horizontalLayoutManager);
-
 
         List<Actor> actorList = team.getCast();
         if(actorList.isEmpty())
@@ -304,7 +302,7 @@ public class MovieFragment extends Fragment {
             }
             return null;
         }).collect(Collectors.toList());
-        ActorListAdapter mAdapter = new ActorListAdapter(dataSet, personImagesTasks, getContext());
+        ActorListAdapter mAdapter = new ActorListAdapter(dataSet, personImagesTasks);
 
         recyclerView.setAdapter(mAdapter);
 
