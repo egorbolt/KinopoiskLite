@@ -1,5 +1,6 @@
 package ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.tabfragments;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +32,19 @@ public class RandomFragment extends Fragment {
 
 
         return view;
+    }
+
+    class DownloadGenres extends AsyncTask<String, Void, Integer> {
+        @Override
+        protected Integer doInBackground(String... parameter) {
+            return 0;
+        }
+
+        @Override
+        protected void onPostExecute(Integer result) {
+            // [... Сообщите о результате через обновление пользовательского
+            // интерфейса, диалоговое окно или уведомление ...]
+        }
     }
 
     //todo: newInstance?
