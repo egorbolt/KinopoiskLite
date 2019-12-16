@@ -1,8 +1,6 @@
 package ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.commonfragments.moviefragment;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -32,6 +30,49 @@ class ActorListAdapter extends RecyclerView.Adapter<ActorListAdapter.ActorViewHo
     private List<Actor> dataSet;
     private List<PersonImagesTask> personImagesTasks;
     private Context context;
+
+
+
+    static class PictureAsyncTask extends AsyncTask<PictureAsyncTaskParams, Void, Void> {
+        @Override
+        protected Void doInBackground(PictureAsyncTaskParams... params) {
+            PersonImagesInfo pictures = null;
+            try {
+                pictures = params[0].personImagesTask.get();
+            } catch (InterruptedException e)
+            {
+                Log.e(ERROR_TAG, "Can't retrieve data: " + e.getMessage());
+                Thread.currentThread().interrupt();
+            }
+            catch (ExecutionException e)
+            {
+                Log.e(ERROR_TAG, "Can't retrieve data: " + e.getMessage());
+            }
+
+            List<Image> posters = pictures.getProfiles();
+
+            if(!posters.isEmpty())
+            {
+                String url = posters.get(posters.size() - 1).getFilePath();
+                ImageView imageView = params[0].imageView;
+                Picasso.get().load(UrlConstructor.urlSingleImage(url)).into(imageView);
+            }
+
+            return null;
+        }
+    }
+
+    private static class PictureAsyncTaskParams
+    {
+        ImageView imageView;
+        PersonImagesTask personImagesTask;
+
+        public PictureAsyncTaskParams(ImageView imageView, PersonImagesTask personImagesTask) {
+            this.imageView = imageView;
+            this.personImagesTask = personImagesTask;
+        }
+    }
+
 
     ActorListAdapter(List<Actor> dataSet, List<PersonImagesTask> personImagesTasks, Context context) {
         this.dataSet = dataSet;
@@ -66,16 +107,15 @@ class ActorListAdapter extends RecyclerView.Adapter<ActorListAdapter.ActorViewHo
         PersonImagesTask personImagesTask = personImagesTasks.get(position);
         if(personImagesTask != null)
         {
-            System.out.println("here");
-            PersonImagesInfo pictures;
-            try {
+            new PictureAsyncTask().execute(new PictureAsyncTaskParams(holder.imageView, personImagesTask));
+            /*try {
                 pictures = personImagesTask.get();
-                /*List<Image> posters = pictures.getProfiles();
+                List<Image> posters = pictures.getProfiles();
 
                 if(!posters.isEmpty())
                 {
                     Picasso.get().load(UrlConstructor.urlSingleImage(posters.get(posters.size() - 1).getFilePath())).into(holder.imageView);
-                }*/
+                }
             }
             catch (InterruptedException e)
             {
@@ -85,7 +125,7 @@ class ActorListAdapter extends RecyclerView.Adapter<ActorListAdapter.ActorViewHo
             catch (ExecutionException e)
             {
                 Log.e(ERROR_TAG, "Can't retrieve data: " + e.getMessage());
-            }
+            }*/
 
         }
 
