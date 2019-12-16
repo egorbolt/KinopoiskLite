@@ -138,4 +138,26 @@ public class MainActivityTest {
     }
 
 
+    @Test
+    public void onClickNext() {
+
+        onView(withId(R.id.action_random)).perform(click());
+        onView(withId(R.id.next_button)).perform(click());
+
+        onView(withId(R.id.action_explore)).perform(click());
+        onView(withId(R.id.action_random)).perform(click());
+        onView(withId(R.id.action_random)).perform(click());
+
+    }
+
+    @Test
+    public void onShowMovieInfoFromRandom() {
+        onView(withId(R.id.action_random)).perform(click());
+        onView(withTagValue(is("MoviePosterRandom"))).perform(click());
+
+        onView(withId(R.id.action_explore)).perform(click());
+        onView(withId(R.id.action_random)).perform(click());
+        onView(withId(R.id.action_random)).perform(click());
+    }
+
 }

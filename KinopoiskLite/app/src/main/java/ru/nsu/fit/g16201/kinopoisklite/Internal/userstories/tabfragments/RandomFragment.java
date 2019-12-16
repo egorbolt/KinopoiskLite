@@ -39,7 +39,6 @@ public class RandomFragment extends Fragment {
     private static final String ERROR_TAG = "RandomFragment";
     private TextView movieTitle, ratingBadge, movieDescription;
     private ImageView moviePoster;
-    private MaterialButton button;
     public RandomFragment() {
     }
 
@@ -49,6 +48,7 @@ public class RandomFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_random, container, false);
 
         moviePoster = view.findViewById(R.id.movie_poster_image_view);
+        moviePoster.setTag("MoviePosterRandom");
 
         ratingBadge = view.findViewById(R.id.badge_rating);
 
