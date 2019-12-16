@@ -8,8 +8,5 @@
         android:id="@+id/action_random"
         android:icon="@android:drawable/ic_menu_help"
         android:title="@string/random" />
-    <item
-        android:id="@+id/action_lists"
-        android:icon="@android:drawable/ic_menu_sort_by_size"
-        android:title="@string/lists" />
+
 </menu>
