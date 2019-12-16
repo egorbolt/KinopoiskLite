@@ -22,6 +22,7 @@ import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.UrlCons
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Actor;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Image;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.PersonImagesInfo;
+import ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.commonfragments.showallfragment.MainThreadExecutor;
 import ru.nsu.fit.g16201.kinopoisklite.R;
 
 class ActorListAdapter extends RecyclerView.Adapter<ActorListAdapter.ActorViewHolder>{
@@ -55,7 +56,8 @@ class ActorListAdapter extends RecyclerView.Adapter<ActorListAdapter.ActorViewHo
             {
                 String url = posters.get(posters.size() - 1).getFilePath();
                 ImageView imageView = params[0].imageView;
-                Picasso.get().load(UrlConstructor.urlSingleImage(url)).into(imageView);
+                new MainThreadExecutor().execute(() -> Picasso.get().load(UrlConstructor.urlSingleImage(url)).into(imageView));
+
             }
 
             return null;
@@ -108,6 +110,8 @@ class ActorListAdapter extends RecyclerView.Adapter<ActorListAdapter.ActorViewHo
         if(personImagesTask != null)
         {
             new PictureAsyncTask().execute(new PictureAsyncTaskParams(holder.imageView, personImagesTask));
+
+
             /*try {
                 pictures = personImagesTask.get();
                 List<Image> posters = pictures.getProfiles();
