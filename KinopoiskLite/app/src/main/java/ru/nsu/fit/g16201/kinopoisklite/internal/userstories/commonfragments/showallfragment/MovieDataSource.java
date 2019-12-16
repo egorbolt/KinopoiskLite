@@ -24,7 +24,7 @@ public class MovieDataSource extends PageKeyedDataSource<Integer, Movie> {
     private static final String ERROR_TAG = "ShowAllFragment:MovieDataSource";
 
 
-    public MovieDataSource(ListType type, int id)
+    MovieDataSource(ListType type, int id)
     {
         this.type = type;
         this.id = id;
@@ -36,7 +36,7 @@ public class MovieDataSource extends PageKeyedDataSource<Integer, Movie> {
     }
 
     @Override
-    public void loadInitial(@NonNull LoadInitialParams params, @NonNull LoadInitialCallback callback) {
+    public void loadInitial(@NonNull LoadInitialParams<Integer> params, @NonNull LoadInitialCallback<Integer, Movie> callback) {
         List<Movie> dataSet = new ArrayList<>();
         if(task != null) {
             try
