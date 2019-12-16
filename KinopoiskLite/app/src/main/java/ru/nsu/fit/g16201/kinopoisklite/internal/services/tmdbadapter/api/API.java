@@ -85,20 +85,6 @@ public class API {
         return task;
     }
 
-    /*public static PersonInfoTask loadPersonInfo(int id, String language) throws MalformedURLException {
-        URL url = new URL(UrlConstructor.urlPersonDetailedInfo(id, language));
-        PersonInfoTask task = new PersonInfoTask();
-        task.execute(url);
-        return task;
-    }
-
-    public static LoadTrailersTask loadTrailers(int id, String language) throws MalformedURLException {
-        URL url = new URL(UrlConstructor.urlTrailers(id, language));
-        LoadTrailersTask task = new LoadTrailersTask();
-        task.execute(url);
-        return task;
-    }*/
-
     public static LoadCreditsTask loadCredits(int id, String language)throws MalformedURLException {
         URL url = new URL(UrlConstructor.urlCredits(id, language));
         LoadCreditsTask task = new LoadCreditsTask();
