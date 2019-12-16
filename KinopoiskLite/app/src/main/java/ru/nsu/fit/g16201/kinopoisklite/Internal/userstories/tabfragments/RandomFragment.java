@@ -16,10 +16,14 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.button.MaterialButton;
 
 import java.net.MalformedURLException;
+import java.util.List;
+import java.util.Random;
 import java.util.concurrent.ExecutionException;
 
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.API;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.GenresListTask;
+import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Genre;
+import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.GenreList;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.commonfragments.showallfragment.ShowAllFragment;
 import ru.nsu.fit.g16201.kinopoisklite.R;
 
@@ -41,15 +45,18 @@ public class RandomFragment extends Fragment {
         MaterialButton button = view.findViewById(R.id.next_button);
         button.setTag("showAllButtonRandom");
         button.setOnClickListener(v -> {
-            //todo
+            loadRandom();
         });
+
+
+        loadRandom();
 
         return view;
     }
 
-    class DownloadGenres extends AsyncTask<String, Void, Void> {
+    static class LoadRandomMovieTask extends AsyncTask<Void, Void, Void> {
         @Override
-        protected Void doInBackground(String... parameter) {
+        protected Void doInBackground(Void... parameter) {
             GenresListTask genresListTask = null;
             try {
                 genresListTask = API.loadGenreList("en-US");
@@ -59,7 +66,12 @@ public class RandomFragment extends Fragment {
             if(genresListTask != null)
             {
                 try {
-                    genresListTask.get();
+                    GenreList genreList = genresListTask.get();
+                    List<Genre> genres = genreList.getList();
+
+                    Genre genre = genres.get(new Random().nextInt(genres.size()));
+                    System.out.println("HERE  " + genre.getName());
+
                 } catch (ExecutionException e) {
                     Log.e(ERROR_TAG, "Can't retrieve data: " + e.getMessage());
                 } catch (InterruptedException e) {
@@ -79,10 +91,30 @@ public class RandomFragment extends Fragment {
     }
 
 
-    public void loadRandom() throws MalformedURLException {
+    private void loadRandom() {
+        GenresListTask genresListTask = null;
+        try {
+            genresListTask = API.loadGenreList("en-US");
+        } catch (MalformedURLException e) {
+            Log.e(ERROR_TAG, "Malformed URL" + e.getMessage());
+        }
+        if(genresListTask != null)
+        {
+            try {
+                GenreList genreList = genresListTask.get();
+                List<Genre> genres = genreList.getList();
 
+                Genre genre = genres.get(new Random().nextInt(genres.size()));
+                System.out.println("HELLO" + genre.getName());
+
+            } catch (ExecutionException e) {
+                Log.e(ERROR_TAG, "Can't retrieve data: " + e.getMessage());
+            } catch (InterruptedException e) {
+                Log.e(ERROR_TAG, "Can't retrieve data: " + e.getMessage());
+                Thread.currentThread().interrupt();
+            }
+        }
 
     }
 
-    //todo: newInstance?
 }

@@ -3,13 +3,13 @@ package ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models;
 import java.util.List;
 
 public class GenreList {
-    private List<Genre> list;
+    private List<Genre> genres;
 
     public List<Genre> getList() {
-        return list;
+        return genres;
     }
 
     public void setList(List<Genre> list) {
-        this.list = list;
+        this.genres = list;
     }
 }
