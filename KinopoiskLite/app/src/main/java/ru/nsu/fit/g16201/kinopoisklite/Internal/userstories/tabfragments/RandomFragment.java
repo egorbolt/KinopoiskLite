@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.material.button.MaterialButton;
 import com.squareup.picasso.Picasso;
@@ -29,7 +30,9 @@ import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Genr
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.GenreList;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Movie;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.PopularMovies;
+import ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.commonfragments.moviefragment.MovieFragment;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.commonfragments.showallfragment.ShowAllFragment;
+import ru.nsu.fit.g16201.kinopoisklite.MainActivity;
 import ru.nsu.fit.g16201.kinopoisklite.R;
 
 public class RandomFragment extends Fragment {
@@ -82,7 +85,6 @@ public class RandomFragment extends Fragment {
                     List<Genre> genres = genreList.getList();
 
                     Genre genre = genres.get(new Random().nextInt(genres.size()));
-                    System.out.println("HERE  " + genre.getName());
 
                 } catch (ExecutionException e) {
                     Log.e(ERROR_TAG, "Can't retrieve data: " + e.getMessage());
@@ -137,6 +139,12 @@ public class RandomFragment extends Fragment {
 
                 if(movie.getPosterPath().isPresent())
                     Picasso.get().load(UrlConstructor.urlSingleImage(movie.getPosterPath().get())).into(moviePoster);
+                moviePoster.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        MovieFragment movieFragment = MovieFragment.newInstance(movie.getId());
+                        notifyMainActivityFragmentIsActive(movieFragment);                    }
+                });
 
             } catch (ExecutionException e) {
                 Log.e(ERROR_TAG, "Can't retrieve data: " + e.getMessage());
@@ -148,6 +156,12 @@ public class RandomFragment extends Fragment {
             }
         }
 
+    }
+
+    private void notifyMainActivityFragmentIsActive(Fragment fragment) {
+        FragmentActivity activity = getActivity();
+        if(activity != null)
+            ((MainActivity)activity).setRandomTabActiveFragment(fragment);
     }
 
 }

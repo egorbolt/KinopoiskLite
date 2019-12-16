@@ -18,11 +18,13 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String EXPLORE_FRAGMENT = "explore_fragment";
     private static final String EXPLORE_ACTIVE_FRAGMENT = "explore_active_fragment";
+    private static final String RANDOM_ACTIVE_FRAGMENT = "random_active_fragment";
     private static final String RANDOM_FRAGMENT = "random_fragment";
     private static final String ACTIVE_FRAGMENT = "active_fragment";
 
     private ExploreFragment exploreFragment;
     private Fragment exploreTabActiveFragment;
+    private Fragment randomTabActiveFragment;
 
     private RandomFragment randomFragment;
 
@@ -43,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
                         //можно использовать бэкстек, тогда он будет сохранять всю историю переходов и разматывать её обратно при нажатии на back
                         case R.id.action_explore:
 
-                            if(active == randomFragment)
+                            if(active == randomTabActiveFragment)
                             {
                                 getSupportFragmentManager().beginTransaction().hide(active).show(exploreTabActiveFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
                                 active = exploreTabActiveFragment;
@@ -56,9 +58,19 @@ public class MainActivity extends AppCompatActivity {
                             }
                             return true;
                         case R.id.action_random:
-                            getSupportFragmentManager().beginTransaction().hide(active).show(randomFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
-                            active = randomFragment;
+                            if(active == exploreTabActiveFragment)
+                            {
+                                getSupportFragmentManager().beginTransaction().hide(active).show(randomTabActiveFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+                                active = randomTabActiveFragment;
+                            }
+                            else    //random fragment
+                            {
+                                getSupportFragmentManager().beginTransaction().hide(active).show(randomFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+                                randomTabActiveFragment = randomFragment;
+                                active = randomFragment;
+                            }
                             return true;
+
 
                         default:
                             return false;
@@ -80,6 +92,9 @@ public class MainActivity extends AppCompatActivity {
             String tagExploreActiveFragment = savedInstanceState.getString(EXPLORE_ACTIVE_FRAGMENT);
             exploreTabActiveFragment = fm.findFragmentByTag(tagExploreActiveFragment);
 
+            String tagRandomActiveFragment = savedInstanceState.getString(RANDOM_ACTIVE_FRAGMENT);
+            randomTabActiveFragment = fm.findFragmentByTag(tagRandomActiveFragment);
+
         }
         else
         {
@@ -91,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
 
             active =  exploreFragment;
             exploreTabActiveFragment = exploreFragment;
+            randomTabActiveFragment = randomFragment;
             bottomNavigationView.setSelectedItemId(R.id.action_explore);
         }
 
@@ -115,6 +131,10 @@ public class MainActivity extends AppCompatActivity {
         if (exploreTabActiveFragment != null) {
             outState.putString(EXPLORE_ACTIVE_FRAGMENT, exploreTabActiveFragment.getTag());
         }
+
+        if (randomTabActiveFragment != null) {
+            outState.putString(RANDOM_ACTIVE_FRAGMENT, randomTabActiveFragment.getTag());
+        }
     }
 
     public void setExploreTabActiveFragment(Fragment exploreTabActiveFragment) {
@@ -126,6 +146,18 @@ public class MainActivity extends AppCompatActivity {
         else
             transaction.remove(active);
         transaction.add(R.id.main_container, exploreTabActiveFragment, "ETAF"/* + tagCounter++*/).show(exploreTabActiveFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+        active = exploreTabActiveFragment;
+    }
+
+    public void setRandomTabActiveFragment(Fragment randomTabActiveFragment) {
+        this.randomTabActiveFragment = randomTabActiveFragment;
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction transaction = fm.beginTransaction();
+        if(active == randomFragment)
+            transaction.hide(active);
+        else
+            transaction.remove(active);
+        transaction.add(R.id.main_container, randomTabActiveFragment, "RTAF"/* + tagCounter++*/).show(randomTabActiveFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
         active = exploreTabActiveFragment;
     }
 }
