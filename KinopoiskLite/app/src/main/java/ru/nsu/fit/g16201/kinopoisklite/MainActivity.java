@@ -15,7 +15,6 @@ import android.view.MenuItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.tabfragments.ExploreFragment;
-import ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.tabfragments.ListsFragment;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.tabfragments.RandomFragment;
 
 public class MainActivity extends AppCompatActivity  implements SearchView.OnQueryTextListener {
@@ -63,10 +62,7 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
                             getSupportFragmentManager().beginTransaction().hide(active).show(randomFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
                             active = randomFragment;
                             return true;
-                        /*case R.id.action_lists:
-                            getSupportFragmentManager().beginTransaction().hide(active).show(listsFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
-                            active = listsFragment;
-                            return true;*/
+
                         default:
                             return false;
                     }
@@ -81,9 +77,6 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
             String tagRandomFragment = savedInstanceState.getString(RANDOM_FRAGMENT);
             randomFragment = (RandomFragment) fm.findFragmentByTag(tagRandomFragment);
 
-            //String tagListsFragment = savedInstanceState.getString(LISTS_FRAGMENT);
-            //listsFragment = (ListsFragment) fm.findFragmentByTag(tagListsFragment);
-
             String tagActiveFragment = savedInstanceState.getString(ACTIVE_FRAGMENT);
             active = fm.findFragmentByTag(tagActiveFragment);
 
@@ -95,9 +88,7 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
         {
             exploreFragment = new ExploreFragment();
             randomFragment = new RandomFragment();
-            //listsFragment = new ListsFragment();
 
-            //getSupportFragmentManager().beginTransaction().add(R.id.main_container, listsFragment, "1").hide(listsFragment).commit();
             getSupportFragmentManager().beginTransaction().add(R.id.main_container, randomFragment, "2").hide(randomFragment).commit();
             getSupportFragmentManager().beginTransaction().add(R.id.main_container, exploreFragment, "3").commit();
 
@@ -142,9 +133,7 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
         if (randomFragment != null) {
             outState.putString(RANDOM_FRAGMENT, randomFragment.getTag());
         }
-        /*if (listsFragment != null) {
-            outState.putString(LISTS_FRAGMENT, listsFragment.getTag());
-        }*/
+
         if (active != null) {
             outState.putString(ACTIVE_FRAGMENT, active.getTag());
         }
