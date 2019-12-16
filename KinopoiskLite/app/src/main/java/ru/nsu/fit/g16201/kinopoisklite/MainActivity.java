@@ -11,8 +11,8 @@ import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.tabfragments.ExploreFragment;
-import ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.tabfragments.RandomFragment;
+import ru.nsu.fit.g16201.kinopoisklite.internal.userstories.tabfragments.ExploreFragment;
+import ru.nsu.fit.g16201.kinopoisklite.internal.userstories.tabfragments.RandomFragment;
 
 public class MainActivity extends AppCompatActivity {
 

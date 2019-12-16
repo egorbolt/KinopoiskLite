@@ -2,7 +2,7 @@ package ru.nsu.fit.g16201.kinopoisklite.fragments;
 
 import org.junit.Test;
 
-import ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.commonfragments.moviefragment.MovieFragment;
+import ru.nsu.fit.g16201.kinopoisklite.internal.userstories.commonfragments.moviefragment.MovieFragment;
 
 import static org.junit.Assert.*;
 
