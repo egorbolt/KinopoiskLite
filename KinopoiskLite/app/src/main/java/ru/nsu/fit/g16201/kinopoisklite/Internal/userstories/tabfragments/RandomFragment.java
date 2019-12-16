@@ -143,7 +143,8 @@ public class RandomFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         MovieFragment movieFragment = MovieFragment.newInstance(movie.getId());
-                        notifyMainActivityFragmentIsActive(movieFragment);                    }
+                        notifyMainActivityFragmentIsActive(movieFragment);
+                    }
                 });
 
             } catch (ExecutionException e) {

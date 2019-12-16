@@ -158,6 +158,6 @@ public class MainActivity extends AppCompatActivity {
         else
             transaction.remove(active);
         transaction.add(R.id.main_container, randomTabActiveFragment, "RTAF"/* + tagCounter++*/).show(randomTabActiveFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
-        active = exploreTabActiveFragment;
+        active = randomTabActiveFragment;
     }
 }
