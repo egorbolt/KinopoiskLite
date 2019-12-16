@@ -98,7 +98,7 @@ public class MainActivityTest {
         onView(withTagValue(is("showAllButtonPopular"))).perform(click());
 
         onView(withTagValue(is("showAllRecyclerView"))).perform(RecyclerViewActions.actionOnItemAtPosition(1, click()));
-
+        //onView(with);
         onView(withId(R.id.action_random)).perform(click());
         onView(withId(R.id.next_button)).check(matches(isDisplayed()));
 
