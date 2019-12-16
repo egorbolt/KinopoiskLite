@@ -32,16 +32,14 @@ public class MainActivityTest {
     @Test
     public void shouldChangeTabAfterMenuClick() {
         onView(withId(R.id.action_explore)).perform(click());
-        onView(withText("Lists!")).check(matches(not(isDisplayed())));
-        onView(withId(R.id.rmDescription)).check(matches(not(isDisplayed())));
+        onView(withId(R.id.next_button)).check(matches(not(isDisplayed())));
 
 
         onView(withId(R.id.action_random)).perform(click());
-        onView(withId(R.id.rmDescription)).check(matches(isDisplayed()));
+        onView(withId(R.id.next_button)).check(matches(isDisplayed()));
 
         onView(withId(R.id.action_explore)).perform(click());
-        onView(withText("Lists!")).check(matches(not(isDisplayed())));
-        onView(withId(R.id.rmDescription)).check(matches(not(isDisplayed())));
+        onView(withId(R.id.next_button)).check(matches(not(isDisplayed())));
 
     }
 
@@ -51,17 +49,15 @@ public class MainActivityTest {
         getInstrumentation().runOnMainSync(() -> rule.getActivity().recreate());
 
         onView(withId(R.id.action_explore)).perform(click());
-        onView(withText("Lists!")).check(matches(not(isDisplayed())));
-        onView(withId(R.id.rmDescription)).check(matches(not(isDisplayed())));
+        onView(withId(R.id.next_button)).check(matches(not(isDisplayed())));
 
 
         onView(withId(R.id.action_random)).perform(click());
-        onView(withId(R.id.rmDescription)).check(matches(isDisplayed()));
+        onView(withId(R.id.next_button)).check(matches(isDisplayed()));
 
 
         onView(withId(R.id.action_explore)).perform(click());
-        onView(withText("Lists!")).check(matches(not(isDisplayed())));
-        onView(withId(R.id.rmDescription)).check(matches(not(isDisplayed())));
+        onView(withId(R.id.next_button)).check(matches(not(isDisplayed())));
 
     }
 
@@ -72,11 +68,10 @@ public class MainActivityTest {
         onView(withTagValue(is("showAllButtonPopular"))).perform(click());
 
         onView(withId(R.id.action_random)).perform(click());
-        onView(withId(R.id.rmDescription)).check(matches(isDisplayed()));
+        onView(withId(R.id.next_button)).check(matches(isDisplayed()));
 
         onView(withId(R.id.action_explore)).perform(click());
-        onView(withText("Lists!")).check(matches(not(isDisplayed())));
-        onView(withId(R.id.rmDescription)).check(matches(not(isDisplayed())));
+        onView(withId(R.id.next_button)).check(matches(not(isDisplayed())));
 
         onView(withId(R.id.action_explore)).perform(click());
 
@@ -88,11 +83,10 @@ public class MainActivityTest {
         onView(withTagValue(is("recyclerViewPopular"))).perform(RecyclerViewActions.actionOnItemAtPosition(1, click()));
 
         onView(withId(R.id.action_random)).perform(click());
-        onView(withId(R.id.rmDescription)).check(matches(isDisplayed()));
+        onView(withId(R.id.next_button)).check(matches(isDisplayed()));
 
         onView(withId(R.id.action_explore)).perform(click());
-        onView(withText("Lists!")).check(matches(not(isDisplayed())));
-        onView(withId(R.id.rmDescription)).check(matches(not(isDisplayed())));
+        onView(withId(R.id.next_button)).check(matches(not(isDisplayed())));
 
         onView(withId(R.id.action_explore)).perform(click());
 
@@ -106,11 +100,10 @@ public class MainActivityTest {
         onView(withTagValue(is("showAllRecyclerView"))).perform(RecyclerViewActions.actionOnItemAtPosition(1, click()));
 
         onView(withId(R.id.action_random)).perform(click());
-        onView(withId(R.id.rmDescription)).check(matches(isDisplayed()));
+        onView(withId(R.id.next_button)).check(matches(isDisplayed()));
 
         onView(withId(R.id.action_explore)).perform(click());
-        onView(withText("Lists!")).check(matches(not(isDisplayed())));
-        onView(withId(R.id.rmDescription)).check(matches(not(isDisplayed())));
+        onView(withId(R.id.next_button)).check(matches(not(isDisplayed())));
 
         onView(withId(R.id.action_explore)).perform(click());
     }
