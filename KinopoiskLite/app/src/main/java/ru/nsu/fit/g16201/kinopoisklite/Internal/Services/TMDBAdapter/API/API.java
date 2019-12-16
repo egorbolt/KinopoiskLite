@@ -7,11 +7,9 @@ import java.net.URL;
 
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.GenresListTask;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.LoadCreditsTask;
-import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.LoadTrailersTask;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.MovieInfoTask;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.PagedMovieListTask;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.PersonImagesTask;
-import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.PersonInfoTask;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.PicturesTask;
 
 public class API {
@@ -87,7 +85,7 @@ public class API {
         return task;
     }
 
-    public static PersonInfoTask loadPersonInfo(int id, String language) throws MalformedURLException {
+    /*public static PersonInfoTask loadPersonInfo(int id, String language) throws MalformedURLException {
         URL url = new URL(UrlConstructor.urlPersonDetailedInfo(id, language));
         PersonInfoTask task = new PersonInfoTask();
         task.execute(url);
@@ -99,7 +97,7 @@ public class API {
         LoadTrailersTask task = new LoadTrailersTask();
         task.execute(url);
         return task;
-    }
+    }*/
 
     public static LoadCreditsTask loadCredits(int id, String language)throws MalformedURLException {
         URL url = new URL(UrlConstructor.urlCredits(id, language));
