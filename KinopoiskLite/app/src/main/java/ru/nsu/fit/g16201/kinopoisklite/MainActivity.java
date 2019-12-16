@@ -2,22 +2,19 @@ package ru.nsu.fit.g16201.kinopoisklite;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.tabfragments.ExploreFragment;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.userstories.tabfragments.RandomFragment;
 
-public class MainActivity extends AppCompatActivity  implements SearchView.OnQueryTextListener {
+public class MainActivity extends AppCompatActivity {
 
     private static final String EXPLORE_FRAGMENT = "explore_fragment";
     private static final String EXPLORE_ACTIVE_FRAGMENT = "explore_active_fragment";
@@ -99,29 +96,6 @@ public class MainActivity extends AppCompatActivity  implements SearchView.OnQue
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.search_menu, menu);
-        MenuItem item = menu.findItem(R.id.search);
-        SearchView searchView = (SearchView) item.getActionView();
-        searchView.setOnQueryTextListener(this);
-
-        return true;
-    }
-
-
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        //todo
-        return false;
-    }
-
-    @Override
-    public boolean onQueryTextChange(String newText) {
-        //todo
-
-        return false;
-    }
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
