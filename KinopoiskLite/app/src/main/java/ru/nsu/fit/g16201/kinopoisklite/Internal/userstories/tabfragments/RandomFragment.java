@@ -69,42 +69,6 @@ public class RandomFragment extends Fragment {
         return view;
     }
 
-    static class LoadRandomMovieTask extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected Void doInBackground(Void... parameter) {
-            GenresListTask genresListTask = null;
-            try {
-                genresListTask = API.loadGenreList("en-US");
-            } catch (MalformedURLException e) {
-                Log.e(ERROR_TAG, "Malformed URL" + e.getMessage());
-            }
-            if(genresListTask != null)
-            {
-                try {
-                    GenreList genreList = genresListTask.get();
-                    List<Genre> genres = genreList.getList();
-
-                    Genre genre = genres.get(new Random().nextInt(genres.size()));
-
-                } catch (ExecutionException e) {
-                    Log.e(ERROR_TAG, "Can't retrieve data: " + e.getMessage());
-                } catch (InterruptedException e) {
-                    Log.e(ERROR_TAG, "Can't retrieve data: " + e.getMessage());
-                    Thread.currentThread().interrupt();
-                }
-            }
-
-            return null;
-        }
-
-        /*@Override
-        protected void onPostExecute(Integer result) {
-            // [... Сообщите о результате через обновление пользовательского
-            // интерфейса, диалоговое окно или уведомление ...]
-        }*/
-    }
-
-
     private void loadRandom() {
         GenresListTask genresListTask = null;
         try {
