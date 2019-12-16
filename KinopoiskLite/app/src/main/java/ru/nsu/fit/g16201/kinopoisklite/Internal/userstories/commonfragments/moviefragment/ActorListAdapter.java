@@ -106,31 +106,10 @@ class ActorListAdapter extends RecyclerView.Adapter<ActorListAdapter.ActorViewHo
         {
             new PictureAsyncTask().execute(new PictureAsyncTaskParams(holder.imageView, personImagesTask));
 
-
-            /*try {
-                pictures = personImagesTask.get();
-                List<Image> posters = pictures.getProfiles();
-
-                if(!posters.isEmpty())
-                {
-                    Picasso.get().load(UrlConstructor.urlSingleImage(posters.get(posters.size() - 1).getFilePath())).into(holder.imageView);
-                }
-            }
-            catch (InterruptedException e)
-            {
-                Log.e(ERROR_TAG, "Can't retrieve data: " + e.getMessage());
-                Thread.currentThread().interrupt();
-            }
-            catch (ExecutionException e)
-            {
-                Log.e(ERROR_TAG, "Can't retrieve data: " + e.getMessage());
-            }*/
-
         }
 
         holder.roleView.setText(actor.getCharacter());
         holder.nameView.setText(actor.getName());
-        System.out.println("here");
     }
 
     @Override

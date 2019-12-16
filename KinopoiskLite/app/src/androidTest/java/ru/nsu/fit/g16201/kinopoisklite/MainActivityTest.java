@@ -12,6 +12,7 @@ import org.junit.runner.RunWith;
 import static android.service.autofill.Validators.or;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
@@ -95,10 +96,12 @@ public class MainActivityTest {
     @Test
     public void onShowMovieInfoFromShowAll()
     {
-        onView(withTagValue(is("showAllButtonPopular"))).perform(click());
 
+        onView(withTagValue(is("showAllButtonPopular"))).perform(click());
         onView(withTagValue(is("showAllRecyclerView"))).perform(RecyclerViewActions.actionOnItemAtPosition(1, click()));
-        //onView(with);
+
+
+
         onView(withId(R.id.action_random)).perform(click());
         onView(withId(R.id.next_button)).check(matches(isDisplayed()));
 
@@ -107,5 +110,32 @@ public class MainActivityTest {
 
         onView(withId(R.id.action_explore)).perform(click());
     }
+
+
+    @Test
+    public void onShowMovieInfoFromMovie() {
+        onView(withTagValue(is("showAllButtonPopular"))).perform(click());
+        onView(withTagValue(is("showAllRecyclerView"))).perform(RecyclerViewActions.actionOnItemAtPosition(1, click()));
+        onView(withId(R.id.similar_movie_collection)).perform(scrollTo());
+        onView(withTagValue(is("recyclerViewSimilar"))).perform(RecyclerViewActions.actionOnItemAtPosition(1, click()));
+
+        onView(withId(R.id.action_explore)).perform(click());
+    }
+
+
+    @Test
+    public void onShowShowAllFromMovie() {
+        onView(withTagValue(is("showAllButtonPopular"))).perform(click());
+        onView(withTagValue(is("showAllRecyclerView"))).perform(RecyclerViewActions.actionOnItemAtPosition(1, click()));
+        onView(withId(R.id.similar_movie_collection)).perform(scrollTo());
+        onView(withTagValue(is("showAllButtonSimilar"))).perform(click());
+
+        onView(withId(R.id.action_random)).perform(click());
+        onView(withId(R.id.next_button)).check(matches(isDisplayed()));
+
+        onView(withId(R.id.action_explore)).perform(click());
+        onView(withId(R.id.next_button)).check(matches(not(isDisplayed())));
+    }
+
 
 }

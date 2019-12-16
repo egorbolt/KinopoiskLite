@@ -220,7 +220,7 @@ public class MovieFragment extends Fragment {
         textView.setText("Similar movies");
 
         MaterialButton button = movieCollection.findViewById(R.id.show_button);
-        button.setTag("showAllButton" + "Similar movies");
+        button.setTag("showAllButtonSimilar");
         button.setOnClickListener(v -> {
             ShowAllFragment showAllFragment = ShowAllFragment.newInstance(ListType.SIMILAR, movieId);
             notifyMainActivityFragmentIsActive(showAllFragment);
@@ -228,6 +228,7 @@ public class MovieFragment extends Fragment {
 
         RecyclerView recyclerView = movieCollection.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
+        recyclerView.setTag("recyclerViewSimilar");
 
         LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(horizontalLayoutManager);
