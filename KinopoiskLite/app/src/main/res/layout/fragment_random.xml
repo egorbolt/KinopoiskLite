@@ -25,41 +25,74 @@
 
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/rmImageView"
+
+
+        <include
+            android:id="@+id/poster_view"
+            layout="@layout/movie_poster_view"
+
             android:layout_width="100dp"
             android:layout_height="150dp"
-            android:scaleType="centerCrop"
-            android:contentDescription="@null"
 
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-
+            android:layout_marginTop="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/next_button"
-            />
-
-        <TextView
-            android:id="@+id/rmTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-
-            app:layout_constraintTop_toBottomOf="@id/rmImageView"
+            app:layout_constraintBottom_toTopOf="@id/description_text_card"
 
             />
 
         <TextView
-            android:id="@+id/rmDescription"
+            android:id="@+id/textViewMovieTitle"
+
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+
+            android:layout_marginBottom="16dp"
+            android:fontFamily="sans-serif-smallcaps"
+            android:gravity="center"
+
+            android:letterSpacing="-0.02"
+            android:lineSpacingExtra="5sp"
+            android:text="No title, check your Internet connection"
+            android:textColor="@color/red"
+            android:textSize="18sp"
+
+            android:textStyle="bold"
+
+            android:variablePadding="true"
+
+            app:layout_constraintBottom_toTopOf="@id/description_text_card"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/poster_view"
+            app:layout_constraintVertical_bias="10.0" />
+
+
+        <include
+            layout="@layout/text_card"
+
+            android:id="@+id/description_text_card"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_margin="8dp"
+            android:orientation="vertical"
+            app:cardCornerRadius="2dp"
+            app:cardElevation="6dp"
+
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
 
-            app:layout_constraintTop_toBottomOf="@id/rmTitle"
+            app:layout_constraintTop_toBottomOf="@id/poster_view"
+            app:layout_constraintBottom_toTopOf="@id/description_text_card"
 
             />
 

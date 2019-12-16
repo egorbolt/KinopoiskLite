@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.button.MaterialButton;
+import com.squareup.picasso.Picasso;
 
 import java.net.MalformedURLException;
 import java.util.List;
@@ -23,6 +24,7 @@ import java.util.concurrent.ExecutionException;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.API;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.GenresListTask;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.Tasks.PagedMovieListTask;
+import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.API.UrlConstructor;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Genre;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.GenreList;
 import ru.nsu.fit.g16201.kinopoisklite.Internal.Services.TMDBAdapter.Models.Movie;
@@ -32,7 +34,7 @@ import ru.nsu.fit.g16201.kinopoisklite.R;
 
 public class RandomFragment extends Fragment {
     private static final String ERROR_TAG = "RandomFragment";
-    private TextView movieTitle;
+    private TextView movieTitle, ratingBadge, movieDescription;
     private ImageView moviePoster;
     private MaterialButton button;
     public RandomFragment() {
@@ -43,8 +45,16 @@ public class RandomFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_random, container, false);
 
-        movieTitle = view.findViewById (R.id.rmDescription);
-        moviePoster = view.findViewById(R.id.rmImageView);
+        moviePoster = view.findViewById(R.id.movie_poster_image_view);
+
+        ratingBadge = view.findViewById(R.id.badge_rating);
+
+        movieTitle = view.findViewById(R.id.textViewMovieTitle);
+
+        movieDescription = view.findViewById(R.id.description_text_card).findViewById(R.id.card_text);
+
+        ((TextView)view.findViewById(R.id.description_text_card).findViewById(R.id.card_name_text_view)).setText("Description");
+
         MaterialButton button = view.findViewById(R.id.next_button);
         button.setTag("showAllButtonRandom");
         button.setOnClickListener(v -> {
@@ -107,13 +117,26 @@ public class RandomFragment extends Fragment {
                 List<Genre> genres = genreList.getList();
 
                 Genre genre = genres.get(new Random().nextInt(genres.size()));
-                PagedMovieListTask moviesTask = API.loadMoviesByGenre(new Random().nextInt(10), genre.getId(), "en-US");
+                PagedMovieListTask moviesTask = API.loadMoviesByGenre(new Random().nextInt(20), genre.getId(), "en-US");
                 PopularMovies movies = moviesTask.get();
                 List<Movie> movieList = movies.getResults();
 
                 Movie movie = movieList.get(new Random().nextInt(movieList.size()));
-                System.out.println("dfsfdfsdffsJJDS: " + movie.getTitle());
 
+                movieTitle.setText(movie.getTitle());
+
+                if(movie.getVoteAverage() != 0) {
+                    ratingBadge.setText(Double.toString(movie.getVoteAverage()));
+                    ratingBadge.setVisibility(View.VISIBLE);
+                }
+                else
+                    ratingBadge.setVisibility(View.GONE);
+
+                if(movie.getOverview() != null)
+                    movieDescription.setText(movie.getOverview());
+
+                if(movie.getPosterPath().isPresent())
+                    Picasso.get().load(UrlConstructor.urlSingleImage(movie.getPosterPath().get())).into(moviePoster);
 
             } catch (ExecutionException e) {
                 Log.e(ERROR_TAG, "Can't retrieve data: " + e.getMessage());
