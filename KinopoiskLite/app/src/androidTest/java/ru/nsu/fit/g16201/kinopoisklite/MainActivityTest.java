@@ -39,10 +39,6 @@ public class MainActivityTest {
         onView(withId(R.id.action_random)).perform(click());
         onView(withId(R.id.rmDescription)).check(matches(isDisplayed()));
 
-        onView(withId(R.id.action_lists)).perform(click());
-        onView(withText("Lists!")).check(matches(isDisplayed()));
-
-
         onView(withId(R.id.action_explore)).perform(click());
         onView(withText("Lists!")).check(matches(not(isDisplayed())));
         onView(withId(R.id.rmDescription)).check(matches(not(isDisplayed())));
@@ -61,9 +57,6 @@ public class MainActivityTest {
 
         onView(withId(R.id.action_random)).perform(click());
         onView(withId(R.id.rmDescription)).check(matches(isDisplayed()));
-
-        onView(withId(R.id.action_lists)).perform(click());
-        onView(withText("Lists!")).check(matches(isDisplayed()));
 
 
         onView(withId(R.id.action_explore)).perform(click());
