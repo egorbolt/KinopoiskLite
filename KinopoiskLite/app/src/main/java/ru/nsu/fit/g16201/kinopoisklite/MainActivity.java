@@ -15,6 +15,7 @@ import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import ru.nsu.fit.g16201.kinopoisklite.internal.userstories.commonfragments.showallfragment.SearchFragment;
 import ru.nsu.fit.g16201.kinopoisklite.internal.userstories.tabfragments.ExploreFragment;
 import ru.nsu.fit.g16201.kinopoisklite.internal.userstories.tabfragments.RandomFragment;
 
@@ -166,6 +167,11 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
     @Override
     public boolean onQueryTextSubmit(String query) {
+        SearchFragment searchFragment = SearchFragment.newInstance(query);
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction transaction = fm.beginTransaction();
+        transaction.hide(active);
+        transaction.add(R.id.main_container, searchFragment, "SEARCH").show(searchFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
         return false;
     }
 
