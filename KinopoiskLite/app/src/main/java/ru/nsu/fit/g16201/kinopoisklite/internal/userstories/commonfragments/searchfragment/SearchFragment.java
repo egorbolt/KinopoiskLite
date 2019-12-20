@@ -21,11 +21,12 @@ import java.util.concurrent.Executors;
 
 import ru.nsu.fit.g16201.kinopoisklite.internal.services.tmdbadapter.api.tasks.PagedMovieListTask;
 import ru.nsu.fit.g16201.kinopoisklite.internal.services.tmdbadapter.models.Movie;
-import ru.nsu.fit.g16201.kinopoisklite.internal.services.tmdbadapter.listloader.ListType;
-import ru.nsu.fit.g16201.kinopoisklite.internal.services.tmdbadapter.listloader.PagedListLoader;
 import ru.nsu.fit.g16201.kinopoisklite.internal.userstories.commonfragments.moviefragment.MovieFragment;
 import ru.nsu.fit.g16201.kinopoisklite.MainActivity;
 import ru.nsu.fit.g16201.kinopoisklite.R;
+import ru.nsu.fit.g16201.kinopoisklite.internal.userstories.commonfragments.showallfragment.SearchMovieDataSource;
+import ru.nsu.fit.g16201.kinopoisklite.internal.userstories.commonfragments.showallfragment.MainThreadExecutor;
+import ru.nsu.fit.g16201.kinopoisklite.internal.userstories.commonfragments.showallfragment.MoviePagedListAdapter;
 
 public class SearchFragment extends Fragment {
     private PagedMovieListTask task = null;

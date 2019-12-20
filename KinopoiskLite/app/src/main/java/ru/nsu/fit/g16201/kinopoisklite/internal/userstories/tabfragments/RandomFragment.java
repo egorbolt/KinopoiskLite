@@ -126,5 +126,4 @@ public class RandomFragment extends Fragment {
         if(activity != null)
             ((MainActivity)activity).setRandomTabActiveFragment(fragment);
     }
-
 }
