@@ -105,4 +105,11 @@ public class API {
         task.execute(url);
         return task;
     }
+
+    public static PagedMovieListTask loadSearchedResult(String title, String language) throws MalformedURLException {
+        URL url = new URL(UrlConstructor.urlSearchMovie(title, language));
+        PagedMovieListTask task = new PagedMovieListTask();
+        task.execute(url);
+        return task;
+    }
 }
