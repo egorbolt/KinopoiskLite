@@ -1,5 +1,8 @@
 package ru.nsu.fit.g16201.kinopoisklite.internal.services.tmdbadapter.api;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 public class UrlConstructor {
     private static final String HOST = "https://api.themoviedb.org/3";
     private static final String APIKEY = "api_key=e4bc0f9cee69e195923579d0cf450c48";
@@ -55,5 +58,15 @@ public class UrlConstructor {
 
     public static String urlSingleImage(String image) {
         return "https://image.tmdb.org/t/p/w500/"+image;
+    }
+
+    static String urlSearchMovie(String query, String language) {
+        try {
+            String q = URLEncoder.encode(query,"utf-8");
+            return HOST+"/search/movie?"+APIKEY+"&language="+language+"&query="+q;
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
