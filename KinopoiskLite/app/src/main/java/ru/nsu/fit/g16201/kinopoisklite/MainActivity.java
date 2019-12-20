@@ -3,7 +3,6 @@ package ru.nsu.fit.g16201.kinopoisklite;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
-import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -12,9 +11,6 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
-
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import ru.nsu.fit.g16201.kinopoisklite.internal.userstories.commonfragments.showallfragment.SearchFragment;
@@ -209,13 +205,6 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         MenuItem item = menu.findItem(R.id.search);
         SearchView searchView = (SearchView) item.getActionView();
         searchView.setOnQueryTextListener(this);
-        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
-            @Override
-            public boolean onClose() {
-                Toast.makeText(getApplicationContext(), "close", Toast.LENGTH_SHORT).show();
-                return false;
-            }
-        });
 
         return true;
     }
