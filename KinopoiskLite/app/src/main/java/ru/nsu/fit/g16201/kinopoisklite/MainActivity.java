@@ -8,14 +8,16 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.SearchView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import ru.nsu.fit.g16201.kinopoisklite.internal.userstories.tabfragments.ExploreFragment;
 import ru.nsu.fit.g16201.kinopoisklite.internal.userstories.tabfragments.RandomFragment;
 
-public class MainActivity extends AppCompatActivity {
-
+public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
     private static final String EXPLORE_FRAGMENT = "explore_fragment";
     private static final String EXPLORE_ACTIVE_FRAGMENT = "explore_active_fragment";
     private static final String RANDOM_ACTIVE_FRAGMENT = "random_active_fragment";
@@ -159,5 +161,25 @@ public class MainActivity extends AppCompatActivity {
             transaction.remove(active);
         transaction.add(R.id.main_container, randomTabActiveFragment, "RTAF"/* + tagCounter++*/).show(randomTabActiveFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
         active = randomTabActiveFragment;
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        return false;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.search_menu, menu);
+        MenuItem item = menu.findItem(R.id.search);
+        SearchView searchView = (SearchView) item.getActionView();
+        searchView.setOnQueryTextListener(this);
+
+        return true;
     }
 }
