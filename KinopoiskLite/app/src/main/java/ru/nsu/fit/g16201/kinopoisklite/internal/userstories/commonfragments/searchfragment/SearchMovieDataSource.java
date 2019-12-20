@@ -36,25 +36,25 @@ public class SearchMovieDataSource extends PageKeyedDataSource<Integer, Movie> {
 
     @Override
     public void loadInitial(@NonNull LoadInitialParams<Integer> params, @NonNull LoadInitialCallback<Integer, Movie> callback) {
-//        List<Movie> dataSet = new ArrayList<>();
-//        if(task != null) {
-//            try
-//            {
-//                PopularMovies movies = task.get();
-//                if(movies != null)
-//                    dataSet = movies.getResults();
-//            }
-//            catch (InterruptedException e)
-//            {
-//                Log.e(ERROR_TAG, "Can't retrieve data: " + e.getMessage());
-//                Thread.currentThread().interrupt();
-//            }
-//            catch (ExecutionException e)
-//            {
-//                Log.e(ERROR_TAG, "Can't retrieve data: " + e.getMessage());
-//            }
-//        }
-//        callback.onResult(dataSet, null, 2);
+        List<Movie> dataSet = new ArrayList<>();
+        if(task != null) {
+            try
+            {
+                PopularMovies movies = task.get();
+                if(movies != null)
+                    dataSet = movies.getResults();
+            }
+            catch (InterruptedException e)
+            {
+                Log.e(ERROR_TAG, "Can't retrieve data: " + e.getMessage());
+                Thread.currentThread().interrupt();
+            }
+            catch (ExecutionException e)
+            {
+                Log.e(ERROR_TAG, "Can't retrieve data: " + e.getMessage());
+            }
+        }
+        callback.onResult(dataSet, null, 2);
     }
 
     @Override

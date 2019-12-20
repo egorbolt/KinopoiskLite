@@ -31,7 +31,7 @@ public class SearchFragment extends Fragment {
     private PagedMovieListTask task = null;
 
     private static final String ERROR_TAG = "ShowAllFragment";
-    private MovieDataSource dataSource;
+    private SearchMovieDataSource dataSource;
 
 
     @Override
@@ -41,38 +41,25 @@ public class SearchFragment extends Fragment {
         Bundle bundle = this.getArguments();
 
         if (bundle != null) {
-            ListType type = (ListType) bundle.getSerializable("type");
-            int id = bundle.getInt("movie_id");
-            dataSource = new MovieDataSource(type, id);
+            String query = bundle.getString("query");
+            dataSource = new SearchMovieDataSource(query);
 
             try {
-                task = PagedListLoader.loadParametrisedList(type, 1, id,"en-US");
+                task = ru.nsu.fit.g16201.kinopoisklite.internal.services.tmdbadapter.api.API.loadSearchedResult(query, "en-US");
             } catch (MalformedURLException e) {
                 Log.e(ERROR_TAG, "Malformed URL" + e.getMessage());
             }
         }
     }
 
-    public static SearchFragment newInstance(ListType type) {
+    public static SearchFragment newInstance(String query) {
         SearchFragment showAllFragment = new SearchFragment();
 
         Bundle bundle = new Bundle();
-        bundle.putSerializable("type", type);
+        bundle.putString("query", query);
         showAllFragment.setArguments(bundle);
 
         return showAllFragment;
-    }
-
-    public static SearchFragment newInstance(ListType type, Integer movieId) {
-        SearchFragment showAllFragment = new SearchFragment();
-
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("type", type);
-        bundle.putInt("movie_id", movieId);
-        showAllFragment.setArguments(bundle);
-
-        return showAllFragment;
-
     }
 
     @Nullable
