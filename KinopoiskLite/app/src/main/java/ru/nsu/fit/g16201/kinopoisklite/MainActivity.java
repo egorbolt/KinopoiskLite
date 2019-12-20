@@ -3,6 +3,7 @@ package ru.nsu.fit.g16201.kinopoisklite;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -11,6 +12,7 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -174,7 +176,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
         transaction.remove(active);
-        transaction.add(R.id.main_container, movieFragment, "SEARCHMOVIE"/* + tagCounter++*/).show(randomTabActiveFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+        transaction.add(R.id.main_container, movieFragment, "SEARCHMOVIE").show(movieFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
         active = movieFragment;
     }
 
@@ -186,11 +188,12 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         if(active == randomTabActiveFragment)
             randomTabActiveFragment = searchFragment;
 
-        active = searchFragment;
+
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
         transaction.hide(active);
         transaction.add(R.id.main_container, searchFragment, "SEARCH").show(searchFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+        active = searchFragment;
         return false;
     }
 
@@ -199,12 +202,20 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         return false;
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.search_menu, menu);
         MenuItem item = menu.findItem(R.id.search);
         SearchView searchView = (SearchView) item.getActionView();
         searchView.setOnQueryTextListener(this);
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                Toast.makeText(getApplicationContext(), "close", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
 
         return true;
     }

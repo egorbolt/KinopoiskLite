@@ -13,8 +13,6 @@ import java.util.concurrent.ExecutionException;
 import ru.nsu.fit.g16201.kinopoisklite.internal.services.tmdbadapter.api.tasks.PagedMovieListTask;
 import ru.nsu.fit.g16201.kinopoisklite.internal.services.tmdbadapter.models.Movie;
 import ru.nsu.fit.g16201.kinopoisklite.internal.services.tmdbadapter.models.PopularMovies;
-import ru.nsu.fit.g16201.kinopoisklite.internal.services.tmdbadapter.listloader.ListType;
-import ru.nsu.fit.g16201.kinopoisklite.internal.services.tmdbadapter.listloader.PagedListLoader;
 
 public class SearchMovieDataSource extends PageKeyedDataSource<Integer, Movie> {
 
@@ -64,35 +62,7 @@ public class SearchMovieDataSource extends PageKeyedDataSource<Integer, Movie> {
 
     @Override
     public void loadAfter(@NonNull LoadParams<Integer> params, @NonNull LoadCallback<Integer, Movie> callback) {
-//        int page = params.key;
-//
-//        PagedMovieListTask pageTask;
-//        try {
-//            pageTask = PagedListLoader.loadParametrisedList(type, page, id,"en-US");
-//        } catch (MalformedURLException e) {
-//            Log.e(ERROR_TAG, "Malformed URL" + e.getMessage());
-//            return;
-//        }
-//
-//        List<Movie> dataSet = new ArrayList<>();
-//        if(pageTask != null) {
-//            try
-//            {
-//                PopularMovies movies = pageTask.get();
-//                if(movies != null)
-//                    dataSet = movies.getResults();
-//            }
-//            catch (InterruptedException e)
-//            {
-//                Log.e(ERROR_TAG, "Can't retrieve data: " + e.getMessage());
-//                Thread.currentThread().interrupt();
-//            }
-//            catch (ExecutionException e)
-//            {
-//                Log.e(ERROR_TAG, "Can't retrieve data: " + e.getMessage());
-//            }
-//        }
-//        callback.onResult(dataSet, params.key+1);
+
 
     }
 }
