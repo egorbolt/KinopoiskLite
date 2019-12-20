@@ -167,15 +167,15 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     }
 
     public void setSearchFragmentActive(MovieFragment movieFragment) {
-        this.randomTabActiveFragment = randomTabActiveFragment;
+        if(active == exploreTabActiveFragment)
+            this.exploreTabActiveFragment = movieFragment;
+        if(active == randomTabActiveFragment)
+            this.randomTabActiveFragment = movieFragment;
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
-        if(active == randomFragment)
-            transaction.hide(active);
-        else
-            transaction.remove(active);
-        transaction.add(R.id.main_container, randomTabActiveFragment, "RTAF"/* + tagCounter++*/).show(randomTabActiveFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
-        active = randomTabActiveFragment;
+        transaction.remove(active);
+        transaction.add(R.id.main_container, movieFragment, "SEARCHMOVIE"/* + tagCounter++*/).show(randomTabActiveFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+        active = movieFragment;
     }
 
     @Override
