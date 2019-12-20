@@ -181,6 +181,12 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     @Override
     public boolean onQueryTextSubmit(String query) {
         SearchFragment searchFragment = SearchFragment.newInstance(query);
+        if(active == exploreTabActiveFragment)
+            exploreTabActiveFragment = searchFragment;
+        if(active == randomTabActiveFragment)
+            randomTabActiveFragment = searchFragment;
+
+        active = searchFragment;
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
         transaction.hide(active);
