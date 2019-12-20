@@ -18,6 +18,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import ru.nsu.fit.g16201.kinopoisklite.internal.userstories.commonfragments.showallfragment.SearchFragment;
 import ru.nsu.fit.g16201.kinopoisklite.internal.userstories.tabfragments.ExploreFragment;
 import ru.nsu.fit.g16201.kinopoisklite.internal.userstories.tabfragments.RandomFragment;
+import ru.nsu.fit.g16201.kinopoisklite.internal.userstories.commonfragments.moviefragment.MovieFragment;
 
 public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
     private static final String EXPLORE_FRAGMENT = "explore_fragment";
@@ -165,6 +166,18 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         active = randomTabActiveFragment;
     }
 
+    public void setSearchFragmentActive(MovieFragment movieFragment) {
+        this.randomTabActiveFragment = randomTabActiveFragment;
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction transaction = fm.beginTransaction();
+        if(active == randomFragment)
+            transaction.hide(active);
+        else
+            transaction.remove(active);
+        transaction.add(R.id.main_container, randomTabActiveFragment, "RTAF"/* + tagCounter++*/).show(randomTabActiveFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+        active = randomTabActiveFragment;
+    }
+
     @Override
     public boolean onQueryTextSubmit(String query) {
         SearchFragment searchFragment = SearchFragment.newInstance(query);
@@ -189,4 +202,6 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
         return true;
     }
+
+
 }

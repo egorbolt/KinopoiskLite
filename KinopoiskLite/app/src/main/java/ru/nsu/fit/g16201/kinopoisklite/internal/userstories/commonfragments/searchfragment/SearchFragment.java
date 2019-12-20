@@ -109,7 +109,7 @@ public class SearchFragment extends Fragment {
     private void notifyMainActivityFragmentIsActive(MovieFragment movieFragment) {
         FragmentActivity activity = getActivity();
         if(activity != null)
-            ((MainActivity)activity).setExploreTabActiveFragment(movieFragment);
+            ((MainActivity)activity).setSearchFragmentActive(movieFragment);
     }
 
 
