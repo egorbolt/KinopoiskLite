@@ -27,7 +27,7 @@ import ru.nsu.fit.g16201.kinopoisklite.internal.userstories.commonfragments.movi
 import ru.nsu.fit.g16201.kinopoisklite.MainActivity;
 import ru.nsu.fit.g16201.kinopoisklite.R;
 
-public class SearchFragments extends Fragment {
+public class SearchFragment extends Fragment {
     private PagedMovieListTask task = null;
 
     private static final String ERROR_TAG = "ShowAllFragment";
@@ -53,8 +53,8 @@ public class SearchFragments extends Fragment {
         }
     }
 
-    public static ShowAllFragment newInstance(ListType type) {
-        ShowAllFragment showAllFragment = new ShowAllFragment();
+    public static SearchFragment newInstance(ListType type) {
+        SearchFragment showAllFragment = new SearchFragment();
 
         Bundle bundle = new Bundle();
         bundle.putSerializable("type", type);
@@ -63,8 +63,8 @@ public class SearchFragments extends Fragment {
         return showAllFragment;
     }
 
-    public static ShowAllFragment newInstance(ListType type, Integer movieId) {
-        ShowAllFragment showAllFragment = new ShowAllFragment();
+    public static SearchFragment newInstance(ListType type, Integer movieId) {
+        SearchFragment showAllFragment = new SearchFragment();
 
         Bundle bundle = new Bundle();
         bundle.putSerializable("type", type);
